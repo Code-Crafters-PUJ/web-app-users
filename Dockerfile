@@ -13,7 +13,7 @@ RUN npm run build --prod
 
 FROM nginx:mainline-alpine3.18-perl
 
-COPY --from=build /usr/local/app/dist/pwa-prueba/browser /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/web-app-users/browser /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
