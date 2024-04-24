@@ -1,34 +1,56 @@
+<!-- This is a Bootstrap navbar with a fixed-top layout -->
 <nav class="navbar navbar-expand-lg bg-white fixed-top">
+
+    <!-- Container fluid for responsive layout -->
     <div class="container-fluid">
+    
+      <!-- Brand/logo image -->
       <img src="assets/images/logo.svg" class="navbar-brand">
+      
+      <!-- Navbar toggler button for offcanvas menu -->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" style="border:none;">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
+      <!-- Offcanvas menu -->
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      
+        <!-- Offcanvas menu header -->
         <div class="offcanvas-header">
-            <img src="assets/images/logo.svg" class="navbar-brand">
+          <img src="assets/images/logo.svg" class="navbar-brand">
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        
+        <!-- Offcanvas menu body -->
         <div class="offcanvas-body d-flex align-items-center text-center flex-column flex-lg-row p-4">
+        
+          <!-- Navigation links -->
           <ul class="navbar-nav flex-grow-1 pe-3">
             <li class="nav-item px-4">
               <a class="nav-link" href="#">Nosotros</a>
             </li>
             <li class="nav-item px-4">
-                <a class="nav-link" href="#">Productos</a>
-              </li>
-              <li class="nav-item px-4">
-                <a class="nav-link" href="#">Planes</a>
-              </li>
-              <li class="nav-item px-4">
-                <a class="nav-link" href="#">Contáctanos</a>
-              </li>
+              <a class="nav-link" href="#">Productos</a>
+            </li>
+            <li class="nav-item px-4">
+              <a class="nav-link" href="#">Planes</a>
+            </li>
+            <li class="nav-item px-4">
+              <a class="nav-link" href="#">Contáctanos</a>
+            </li>
           </ul>
+          
+          <!-- Main links (Login and Free trial) -->
           <div class="d-flex flex-column flex-lg-row align-items-center gap-3">
-          <a href="#login" class="text-black px-4">Iniciar sesión</a>
-          <a href="#signup" class="text-white text-decoration-none px-4 py-2 rounded-2" style="background-color: #51BDFF"> Prueba Gratuita</a>
+            <a href="" class="text-black px-4">Iniciar sesión</a>
+            <a href="" class="text-white text-decoration-none px-4 py-2 rounded-2" style="background-color: #51BDFF"> Prueba Gratuita</a>
           </div>
+          
         </div>
+        
       </div>
+      
     </div>
+    
   </nav>
+  
