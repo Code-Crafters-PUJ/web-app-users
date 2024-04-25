@@ -14,7 +14,7 @@ body {
 
 .info{
     color: #21325B;
-    font-weight:500;
+    font-weight:400;
 }
 .items{
     margin: 1%;
@@ -22,10 +22,15 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 1000px) {
+.small-img{
+    width: 8vh;
+    padding-bottom: 10%;
+}
+
+@media (max-width: 700px) {
     
     .items {
-        padding: 1%;
+        padding: 3%;
         padding-left: 5%;
         padding-right: 5%;
         display: flex;
@@ -41,11 +46,6 @@ body {
         padding-left: 2%;
     }
     .small-img{
-        padding-bottom: 0;
+        padding-bottom: 1%;
     }
-}
-
-.small-img{
-    width: 8vh;
-    padding-bottom: 10%;
 }
