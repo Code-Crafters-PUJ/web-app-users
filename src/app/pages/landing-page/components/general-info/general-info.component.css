@@ -7,3 +7,45 @@
     opacity: 0.9;
     z-index: -1;
 }
+
+body {
+    background-color: red;
+}
+
+.info{
+    color: #21325B;
+    font-weight:500;
+}
+.items{
+    margin: 1%;
+    padding: 25%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1000px) {
+    
+    .items {
+        padding: 1%;
+        padding-left: 5%;
+        padding-right: 5%;
+        display: flex;
+        flex-wrap:wrap;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-size: medium;
+        
+    }
+    .items p{
+        padding: 1%;
+        padding-left: 2%;
+    }
+    .small-img{
+        padding-bottom: 0;
+    }
+}
+
+.small-img{
+    width: 8vh;
+    padding-bottom: 10%;
+}
