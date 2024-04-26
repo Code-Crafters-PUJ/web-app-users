@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { LoginPageComponent } from './pages/authentication-page/login-page/login-page.component';
 import { PasswordPageComponent } from './pages/authentication-page/password-page/password-page.component';
 import { SignupIPageComponent } from './pages/authentication-page/signup-i-page/signup-i-page.component';
 import { SignupIIPageComponent } from './pages/authentication-page/signup-ii-page/signup-ii-page.component';
@@ -39,7 +40,7 @@ export const routes: Routes = [
 
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
     { path: 'landing', component: LandingPageComponent },
-    { path: 'login', component: LandingPageComponent },
+    { path: 'login', component: LoginPageComponent },
     { path: 'register', component: SignupIPageComponent },
     { path: 'payment', component:SignupIIPageComponent },
     { path:'lostpassword', component: PasswordPageComponent },
