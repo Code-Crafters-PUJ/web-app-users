@@ -1,1 +1,71 @@
-<p>show-employees-page works!</p>
+
+<div class="container">
+  <div class="header-container">
+    <h1>Empleados</h1>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4 mb-3">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar: Estado, Nombre, Periodo de Pago"
+               aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="B">
+                <i class="fas fa-search"></i>
+            </span>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-end mb-3">
+      <button class="btn btn-primary-border">Crear Nuevo Empleado</button>
+    </div>
+  </div>
+
+
+  <div class="table-responsive">
+    <table class="table table-custom-primary">
+      <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">No. Identificacion</th>
+        <th scope="col">No. Contrato</th>
+        <th scope="col">Fecha de Inicio</th>
+        <th scope="col">Fecha Fin</th>
+        <th scope="col">Sueldo</th>
+        <th scope="col">Tipo Contrato</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Liquidado</td>
+        <td>Nomina de Enero</td>
+        <td>Mensual</td>
+        <td>Enero I</td>
+        <td>$ 35.000.000</td>
+        <td>$ 15.000.000</td>
+        <td>$ 15.000.000</td>
+      </tr>
+      <tr>
+        <td>En proceso</td>
+        <td>Nomina de Febrero</td>
+        <td>Quincenal</td>
+        <td>Enero II</td>
+        <td>$ 15.000.000</td>
+        <td>$ 15.000.000</td>
+        <td>$ 15.000.000</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-start align-items-center mt-3">
+      <button class="btn mx-1">
+        <i class="fas fa-chevron-left icon-color"></i>
+      </button>
+      <div>Pagina uno</div>
+      <button class="btn mx-1">
+        <i class="fas fa-chevron-right icon-color"></i>
+      </button>
+    </div>
+
+  </div>
+
+</div>

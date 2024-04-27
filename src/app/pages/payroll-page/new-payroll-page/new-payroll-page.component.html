@@ -1,1 +1,166 @@
-<p>new-payroll-page works!</p>
+
+<div class="container">
+  <div class="header-container">
+    <h1>Nominas</h1>
+    <h5>/Crear Nomina</h5>
+  </div>
+
+
+  <div class="row mb-3 py-0">
+    <div class="col-md-8 order-2 order-md-1 ">
+      <h5>Nueva Nomina</h5>
+    </div>
+
+    <div class="col-md-4 order-1 order-md-2 d-flex justify-content-start justify-content-md-end mb-2">
+      <button class="btn btn-primary">Cancelar Nomina</button>
+    </div>
+  </div>
+
+
+  <h6>Informacion General</h6>
+
+  <form class="mt-3" action="tu_accion" method="POST">
+    <div class="row mb-3">
+      <!-- Primera fila -->
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="tipoLiquidacion" class="form-label">Tipo de liquidación:</label>
+          <select id="tipoLiquidacion" name="tipoLiquidacion" class="form-control" required>
+            <option value="mensual">Mensual</option>
+            <option value="quincenal">Quincenal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="nombreNomina" class="form-label">Nombre de la nómina:</label>
+          <input type="text" id="nombreNomina" name="nombreNomina" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Segunda fila -->
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="mes" class="form-label">Mes:</label>
+          <select id="mes" name="mes" class="form-control" required>
+            <option value="enero">Enero (I)</option>
+            <option value="enero">Enero (II)</option>
+            <option value="febrero">Febrero (I)</option>
+            <option value="febrero">Febrero (II)</option>
+            <option value="marzo">Marzo (I)</option>
+            <option value="marzo">Marzo (II)</option>
+            <option value="abril">Abril (I)</option>
+            <option value="abril">Abril (II)</option>
+            <option value="mayo">Mayo (I)</option>
+            <option value="mayo">Mayo (II)</option>
+            <option value="junio">Junio (I)</option>
+            <option value="junio">Junio (II)</option>
+            <option value="julio">Julio (I)</option>
+            <option value="julio">Julio (II)</option>
+            <option value="agosto">Agosto (I)</option>
+            <option value="agosto">Agosto (II)</option>
+            <option value="septiembre">Septiembre (I)</option>
+            <option value="septiembre">Septiembre (II)</option>
+            <option value="octubre">Octubre (I)</option>
+            <option value="octubre">Octubre (II)</option>
+            <option value="noviembre">Noviembre (I)</option>
+            <option value="noviembre">Noviembre (II)</option>
+            <option value="diciembre">Diciembre (I)</option>
+            <option value="diciembre">Diciembre (II)</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="anio" class="form-label">Año:</label>
+          <input type="number" id="anio" name="anio" class="form-control" required min="1900" max="2100">
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <h6>Empleados de Nomina</h6>
+
+
+  <div class="table-responsive">
+    <table class="table table-custom-primary">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Nombre</th>
+        <th scope="col">No. Identificacion</th>
+        <th scope="col">No. Contrato</th>
+        <th scope="col">Fecha de Inicio</th>
+        <th scope="col">Fecha Fin</th>
+        <th scope="col">Sueldo</th>
+        <th scope="col">Tipo Contrato</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <!-- Celda con checkbox -->
+        <td><input type="checkbox" name="select-row"></td>
+        <td>Liquidado</td>
+        <td>Nomina de Enero</td>
+        <td>Mensual</td>
+        <td>Enero I</td>
+        <td>$ 35.000.000</td>
+        <td>$ 15.000.000</td>
+        <td>$ 15.000.000</td>
+      </tr>
+      <tr>
+        <!-- Celda con checkbox -->
+        <td><input type="checkbox" name="select-row"></td>
+        <td>En proceso</td>
+        <td>Nomina de Febrero</td>
+        <td>Quincenal</td>
+        <td>Enero II</td>
+        <td>$ 15.000.000</td>
+        <td>$ 15.000.000</td>
+        <td>$ 15.000.000</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-start align-items-center mt-3">
+      <button class="btn mx-1">
+        <i class="fas fa-chevron-left icon-color"></i>
+      </button>
+      <div>Pagina uno</div>
+      <button class="btn mx-1">
+        <i class="fas fa-chevron-right icon-color"></i>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <h6>Total Ingresos</h6>
+        <h4>1.800.350 COP</h4>
+      </div>
+
+      <div class="col-md-4 text-center">
+        <h6>Total Deducciones</h6>
+        <h4>1.800.350 COP</h4>
+      </div>
+
+      <div class="col-md-4 text-center">
+        <h6>Total Neto a Pagar</h6>
+        <h4>1.800.350 COP</h4>
+      </div>
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary mb-5">Guardar Nomina</button>
+
+</div>

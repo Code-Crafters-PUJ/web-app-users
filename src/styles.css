@@ -22,7 +22,7 @@ body {
   --bs-danger-active: #d20202;
 }
 
-/* Estilo de titulos */
+/* Estilo de titulos y textos*/
 h1 {
   color: var(--bs-secondary);
   font-weight: bold;
@@ -32,14 +32,23 @@ h5 {
   color: var(--bs-secondary);
   padding-bottom: 5px;
   font-weight: bold;
-
 }
 
+h6,h4 {
+  color: var(--bs-secondary);
+  font-weight: bold;
+}
 
 .header-container {
   display: flex;
   align-items: flex-end;
   gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 35px;
+}
+
+div{
+  color: var(--bs-secondary);
 }
 
 
@@ -196,7 +205,7 @@ button.btn-danger-border:hover {
   color: white !important;
 }
 
-/* Estilo del forms*/
+/* Estilo del formulario*/
 form input {
   border-color: var(--bs-secondary-light) !important;
   color: var(--bs-secondary) !important;
@@ -207,5 +216,24 @@ form input::placeholder {
 }
 
 form label {
+  color: var(--bs-secondary) !important;
+}
+
+/* Estilo del formulario agrupado */
+.input-group .form-control {
+  border-color: var(--bs-secondary-light) !important;
+  color: var(--bs-secondary) !important;
+}
+
+.input-group .form-control::placeholder {
+  color: var(--bs-secondary-light) !important;
+}
+
+.input-group .input-group-text {
+  border-color: var(--bs-secondary-light) !important;
+  color: var(--bs-secondary) !important;
+}
+/* Estilo de icpnos */
+.icon-color{
   color: var(--bs-secondary) !important;
 }
