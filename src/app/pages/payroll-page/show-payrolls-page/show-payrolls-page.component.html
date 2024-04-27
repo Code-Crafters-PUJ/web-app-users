@@ -32,11 +32,11 @@
       </thead>
       <tbody>
       <tr *ngFor="let payroll of displayedPayrolls">
-        <td>{{ payroll.estado }}</td>
-        <td>{{ payroll.nombreNomina }}</td>
-        <td>{{ payroll.tipoLiquidacion }}</td>
-        <td>{{ payroll.periodoPago }}</td>
-        <td>{{ payroll.totalNomina }}</td>
+        <td>{{ payroll.state }}</td>
+        <td>{{ payroll.payrollName }}</td>
+        <td>{{ payroll.liquidationType }}</td>
+        <td>{{ payroll.month }} de {{payroll.year}}</td>
+        <td>{{ payroll.totalNet }}</td>
       </tr>
 
       </tbody>

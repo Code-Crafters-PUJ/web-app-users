@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { CommonModule } from '@angular/common';
 import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
+import {Payroll} from "../../../models/payroll-models/payroll";
 
 
 @Component({
@@ -14,59 +15,12 @@ import {PayrollsService} from "../../../services/payroll-services/payrolls.servi
 export class ShowPayrollsPageComponent {
 
   //Variables
+  payrolls: Payroll[] = [];
   Actualpage: number = 1;
   totalPages: number = 1;
   pageSize: number = 10;
 
-
-  displayedPayrolls: Array<{
-    estado: string;
-    nombreNomina: string;
-    tipoLiquidacion: string;
-    periodoPago: string;
-    totalNomina: number;
-  }> = [];
-
-
-  // Lista de datos de nóminas (debería provenir de un servicio)
-  payrolls = [
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-    { estado: 'Activo', nombreNomina: 'Nomina Mensual', tipoLiquidacion: 'Mensual', periodoPago: '01/04/2024 - 30/04/2024', totalNomina: 10000 },
-
-  ];
+  displayedPayrolls: Payroll[] = [];
 
 
   //Constructor
@@ -79,21 +33,29 @@ export class ShowPayrollsPageComponent {
     this.updateData();
   }
 
-  // Métodos para la paginación
   // Actualiza los datos de nóminas que se muestran y el número total de páginas
   updateData() {
+    // Llamada al servicio para obtener los datos de nómina
     this.payrollsService.getPayrolls().subscribe((payrolls) => {
+      // Almacena los datos obtenidos en la variable 'payrolls'
       this.payrolls = payrolls;
+
+      // Calcula los índices de inicio y fin de los datos para mostrar en la página actual
       const startIndex = (this.Actualpage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
 
-      // Actualiza los datos de nóminas para mostrar solo los registros de la página actual
+      // Filtra los datos de nómina para mostrar solo los registros de la página actual
       this.displayedPayrolls = this.payrolls.slice(startIndex, endIndex);
 
       // Calcula el número total de páginas
       this.totalPages = Math.ceil(this.payrolls.length / this.pageSize);
+    }, (error) => {
+      // Manejo de errores
+      console.error('Error al obtener los datos de nómina:', error);
     });
   }
+
+  // Métodos para la paginación
 
   previousPage() {
     if (this.Actualpage > 1) {
