@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {Payroll} from "../../../models/payroll-models/payroll";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
-import {Employee} from "../../../models/payroll-models/employee";
-import {FormsModule} from "@angular/forms";
-import {CurrencyPipe, NgForOf} from "@angular/common";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {FormsModule, NgForm} from '@angular/forms';
+import { Employee } from '../../../models/payroll-models/employee';
+import { Payroll } from '../../../models/payroll-models/payroll';
+import { PayrollsService } from '../../../services/payroll-services/payrolls.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-new-payroll-page',
+  templateUrl: './new-payroll-page.component.html',
+  styleUrls: ['./new-payroll-page.component.css'],
   standalone: true,
   imports: [
     FormsModule,
     NgForOf,
-    CurrencyPipe
-  ],
-  templateUrl: './new-payroll-page.component.html',
-  styleUrl: './new-payroll-page.component.css'
+    CurrencyPipe,
+    DatePipe
+  ]
 })
 export class NewPayrollPageComponent implements OnInit {
-
-  //Variables
+  @ViewChild('payrollForm') payrollForm!: NgForm;
   employees: Employee[] = [];
   payroll: Payroll = {
     state: 'En espera',
@@ -35,12 +35,11 @@ export class NewPayrollPageComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 1;
   pageSize: number = 10;
+  totalIncome: number =0;
+  totalDeductions: number =0;
+  totalNet: number =0;
   displayedEmployees: Employee[] = [];
-  totalIncome: number = 0;
-  totalDeductions: number = 0;
-  totalNet: number = 0;
   selectedEmployees: {[id: number]: boolean} = {};
-
   months = [
     { value: 1, name: 'Enero (I)' },
     { value: 2, name: 'Enero (II)' },
@@ -68,111 +67,92 @@ export class NewPayrollPageComponent implements OnInit {
     { value: 24, name: 'Diciembre (II)' }
   ];
 
-
-//contructor
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private payrollsService: PayrollsService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.updateData();
   }
 
-//actualizacion de datos
-  // Actualización de datos
   updateData() {
-    // Llamada al servicio para obtener los datos de empleados
-    this.payrollsService.getEmployees().subscribe((employees) => {
-      // Almacena los datos obtenidos en la variable 'employees'
-      this.employees = employees;
-
-      // Calcula los índices de inicio y fin de los datos para mostrar en la página actual
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-
-      // Filtra los datos de nómina para mostrar solo los registros de la página actual
-      this.displayedEmployees = this.employees.slice(startIndex, endIndex);
-
-      // Calcula el número total de páginas
-      this.totalPages = Math.ceil(this.employees.length / this.pageSize);
-    }, (error) => {
-      // Manejo de errores
-      console.error('Error al obtener los datos de Empleado:', error);
+    this.payrollsService.getEmployees().subscribe({
+      next: (employees) => {
+        this.employees = employees;
+        this.updateDisplayedEmployees();
+      },
+      error: (error) => {
+        console.error('Error al obtener los datos de empleados:', error);
+      }
     });
   }
 
-
-  // Métodos para la paginación
-  previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updateURL();
-      this.updateData();
-    }
+  updateDisplayedEmployees() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayedEmployees = this.employees.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.employees.length / this.pageSize);
   }
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.updateURL();
-      this.updateData();
+      this.updateDisplayedEmployees();
     }
   }
 
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updateDisplayedEmployees();
+    }
+  }
 
-  private updateURL() {
+  updateURL() {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {pagina: this.currentPage, pageSize: this.pageSize},
-      queryParamsHandling: 'merge',
+      queryParams: { pagina: this.currentPage, pageSize: this.pageSize },
+      queryParamsHandling: 'merge'
     });
   }
 
-// Método para cancelar la creación de la nómina
   cancelPayroll() {
     this.router.navigate(['/home/payroll/show/all/payrolls']);
   }
 
-  // Método para guardar la nómina
   savePayroll() {
-    this.payroll.employees = this.employees.filter(e => this.selectedEmployees[e.id]);
-    if (this.payroll) {
-      this.payrollsService.addPayroll(this.payroll).subscribe(() => {
-        this.router.navigate(['/home/payroll/show/all/payrolls']);
-      }, (error) => {
-        console.error('Error al guardar la nómina:', error);
-      });
+    if (!this.payrollForm.valid || !this.isEmployeeSelected()) {
+      this.payrollForm.form.markAllAsTouched();
+      alert('Por favor complete todos los campos requeridos y seleccione al menos un empleado.');
+      return;
     }
+    this.payroll.employees = this.employees.filter(e => this.selectedEmployees[e.id]);
+    this.payrollsService.addPayroll(this.payroll).subscribe({
+      next: () => this.router.navigate(['/home/payroll/show/all/payrolls']),
+      error: (error) => console.error('Error al guardar la nómina:', error)
+    });
   }
 
-
-
-  // Método para enviar el formulario
   onSubmit() {
     this.savePayroll();
   }
 
-
-  //metodos del checkbox
   updateSelection(employee: Employee) {
     this.selectedEmployees[employee.id] = !this.selectedEmployees[employee.id];
     this.calculateTotal();
   }
 
   calculateTotal() {
-    // Calcula el total neto sumando los salarios de los empleados seleccionados.
     this.totalNet = this.displayedEmployees
       .filter(emp => this.selectedEmployees[emp.id])
       .reduce((acc, curr) => acc + (curr.contract.length > 0 ? curr.contract[0].totalSalary : 0), 0);
-
-    // Calcula el total de deducciones como el 8% del total neto.
     this.totalDeductions = this.totalNet * 0.08;
-
-    // Calcula el total de ingresos sumando el total neto y las deducciones.
     this.totalIncome = this.totalNet + this.totalDeductions;
   }
 
+  isEmployeeSelected(): boolean {
+    return Object.values(this.selectedEmployees).some(value => value);
+  }
 }
