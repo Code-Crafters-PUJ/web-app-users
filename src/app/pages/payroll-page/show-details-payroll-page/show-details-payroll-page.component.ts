@@ -81,6 +81,34 @@ export class ShowDetailsPayrollPageComponent implements OnInit {
     }
   }
 
+  deletePayroll() {
+    if (confirm('¿Estás seguro de querer eliminar esta nómina?')) {
+      this.payrollsService.deletePayroll(this.payroll.id).subscribe({
+        next: (response) => {
+          alert('Nómina eliminada con éxito');
+          this.router.navigate(['/home/payroll/show/all/payrolls']);
+        },
+        error: (err) => {
+          console.error('Error al eliminar la nómina:', err);
+        }
+      });
+    }
+  }
+
+  consolidatePayroll() {
+    this.payrollsService.updatePayrollStatus(this.payroll.id, 'Consolidada').subscribe({
+      next: (response) => {
+        alert('Nómina consolidada con éxito');
+        this.router.navigate(['/home/payroll/show/all/payrolls']);
+      },
+      error: (err) => {
+        console.error('Error al consolidar la nómina:', err);
+      }
+    });
+  }
+
+
+
 
 
 
