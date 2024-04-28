@@ -6,7 +6,6 @@ export interface Contract {
   number: string;
   startDate: Date;
   endDate: Date;
-  employee: Employee;
   contractType: ContractType;
   baseSalary: number;
   transportAllowance: boolean;

@@ -36,10 +36,10 @@ export class NewPayrollPageComponent implements OnInit {
   totalPages: number = 1;
   pageSize: number = 10;
   displayedEmployees: Employee[] = [];
-  totalIngresos: number = 0;
-  totalDeducciones: number = 0;
-  totalNeto: number = 0;
-  selectedEmployees: { [id: number]: boolean } = {};
+  totalIncome: number = 0;
+  totalDeductions: number = 0;
+  totalNet: number = 0;
+  selectedEmployees: {[id: number]: boolean} = {};
 
   months = [
     { value: 1, name: 'Enero (I)' },
@@ -104,40 +104,6 @@ export class NewPayrollPageComponent implements OnInit {
     });
   }
 
-  // Método para manejar la selección de un empleado
-  onEmployeeSelectionChange(employeeId: number, isSelected: boolean) {
-    if (isSelected) {
-      // Si el empleado es seleccionado, agrégalo a la lista de empleados seleccionados
-      this.selectedEmployees[employeeId] = true;
-    } else {
-      // Si el empleado es deseleccionado, remuévelo de la lista de empleados seleccionados
-      delete this.selectedEmployees[employeeId];
-    }
-    // Actualiza los totales de ingresos, deducciones y neto
-    this.updateTotals();
-  }
-
-
-  // Método para actualizar los totales de ingresos, deducciones y neto
-  updateTotals() {
-    // Inicializa los totales
-    this.totalIngresos = 0;
-    this.totalDeducciones = 0;
-    this.totalNeto = 0;
-
-    // Calcula los totales para la nómina actual
-    if (this.payroll && this.payroll.employees.length > 0) {
-      this.payroll.employees.forEach((employee) => {
-        const contract = employee.contract[0];
-        if (contract) {
-          this.totalIngresos += contract.totalSalary;
-          this.totalDeducciones += contract.baseSalary;
-          this.totalNeto += contract.totalSalary - contract.baseSalary;
-        }
-      });
-    }
-  }
-
 
   // Métodos para la paginación
   previousPage() {
@@ -156,6 +122,7 @@ export class NewPayrollPageComponent implements OnInit {
     }
   }
 
+
   private updateURL() {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -171,6 +138,7 @@ export class NewPayrollPageComponent implements OnInit {
 
   // Método para guardar la nómina
   savePayroll() {
+    this.payroll.employees = this.employees.filter(e => this.selectedEmployees[e.id]);
     if (this.payroll) {
       this.payrollsService.addPayroll(this.payroll).subscribe(() => {
         this.router.navigate(['/home/payroll/show/all/payrolls']);
@@ -181,8 +149,30 @@ export class NewPayrollPageComponent implements OnInit {
   }
 
 
+
   // Método para enviar el formulario
   onSubmit() {
     this.savePayroll();
   }
+
+
+  //metodos del checkbox
+  updateSelection(employee: Employee) {
+    this.selectedEmployees[employee.id] = !this.selectedEmployees[employee.id];
+    this.calculateTotal();
+  }
+
+  calculateTotal() {
+    // Calcula el total neto sumando los salarios de los empleados seleccionados.
+    this.totalNet = this.displayedEmployees
+      .filter(emp => this.selectedEmployees[emp.id])
+      .reduce((acc, curr) => acc + (curr.contract.length > 0 ? curr.contract[0].totalSalary : 0), 0);
+
+    // Calcula el total de deducciones como el 8% del total neto.
+    this.totalDeductions = this.totalNet * 0.08;
+
+    // Calcula el total de ingresos sumando el total neto y las deducciones.
+    this.totalIncome = this.totalNet + this.totalDeductions;
+  }
+
 }

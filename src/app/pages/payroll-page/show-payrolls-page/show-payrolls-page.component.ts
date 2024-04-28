@@ -17,7 +17,7 @@ export class ShowPayrollsPageComponent implements OnInit {
 
   //Variables
   payrolls: Payroll[] = [];
-  Actualpage: number = 1;
+  currentPage: number = 1;
   totalPages: number = 1;
   pageSize: number = 10;
   displayedPayrolls: Payroll[] = [];
@@ -44,7 +44,7 @@ export class ShowPayrollsPageComponent implements OnInit {
       this.payrolls = payrolls;
 
       // Calcula los índices de inicio y fin de los datos para mostrar en la página actual
-      const startIndex = (this.Actualpage - 1) * this.pageSize;
+      const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
 
       // Filtra los datos de nómina para mostrar solo los registros de la página actual
@@ -64,16 +64,16 @@ export class ShowPayrollsPageComponent implements OnInit {
 }
 
   previousPage() {
-    if (this.Actualpage > 1) {
-      this.Actualpage--;
+    if (this.currentPage > 1) {
+      this.currentPage--;
       this.updateURL();
       this.updateData();
     }
   }
 
   nextPage() {
-    if (this.Actualpage < this.totalPages) {
-      this.Actualpage++;
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
       this.updateURL();
       this.updateData();
     }
@@ -82,7 +82,7 @@ export class ShowPayrollsPageComponent implements OnInit {
   private updateURL() {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { pagina: this.Actualpage, pageSize: this.pageSize },
+      queryParams: { pagina: this.currentPage, pageSize: this.pageSize },
       queryParamsHandling: 'merge',
     });
   }

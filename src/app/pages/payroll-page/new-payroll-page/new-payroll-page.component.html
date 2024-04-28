@@ -74,7 +74,7 @@
         <tbody>
         <tr *ngFor="let employee of displayedEmployees">
           <td>
-            <input type="checkbox" [(ngModel)]="selectedEmployees[employee.id]" (ngModelChange)="onEmployeeSelectionChange(employee.id, $event)">
+            <input type="checkbox" [checked]="selectedEmployees[employee.id]" (change)="updateSelection(employee)">
           </td>
           <td>{{ employee.firstName }} {{ employee.lastName }}</td>
           <td>{{ employee.idCard }}</td>
@@ -84,15 +84,16 @@
           <td>{{ employee.contract.length > 0 ? employee.contract[0].baseSalary : '' }}</td>
           <td>{{ employee.contract.length > 0 ? employee.contract[0].totalSalary : '' }}</td>
         </tr>
+
         </tbody>
       </table>
 
       <div class="d-flex justify-content-start align-items-center mt-3">
-        <button class="btn mx-1" (click)="previousPage()">
+        <button type="button"  class="btn mx-1" (click)="previousPage()">
           <i class="fas fa-chevron-left icon-color"></i>
         </button>
         <div>Página {{ currentPage }} de {{ totalPages }}</div>
-        <button class="btn mx-1" (click)="nextPage()">
+        <button type="button" class="btn mx-1" (click)="nextPage()">
           <i class="fas fa-chevron-right icon-color"></i>
         </button>
       </div>
@@ -102,21 +103,21 @@
       <div class="row">
         <div class="col-md-4 text-center">
           <h6>Total Ingresos</h6>
-          <h4>{{ totalIngresos | currency }}</h4>
+          <h4>{{ totalIncome | currency }}</h4>
         </div>
 
         <div class="col-md-4 text-center">
           <h6>Total Deducciones</h6>
-          <h4>{{ totalDeducciones | currency }}</h4>
+          <h4>{{ totalDeductions | currency }}</h4>
         </div>
 
         <div class="col-md-4 text-center">
           <h6>Total Neto</h6>
-            <h4>{{ totalNeto | currency }}</h4>
+            <h4>{{ totalNet | currency }}</h4>
         </div>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary mb-5">Save Payroll</button>
+    <button type="submit" class="btn btn-primary mb-5">Guardar Nomina</button>
   </form>
 </div>
