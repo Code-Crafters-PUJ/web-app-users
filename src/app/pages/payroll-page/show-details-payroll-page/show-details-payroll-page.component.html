@@ -1,12 +1,12 @@
 <div class="container">
   <div class="header-container">
     <h1>Nominas </h1>
-    <h5>/Crear nomina</h5>
+    <h5>/Nomina Creada</h5>
   </div>
 
   <div class="row mb-3 py-0">
     <div class="col-md-8 order-2 order-md-1">
-      <h5>Nueva Nomina</h5>
+      <h5>Nomina {{payroll.payrollName}}</h5>
     </div>
     <div class="col-md-4 order-1 order-md-2 d-flex justify-content-start justify-content-md-end mb-2">
       <button class="btn btn-danger-border mx-3" >Eliminar Nomina</button>
@@ -21,7 +21,7 @@
       <div class="col-md-3">
         <div class="mb-3">
           <label for="liquidationType" class="form-label">Tipo de Liquidacion</label>
-          <select id="liquidationType" class="form-control" [(ngModel)]="payroll.liquidationType" name="liquidationType" required #liquidationType="ngModel">
+          <select id="liquidationType"  class="form-control" [(ngModel)]="payroll.liquidationType" name="liquidationType" required #liquidationType="ngModel" >
             <option value="">Seleccione...</option>
             <option value="Mensual">Mensual</option>
             <option value="Quincenal">Quincenal</option>

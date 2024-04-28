@@ -47,20 +47,25 @@ export class ShowDetailsPayrollPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.payrollId = this.route.snapshot.paramMap.get('id');
+    console.log('Payroll ID:', this.payrollId);  // Verifica que se esté obteniendo un ID válido
+
     this.payrollsService.getPayrollDetails(this.payrollId).subscribe(data => {
+      console.log('Data loaded:', data);  // Verifica que los datos se carguen correctamente
       this.payroll = data;
+      this.updateDisplayedEmployees();  // Asegúrate de llamar esto después de cargar los datos
     }, error => {
       console.error('Error fetching payroll details', error);
     });
   }
-
 
   updateDisplayedEmployees() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.displayedEmployees = this.payroll.employees.slice(startIndex, endIndex);
     this.totalPages = Math.ceil(this.payroll.employees.length / this.pageSize);
+    console.log('Displayed employees:', this.displayedEmployees);  // Verifica qué empleados se están mostrando
   }
+
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
