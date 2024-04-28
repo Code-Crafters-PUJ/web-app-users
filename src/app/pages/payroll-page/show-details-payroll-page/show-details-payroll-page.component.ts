@@ -47,12 +47,12 @@ export class ShowDetailsPayrollPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.payrollId = this.route.snapshot.paramMap.get('id');
-    console.log('Payroll ID:', this.payrollId);  // Verifica que se esté obteniendo un ID válido
+    console.log('Payroll ID:', this.payrollId);
 
     this.payrollsService.getPayrollDetails(this.payrollId).subscribe(data => {
-      console.log('Data loaded:', data);  // Verifica que los datos se carguen correctamente
+      console.log('Data loaded:', data);
       this.payroll = data;
-      this.updateDisplayedEmployees();  // Asegúrate de llamar esto después de cargar los datos
+      this.updateDisplayedEmployees();
     }, error => {
       console.error('Error fetching payroll details', error);
     });
@@ -80,6 +80,34 @@ export class ShowDetailsPayrollPageComponent implements OnInit {
       this.updateDisplayedEmployees();
     }
   }
+
+  deletePayroll() {
+    if (confirm('¿Estás seguro de querer eliminar esta nómina?')) {
+      this.payrollsService.deletePayroll(this.payroll.id).subscribe({
+        next: (response) => {
+          alert('Nómina eliminada con éxito');
+          this.router.navigate(['/home/payroll/show/all/payrolls']);
+        },
+        error: (err) => {
+          console.error('Error al eliminar la nómina:', err);
+        }
+      });
+    }
+  }
+
+  consolidatePayroll() {
+    this.payrollsService.updatePayrollStatus(this.payroll.id, 'Consolidada').subscribe({
+      next: (response) => {
+        alert('Nómina consolidada con éxito');
+        this.router.navigate(['/home/payroll/show/all/payrolls']);
+      },
+      error: (err) => {
+        console.error('Error al consolidar la nómina:', err);
+      }
+    });
+  }
+
+
 
 
 

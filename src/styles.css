@@ -124,7 +124,7 @@ button.btn-primary-border:hover {
 }
 
 
-/* Estilo de secundario  */
+/* Estilo de boton secundario  */
 
 button.btn-secondary {
   background-color: var(--bs-secondary);
@@ -165,7 +165,7 @@ button.btn-secondary-border:hover {
 }
 
 
-/* Estilo de eliminar   */
+/* Estilo de boton eliminar   */
 
 button.btn-danger {
   background-color: var(--bs-danger);
@@ -233,7 +233,7 @@ form label {
   border-color: var(--bs-secondary-light) !important;
   color: var(--bs-secondary) !important;
 }
-/* Estilo de icpnos */
+/* Estilo de iconos */
 .icon-color{
   color: var(--bs-secondary) !important;
 }

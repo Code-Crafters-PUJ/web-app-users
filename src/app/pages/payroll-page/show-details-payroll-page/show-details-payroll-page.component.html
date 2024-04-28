@@ -9,8 +9,8 @@
       <h5>Nomina {{payroll.payrollName}}</h5>
     </div>
     <div class="col-md-4 order-1 order-md-2 d-flex justify-content-start justify-content-md-end mb-2">
-      <button class="btn btn-danger-border mx-3" >Eliminar Nomina</button>
-      <button class="btn btn-primary" >Consolidar Nomina</button>
+      <button class="btn btn-danger-border mx-3" (click)="deletePayroll()">Eliminar Nomina</button>
+      <button class="btn btn-primary" (click)="consolidatePayroll()">Consolidar Nomina</button>
     </div>
   </div>
 
