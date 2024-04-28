@@ -204,6 +204,26 @@ export class PayrollsService {
     return of(employee);
   }
 
+  getPayrollDetails(id: string | null): Observable<any> {
+    //return this.http.get(`/api/payroll/${id}`);
+
+    // Verifica si el ID es válido y no es nulo
+    if (id) {
+      // Busca la nómina con el ID proporcionado dentro del arreglo de nóminas
+      const payroll = this.payrolls.find(p => p.id === id);
+      // Verifica si se encontró la nómina
+      if (payroll) {
+        // Si se encuentra, devuelve la nómina como un Observable
+        return of(payroll);
+      } else {
+        // Si no se encuentra, emite un error indicando que la nómina no se encontró
+        return throwError(`Payroll with ID ${id} not found`);
+      }
+    } else {
+      // Si el ID es nulo, emite un error indicando que el ID es inválido
+      return throwError('Invalid ID');
+    }
+  }
 
 
 }

@@ -5,6 +5,9 @@ import { Payroll } from '../../../models/payroll-models/payroll';
 import { PayrollsService } from '../../../services/payroll-services/payrolls.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
+import {timestamp} from "rxjs";
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-new-payroll-page',
@@ -22,6 +25,7 @@ export class NewPayrollPageComponent implements OnInit {
   @ViewChild('payrollForm') payrollForm!: NgForm;
   employees: Employee[] = [];
   payroll: Payroll = {
+    id: uuidv4(),
     state: 'En espera',
     liquidationType: '',
     payrollName: '',
@@ -128,12 +132,25 @@ export class NewPayrollPageComponent implements OnInit {
       alert('Por favor complete todos los campos requeridos y seleccione al menos un empleado.');
       return;
     }
+
+    // Ensure all necessary fields are populated
     this.payroll.employees = this.employees.filter(e => this.selectedEmployees[e.id]);
+    this.payroll.totalIncome = this.totalIncome;
+    this.payroll.totalDeductions = this.totalDeductions;
+    this.payroll.totalNet = this.totalNet;
+
+    // Call to service to save the payroll data
     this.payrollsService.addPayroll(this.payroll).subscribe({
-      next: () => this.router.navigate(['/home/payroll/show/all/payrolls']),
-      error: (error) => console.error('Error al guardar la nómina:', error)
+      next: () => {
+        console.log('Payroll saved successfully!');
+        this.router.navigate(['/home/payroll/show/all/payrolls']);
+      },
+      error: (error) => {
+        console.error('Error al guardar la nómina:', error);
+      }
     });
   }
+
 
   onSubmit() {
     this.savePayroll();

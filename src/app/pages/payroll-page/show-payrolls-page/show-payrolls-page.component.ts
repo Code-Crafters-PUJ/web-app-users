@@ -87,5 +87,10 @@ export class ShowPayrollsPageComponent implements OnInit {
     });
   }
 
+  viewPayrollDetail(payroll: Payroll): void {
+    // Navegar a la ruta de detalles de payroll
+    this.router.navigate(['home/payroll/show/detail/payroll', payroll.id]);
+  }
+
 
 }
