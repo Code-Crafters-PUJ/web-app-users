@@ -5,12 +5,16 @@ import {Education} from "./education";
 
 export interface Employee {
   id: number;
-  idCard: string;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-  address: string;
+  gender: string;
+  typeCard: string;
+  idCard: string;
   city: string;
+  address: string;
+  maritalStatus: string;
+  phoneNumber: string;
   education: Education;
   companyId: number;
   contact: Contact;
