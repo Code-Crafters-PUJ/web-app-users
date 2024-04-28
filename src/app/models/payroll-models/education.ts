@@ -1,7 +1,8 @@
 export interface Education {
   id: number;
-  name: string;
   level: string;
-  endDate: Date;
   title: string;
+  endDate: Date;
+  nameInstitution: string;
+
 }

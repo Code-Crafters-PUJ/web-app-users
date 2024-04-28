@@ -3,16 +3,16 @@ import {Employee} from "./employee";
 
 export interface Contract {
   id: number;
-  number: string;
-  startDate: Date;
-  endDate: Date;
   contractType: ContractType;
+  startDate: Date;
+  endDate?: Date;
+  duration: string;
+  position: string;
   baseSalary: number;
   transportAllowance: boolean;
   healthAndPensions: boolean;
   severancePay: boolean;
   serviceBonus: boolean;
   totalSalary: number;
-
 }
 
