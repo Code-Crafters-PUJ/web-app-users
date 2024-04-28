@@ -133,13 +133,11 @@ export class NewPayrollPageComponent implements OnInit {
       return;
     }
 
-    // Ensure all necessary fields are populated
     this.payroll.employees = this.employees.filter(e => this.selectedEmployees[e.id]);
     this.payroll.totalIncome = this.totalIncome;
     this.payroll.totalDeductions = this.totalDeductions;
     this.payroll.totalNet = this.totalNet;
 
-    // Call to service to save the payroll data
     this.payrollsService.addPayroll(this.payroll).subscribe({
       next: () => {
         console.log('Payroll saved successfully!');

@@ -80,7 +80,7 @@ export class PayrollsService {
         idCard: '1263786789',
         typeCard: 'Tarjeta de identidad',
         firstName: 'Felipe',
-        lastName: 'Garcia',
+        lastName: 'Pérez',
         dateOfBirth: new Date('1990-05-15'),
         address: 'Calle 123, Ciudad XYZ',
         city: 'Ciudad XYZ',
