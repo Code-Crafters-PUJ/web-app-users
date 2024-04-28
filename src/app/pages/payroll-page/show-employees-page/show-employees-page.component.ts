@@ -70,5 +70,9 @@ export class ShowEmployeesPageComponent implements OnInit {
     }
   }
 
+  newEmployee(){
+    this.router.navigate(['/home/payroll/register/employee']);
+  }
+
 
 }
