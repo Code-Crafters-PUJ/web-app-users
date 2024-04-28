@@ -1,7 +1,7 @@
 import {Employee} from "./employee";
 
 export interface Payroll {
-  state: string;
+  state:string;
   liquidationType: string;
   payrollName: string;
   month: string;

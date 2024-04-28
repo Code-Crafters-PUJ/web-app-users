@@ -9,5 +9,11 @@ export interface Contract {
   employee: Employee;
   contractType: ContractType;
   baseSalary: number;
+  transportAllowance: boolean;
+  healthAndPensions: boolean;
+  severancePay: boolean;
+  serviceBonus: boolean;
+  totalSalary: number;
+
 }
 

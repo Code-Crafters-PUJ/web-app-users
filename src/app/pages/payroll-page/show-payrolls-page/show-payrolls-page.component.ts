@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { CommonModule } from '@angular/common';
 import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
 import {Payroll} from "../../../models/payroll-models/payroll";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
@@ -12,14 +13,13 @@ import {Payroll} from "../../../models/payroll-models/payroll";
   templateUrl: './show-payrolls-page.component.html',
   styleUrl: './show-payrolls-page.component.css'
 })
-export class ShowPayrollsPageComponent {
+export class ShowPayrollsPageComponent implements OnInit {
 
   //Variables
   payrolls: Payroll[] = [];
   Actualpage: number = 1;
   totalPages: number = 1;
   pageSize: number = 10;
-
   displayedPayrolls: Payroll[] = [];
 
 
@@ -29,7 +29,10 @@ export class ShowPayrollsPageComponent {
     private router: Router,
     private payrollsService: PayrollsService
 
-) {
+) {}
+
+
+  ngOnInit(): void {
     this.updateData();
   }
 
@@ -56,6 +59,9 @@ export class ShowPayrollsPageComponent {
   }
 
   // Métodos para la paginación
+  newPayroll(){
+  this.router.navigate(['/home/payroll/register/payroll']);
+}
 
   previousPage() {
     if (this.Actualpage > 1) {
@@ -80,4 +86,6 @@ export class ShowPayrollsPageComponent {
       queryParamsHandling: 'merge',
     });
   }
+
+
 }

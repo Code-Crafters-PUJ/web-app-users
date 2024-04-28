@@ -5,7 +5,7 @@ import {Education} from "./education";
 
 export interface Employee {
   id: number;
-  idCedula: string;
+  idCard: string;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
@@ -14,7 +14,6 @@ export interface Employee {
   education: Education;
   companyId: number;
   contact: Contact;
-  payroll: Payroll;
   contract: Contract[];
 }
 
