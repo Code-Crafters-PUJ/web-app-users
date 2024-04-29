@@ -8,7 +8,7 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
   
   if(storageService.getSavedAccount() === null){
-    router.navigate(['/login'])
+    router.navigate(['/landing'])
   }
   return true;
 };

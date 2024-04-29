@@ -13,7 +13,7 @@ export const hasRoleGuard: CanActivateFn = (route, state) => {
    }
    console.log(route.data['role'])
   if (!account || account.role != route.data['role']){
-    router.navigate(['/login'])
+    router.navigate(['/landing'])
   }
   return true
 };
