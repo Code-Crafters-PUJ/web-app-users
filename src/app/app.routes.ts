@@ -26,6 +26,7 @@ import { CreateBillComponent } from './pages/sales-page/create-bill-page/create-
 
 import { InventoryPageComponent } from './pages/analytics-page/inventory-page/inventory-page.component';
 import { ShowAllProductsComponent } from './pages/inventory-page/show-all-products-page/show-all-products.component';
+import { ShowAllSuppliersPageComponent } from "./pages/inventory-page/show-all-suppliers-page/show-all-suppliers-page.component";
 import { ShowProductDetailsComponent } from './pages/inventory-page/show-product-details-page/show-product-details.component';
 import { CreateProductComponent } from './pages/inventory-page/create-product-page/create-product.component';
 import { CreateSupplierComponent } from './pages/inventory-page/create-supplier-page/create-supplier.component';
@@ -35,6 +36,7 @@ import { AccountingPageComponent } from './pages/analytics-page/accounting-page/
 import { AccountingRecordComponent } from './pages/accounting-page/accounting-record-page/accounting-record.component';
 import { ElectronicPayrollComponent } from './pages/accounting-page/electronic-payroll-page/electronic-payroll.component';
 import { ElectronicBillComponent } from './pages/accounting-page/electronic-bill-page/electronic-bill.component';
+
 
 export const routes: Routes = [
 
@@ -86,6 +88,7 @@ export const routes: Routes = [
         children: [
             { path: 'general', component:InventoryPageComponent },
             { path: 'show/product/all', component: ShowAllProductsComponent },
+            { path: 'show/supplier/all', component: ShowAllSuppliersPageComponent},
             { path: 'show/product/detail', component:ShowProductDetailsComponent },
             { path: 'show/supplier/detail', component:ShowSupplierDetailsComponent },
             { path: 'register/product', component: CreateProductComponent },
