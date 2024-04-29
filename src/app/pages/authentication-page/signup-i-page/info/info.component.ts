@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../services/login-services/auth.service';
 import Swal from 'sweetalert2';
+import { Account } from '../../../../models/user-models/account';
 
 
 @Component({
@@ -11,20 +12,35 @@ import Swal from 'sweetalert2';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent {
+  router: any;
 
   constructor(private authService: AuthService) { }
 
-  signUpUser(accountData: any): void {
+  signUpUser(accountData: Account): void {
 
     this.authService.signup(accountData).then((value) => {
       if (value){
         var jwt = JSON.parse(value).jwt;
         // TO DO: Complete in case of Authentication
+        this.handleSuccessfulAuthentication();
       }
       else {
         this.handleFailedAuthentication();
       }
     })
+  }
+
+  private handleSuccessfulAuthentication() {
+    
+    Swal.fire({
+      title: 'Bienvenido',
+      text: "Autenticación exitosa",
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+
+    this.router.navigate(['/home/admin']);
+
   }
 
   private handleFailedAuthentication() {
