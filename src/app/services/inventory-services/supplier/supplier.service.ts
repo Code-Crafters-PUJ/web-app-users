@@ -35,13 +35,13 @@ export class SupplierService {
      }
      //TODO: 'include company id in the request'
      //return this.http.post<supplier>(`${environment.baseURL}/create/supplier`, newsupplier);
-     //return this.http.post<supplier>('https://localhost:7071/create/supplier', newsupplier);
+     //return this.http.post<supplier>('https://localhost:7071/api/supplier', newsupplier);
      return of(true);
   }
 
   generateSupplierId(): Observable<number> {
-    //return this.http.get<number>(`${environment.baseURL}/generate/supplier/id`);
-    //return this.http.get<number>('https://localhost:7071/generate/supplier/id');
+    //return this.http.get<number>(`${environment.baseURL}/supplier/generate/id`);
+    //return this.http.get<number>('https://localhost:7071/api/supplier/generate/id');
     let numero = 82374;
     return of(numero);
   }
@@ -49,7 +49,7 @@ export class SupplierService {
   getSupplierById(supplierId: number, companyId: number): Observable<supplier> {
     //TODO: 'include company id in the request'
     //return this.http.get<supplier>(`${environment.baseURL}/get/supplier/${supplierId}`);
-    //return this.http.get<supplier>(`https://localhost:7071/get/supplier/${supplierId}`);
+    //return this.http.get<supplier>(`https://localhost:7071/api/get/supplier/${supplierId}`);
     let supplier: supplier = {
       id: 82374,
       name: 'Juan Perez',
