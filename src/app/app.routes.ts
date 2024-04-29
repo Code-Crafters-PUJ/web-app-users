@@ -52,7 +52,7 @@ export const routes: Routes = [
             { path: 'myaccount', component:GeneralInfoPageComponent },
             { path: 'configinfo', component:ConfigInfoPageComponent },
             { path: 'configpayment', component:ConfigPaymentPageComponent },
-            { path: 'accmanagement:', component:AccountsManagementPageComponent },
+            { path: 'accmanagement', component:AccountsManagementPageComponent },
             { path: '', redirectTo: 'general', pathMatch: 'full' }
         ]
     },
