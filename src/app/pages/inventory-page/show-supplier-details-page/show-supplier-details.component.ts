@@ -55,6 +55,7 @@ export class ShowSupplierDetailsComponent implements OnInit{
         this.supplier = supplier;
       });
     }
+    sessionStorage.removeItem('supplierId');
   }
 
   saveSupplierChanges() {
