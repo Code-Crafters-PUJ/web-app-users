@@ -46,6 +46,7 @@
             type="checkbox"
             id="enable-{{i}}"
             [(ngModel)]="branchProduct.enabled"
+            (change)="handleBranchToggle(branchProduct, i)"
           />
         </div>
 
@@ -63,6 +64,7 @@
             [(ngModel)]="branchProduct.quantity"
             placeholder="Cantidad"
             [disabled]="!branchProduct.enabled"
+            (change)="updateTotalProducts()"
           />
         </div>
 

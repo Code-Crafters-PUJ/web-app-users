@@ -7,6 +7,7 @@ import {NgForOf} from "@angular/common";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
 import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
 import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-show-product-details',
@@ -41,25 +42,80 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Obtener el ID del producto desde sessionStorage
     const productIdString = sessionStorage.getItem('productId');
     if (productIdString !== null) {
       this.productId = parseInt(productIdString);
-      this.productService.getProductById(this.productId).subscribe(product => {
+      this.productService.getProductById(this.productId).subscribe((product) => {
         this.product = product;
       });
-      this.productService.getAllBranchesByProduct(this.productId).subscribe(branches => {
-        this.branchesProducts = branches;
+
+      // Obtener todas las sucursales y establecer habilitadas o deshabilitadas según tengan el producto
+      this.productService.getAllBranchesByCompany(1).subscribe((allBranches) => {
+        this.productService.getAllBranchesByProduct(this.productId).subscribe((productBranches) => {
+          // Crear un mapa de sucursales con productos
+          const productBranchNames = productBranches.map((b) => b.branchName);
+          // Iniciar todas las sucursales, pero solo habilitar las que tienen el producto
+          this.branchesProducts = allBranches.map((branch) => {
+            const enabled = productBranchNames.includes(branch.name);
+            return {
+              branchName: branch.name,
+              discount: enabled ? productBranches.find(b => b.branchName === branch.name)?.discount ?? 0 : 0,
+              quantity: enabled ? productBranches.find(b => b.branchName === branch.name)?.quantity ?? 0 : 0,
+              enabled,
+            };
+          });
+        });
       });
     }
-    sessionStorage.removeItem('supplierId');
-    //get the total of products of all branches
-    this.branchesProducts.forEach(branchProduct => {
-      this.total += branchProduct.quantity;
-    });
+
+    this.updateTotalProducts();
+  }
+  validateForm() {
+    if (this.product.name != '' && this.product.description != '' && this.product.category != '' && this.product.sellPrice > 0){
+      //verify that all enable branches have a quantity and a discount
+      if (this.branchesProducts.filter(branch => branch.enabled).every(branch => branch.quantity >= 0 && branch.discount >= 0)){
+        return true;
+      }
+    }
+    return false;
   }
 
   updateProduct(product: product): void {
-    this.product = product; // Actualizar el producto
+    this.product = product;
+    this.updateTotalProducts()
+    if (this.validateForm()) {
+      //get the branches that are enabled
+      const enabledBranches = this.branchesProducts.filter(branchProduct => branchProduct.enabled);
+      //Verify that the product has at least one branch
+      if (enabledBranches.length === 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'El producto debe estar disponible en al menos una sucursal',
+          icon: 'error'
+        });
+        return;
+      }
+      this.productService.updateProduct(product, enabledBranches).subscribe(result => {
+        if (result) {
+          Swal.fire({
+            title: 'Producto actualizado',
+            text: 'El producto se ha actualizado correctamente',
+            icon: 'success'
+          });
+          this.cancelChanges();
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Ha ocurrido un error al actualizar el producto',
+            icon: 'error'
+          });
+        }
+
+      });
+    }
+
+    this.cancelChanges()
   }
 
   cancelChanges() {
@@ -71,5 +127,37 @@ export class ShowProductDetailsComponent implements OnInit {
       this.router.navigate(['home/inventory/show/product/all']);
     });
 
+  }
+  updateTotalProducts(){
+    this.total = this.branchesProducts.reduce((acc, branchProduct) => acc + branchProduct.quantity, 0);
+  }
+
+  handleBranchToggle(branchProduct: branchesProductTemplate, index: number) {
+    if (branchProduct.enabled) {
+      // Si la sucursal está habilitada, no necesitamos confirmación
+      return;
+    }
+
+    // Mostrar la alerta de confirmación
+    Swal.fire({
+      title: 'Desactivar sucursal',
+      text: 'Al desactivar, se perderán los cambios realizados para esta sucursal. ¿Estás seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si se confirma, desactivar la sucursal y restablecer los datos
+        branchProduct.enabled = false;
+        branchProduct.quantity = 0;
+        branchProduct.discount = 0;
+        this.updateTotalProducts();
+
+      } else {
+        // Si no se confirma, volver a habilitar el checkbox
+        branchProduct.enabled = true;
+      }
+    });
   }
 }
