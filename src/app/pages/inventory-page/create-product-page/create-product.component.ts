@@ -63,6 +63,16 @@ export class CreateProductComponent implements OnInit{
 
       //get the branches that are enabled
       const branchesProducts = this.branchesProducts.filter(branch => branch.enabled);
+      //Verify that the product has at least one branch
+      if (branchesProducts.length == 0){
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Por favor, seleccione al menos una sucursal',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        return;
+      }
       this.productService.createProduct(this.newProduct, branchesProducts).subscribe(result => {
         if (result) {
           Swal.fire({
@@ -100,6 +110,33 @@ export class CreateProductComponent implements OnInit{
       }
     }
     return false;
+  }
+
+  handleBranchToggle(branchProduct: branchesProductTemplate, index: number) {
+    if (branchProduct.enabled) {
+      // If the branch is enabled, we don't need confirmation
+      return;
+    }
+
+    // Display the confirmation alert
+    Swal.fire({
+      title: 'Desactivar sucursal',
+      text: 'Al desactivar, se perderán los cambios realizados para esta sucursal. ¿Estás seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If confirmed, disable the branch and reset related data
+        branchProduct.enabled = false;
+        branchProduct.quantity = 0;
+        branchProduct.discount = 0;
+      } else {
+        // If not confirmed, re-enable the checkbox
+        branchProduct.enabled = true;
+      }
+    });
   }
 
   disableProductComponent() {

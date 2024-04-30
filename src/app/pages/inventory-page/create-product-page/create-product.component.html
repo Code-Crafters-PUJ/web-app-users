@@ -41,6 +41,7 @@
             type="checkbox"
             id="enable-{{i}}"
             [(ngModel)]="branchProduct.enabled"
+            (change)="handleBranchToggle(branchProduct, i)"
           />
         </div>
 
