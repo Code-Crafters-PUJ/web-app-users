@@ -65,7 +65,7 @@ export const routes: Routes = [
           { path: 'show/detail/payroll/:id', component: ShowDetailsPayrollPageComponent },
             { path: 'register/payroll', component: NewPayrollPageComponent },
             { path: 'show/all/employees', component: ShowEmployeesPageComponent },
-            {path: 'show/detail/employee', component:ShowDetailsEmployeePageComponent },
+            {path: 'show/detail/employee/:id', component:ShowDetailsEmployeePageComponent },
             {path: 'register/employee', component:NewEmployeePageComponent },
             { path: '', redirectTo: 'general', pathMatch: 'full' }
         ]

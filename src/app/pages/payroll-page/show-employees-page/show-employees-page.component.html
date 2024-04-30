@@ -35,7 +35,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let employee of displayedEmployees">
+      <tr *ngFor="let employee of displayedEmployees" (click)="viewEmployeeDetail(employee)" style="cursor: pointer">
         <td>{{ employee.firstName }} {{ employee.lastName }}</td>
         <td>{{ employee.idCard }}</td>
         <td>{{ employee.contract.length > 0 ? employee.contract[0].id : '' }}</td>
