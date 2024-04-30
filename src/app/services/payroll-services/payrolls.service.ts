@@ -167,4 +167,32 @@ export class PayrollsService {
 
 
 
+
+
+  getEmployeeDetails(id: string | null): Observable<any> {
+    //return this.http.get(`/api/payroll/${id}`);
+    if (id) {
+      const employee = this.employees.find(p => p.id.toString() === id);
+      if (employee) {
+        return of(employee);
+      } else {
+        return throwError(`Employee with ID ${id} not found`);
+      }
+    } else {
+      return throwError('Invalid ID');
+    }
+  }
+
+
+  updateEmployee(employeeId: string, updatedEmployee: Employee): Observable<Employee> {
+    const index = this.employees.findIndex(e => e.id.toString() === employeeId);
+    if (index !== -1) {
+      this.employees[index] = updatedEmployee;
+      return of(this.employees[index]);
+    } else {
+      return throwError(`Employee with ID ${employeeId} not found`);
+    }
+  }
+
+
 }
