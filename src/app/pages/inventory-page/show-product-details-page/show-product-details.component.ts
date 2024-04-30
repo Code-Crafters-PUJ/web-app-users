@@ -42,7 +42,7 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Obtener el ID del producto desde sessionStorage
+    //Get the product id from the session storage
     const productIdString = sessionStorage.getItem('productId');
     if (productIdString !== null) {
       this.productId = parseInt(productIdString);
@@ -50,12 +50,12 @@ export class ShowProductDetailsComponent implements OnInit {
         this.product = product;
       });
 
-      // Obtener todas las sucursales y establecer habilitadas o deshabilitadas según tengan el producto
+      //Get all branches and set them enabled or disabled depending if they have the product
       this.productService.getAllBranchesByCompany(1).subscribe((allBranches) => {
         this.productService.getAllBranchesByProduct(this.productId).subscribe((productBranches) => {
-          // Crear un mapa de sucursales con productos
+          //Create a map of branches with products
           const productBranchNames = productBranches.map((b) => b.branchName);
-          // Iniciar todas las sucursales, pero solo habilitar las que tienen el producto
+          // Start all branches, but only enable those that have the product
           this.branchesProducts = allBranches.map((branch) => {
             const enabled = productBranchNames.includes(branch.name);
             return {
@@ -134,11 +134,11 @@ export class ShowProductDetailsComponent implements OnInit {
 
   handleBranchToggle(branchProduct: branchesProductTemplate, index: number) {
     if (branchProduct.enabled) {
-      // Si la sucursal está habilitada, no necesitamos confirmación
+      //If the branch is enabled, we don't need confirmation
       return;
     }
 
-    // Mostrar la alerta de confirmación
+    //Show the confirmation alert
     Swal.fire({
       title: 'Desactivar sucursal',
       text: 'Al desactivar, se perderán los cambios realizados para esta sucursal. ¿Estás seguro?',
@@ -148,14 +148,14 @@ export class ShowProductDetailsComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Si se confirma, desactivar la sucursal y restablecer los datos
+        //If confirmed, reset the quantity and discount
         branchProduct.enabled = false;
         branchProduct.quantity = 0;
         branchProduct.discount = 0;
         this.updateTotalProducts();
 
       } else {
-        // Si no se confirma, volver a habilitar el checkbox
+        // If not confirmed, re-enable the checkbox
         branchProduct.enabled = true;
       }
     });

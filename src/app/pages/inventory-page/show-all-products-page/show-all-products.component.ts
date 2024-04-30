@@ -78,12 +78,12 @@ export class ShowAllProductsComponent implements OnInit{
   }
 
   haandleProductDisabled(disabled: boolean) {
-    // Si el componente se desactiva, oculta la interfaz de creación de productos
+    //If the component is disabled, hide the product registration form
     this.showProductRegister = !disabled;
 
-    // Si el componente se desactiva, recargar o actualizar información
+    // If the component is disabled, reload or update information
     if (disabled) {
-      // Recargar sucursales o información de productos
+      // Reload branches or product information
       this.productService.getAllBranchesByCompany(1).subscribe((branches) => {
         this.branches = branches;
         this.initializePagination();

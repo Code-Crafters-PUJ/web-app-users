@@ -80,10 +80,10 @@ input{
 }
 
 .clickable {
-  text-decoration: underline; /* Subrayado */
-  cursor: pointer; /* Cambia el cursor a un puntero para indicar que es clickeable */
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .clickable:hover {
-  color: #0056b3; /* Cambia el color cuando se pasa el mouse por encima */
+  color: #0056b3;
 }
