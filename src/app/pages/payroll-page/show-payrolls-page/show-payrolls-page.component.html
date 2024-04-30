@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="header-container">
     <h1>Nominas</h1>
@@ -10,16 +9,15 @@
         <input type="text" class="form-control" placeholder="Buscar: Estado, Nombre, Periodo de Pago"
                aria-label="Recipient's username" aria-describedby="basic-addon2">
         <span class="input-group-text" id="a">
-                <i class="fas fa-search"></i>
-            </span>
+          <i class="fas fa-search"></i>
+        </span>
       </div>
     </div>
 
     <div class="col-md-8 d-flex justify-content-end mb-3">
-      <button class="btn btn-primary-border">Crear Nomina</button>
+      <button class="btn btn-primary-border" (click)="newPayroll()">Crear Nomina</button>
     </div>
   </div>
-
 
   <div class="table-responsive">
     <table class="table table-custom-primary">
@@ -28,40 +26,31 @@
         <th scope="col">Estado</th>
         <th scope="col">Nombre de Nomina</th>
         <th scope="col">Tipo Liquidacion</th>
-        <th scope="col">Peridodo de Pago</th>
+        <th scope="col">Periodo de Pago</th>
         <th scope="col">Total Nomina</th>
       </tr>
       </thead>
       <tbody>
-
-      <tr>
-        <td>Liquidado</td>
-        <td>Nomina de Enero</td>
-        <td>Mensual</td>
-        <td>Enero I</td>
-        <td>$ 35.000.000</td>
-      </tr>
-      <tr>
-        <td>En proceso</td>
-        <td>Nomina de Febrero</td>
-        <td>Quincenal</td>
-        <td>Enero II</td>
-        <td>$ 15.000.000</td>
+      <tr *ngFor="let payroll of displayedPayrolls" (click)="viewPayrollDetail(payroll)" style="cursor: pointer">
+        <td>{{ payroll.state }}</td>
+        <td>{{ payroll.payrollName }}</td>
+        <td>{{ payroll.liquidationType }}</td>
+        <td>{{ payroll.month }} de {{payroll.year}}</td>
+        <td>{{ payroll.totalNet }}</td>
       </tr>
 
       </tbody>
     </table>
 
     <div class="d-flex justify-content-start align-items-center mt-3">
-      <button class="btn mx-1">
+      <button class="btn mx-1" (click)="previousPage()">
         <i class="fas fa-chevron-left icon-color"></i>
       </button>
-      <div>Pagina uno</div>
-      <button class="btn mx-1">
+      <div>Página {{ currentPage }} de {{ totalPages }}</div>
+      <button class="btn mx-1" (click)="nextPage()">
         <i class="fas fa-chevron-right icon-color"></i>
       </button>
     </div>
 
   </div>
-
 </div>

@@ -63,18 +63,27 @@ export class LoginComponent {
     }
   }
   private handleSuccessfulAuthentication(role: string) {
+    
     Swal.fire({
       title: 'Bienvenido',
       text: "Autenticación exitosa",
       icon: 'success',
       confirmButtonText: 'OK'
     });
-    if (role === "ADMIN") {
+
+    if (role === "ROOT") {
       this.router.navigate(['/home/admin']);
 
-    } else {
+    } else if (role === "HR"){
+      this.router.navigate(['/home/payroll']);
+    } else if (role === "SALES"){
       this.router.navigate(['/home/sales']);
+    } else if (role === "INVENTORY"){
+      this.router.navigate(['/home/inventory']);
+    } else if (role === "ACCOUNTING"){
+      this.router.navigate(['/home/accounting']);
     }
+
   }
   private handleFailedAuthentication() {
     Swal.fire({

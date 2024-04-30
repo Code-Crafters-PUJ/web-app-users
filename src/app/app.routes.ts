@@ -7,7 +7,7 @@ import { SignupIPageComponent } from './pages/authentication-page/signup-i-page/
 import { SignupIIPageComponent } from './pages/authentication-page/signup-ii-page/signup-ii-page.component';
 
 import { AdminPageComponent } from './pages/analytics-page/admin-page/admin-page.component';
-import { GeneralInfoComponent } from './pages/landing-page/components/general-info/general-info.component';
+import { GeneralInfoPageComponent } from './pages/account-page/general-info-page/general-info-page.component';
 import { ConfigInfoPageComponent } from './pages/account-page/config-info-page/config-info-page.component';
 import { ConfigPaymentPageComponent } from './pages/account-page/config-payment-page/config-payment-page.component';
 import { AccountsManagementPageComponent } from './pages/account-page/accounts-management-page/accounts-management-page.component';
@@ -51,10 +51,10 @@ export const routes: Routes = [
         path: 'home/admin',
         children: [
             { path: 'general', component:AdminPageComponent },
-            { path: 'myaccount', component:GeneralInfoComponent },
+            { path: 'myaccount', component:GeneralInfoPageComponent },
             { path: 'configinfo', component:ConfigInfoPageComponent },
             { path: 'configpayment', component:ConfigPaymentPageComponent },
-            { path: 'accmanagement:', component:AccountsManagementPageComponent },
+            { path: 'accmanagement', component:AccountsManagementPageComponent },
             { path: '', redirectTo: 'general', pathMatch: 'full' }
         ]
     },
@@ -64,7 +64,7 @@ export const routes: Routes = [
         children: [
             { path: 'general', component:PayrollPageComponent },
             { path: 'show/all/payrolls', component:ShowPayrollsPageComponent },
-            { path: 'show/detail/payroll', component:ShowDetailsPayrollPageComponent },
+          { path: 'show/detail/payroll/:id', component: ShowDetailsPayrollPageComponent },
             { path: 'register/payroll', component: NewPayrollPageComponent },
             { path: 'show/all/employees', component: ShowEmployeesPageComponent },
             {path: 'show/detail/employee', component:ShowDetailsEmployeePageComponent },

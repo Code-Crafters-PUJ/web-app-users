@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-md-8 d-flex justify-content-end mb-3">
-      <button class="btn btn-primary-border">Crear Nuevo Empleado</button>
+      <button class="btn btn-primary-border" (click)="newEmployee()" >Crear Nuevo Empleado</button>
     </div>
   </div>
 
@@ -26,42 +26,33 @@
       <thead>
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">No. Identificacion</th>
+        <th scope="col">No. Cedula</th>
         <th scope="col">No. Contrato</th>
-        <th scope="col">Fecha de Inicio</th>
+        <th scope="col">Fecha Inicio</th>
         <th scope="col">Fecha Fin</th>
-        <th scope="col">Sueldo</th>
+        <th scope="col">Salario</th>
         <th scope="col">Tipo Contrato</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Liquidado</td>
-        <td>Nomina de Enero</td>
-        <td>Mensual</td>
-        <td>Enero I</td>
-        <td>$ 35.000.000</td>
-        <td>$ 15.000.000</td>
-        <td>$ 15.000.000</td>
-      </tr>
-      <tr>
-        <td>En proceso</td>
-        <td>Nomina de Febrero</td>
-        <td>Quincenal</td>
-        <td>Enero II</td>
-        <td>$ 15.000.000</td>
-        <td>$ 15.000.000</td>
-        <td>$ 15.000.000</td>
+      <tr *ngFor="let employee of displayedEmployees">
+        <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+        <td>{{ employee.idCard }}</td>
+        <td>{{ employee.contract.length > 0 ? employee.contract[0].id : '' }}</td>
+        <td>{{ employee.contract.length > 0 ? (employee.contract[0].startDate | date:'yyyy-MM-dd') : '' }}</td>
+        <td>{{ employee.contract.length > 0 ? (employee.contract[0].endDate | date:'yyyy-MM-dd') : '' }}</td>
+        <td>{{ employee.contract.length > 0 ? (employee.contract[0].baseSalary | currency:'USD':true:'1.2-2') : '' }}</td>
+        <td>{{ employee.contract.length > 0 ? employee.contract[0].totalSalary : '' }}</td>
       </tr>
       </tbody>
     </table>
 
     <div class="d-flex justify-content-start align-items-center mt-3">
-      <button class="btn mx-1">
+      <button type="button" class="btn mx-1" (click)="previousPage()">
         <i class="fas fa-chevron-left icon-color"></i>
       </button>
-      <div>Pagina uno</div>
-      <button class="btn mx-1">
+      <div>Página {{ currentPage }} de {{ totalPages }}</div>
+      <button type="button" class="btn mx-1" (click)="nextPage()">
         <i class="fas fa-chevron-right icon-color"></i>
       </button>
     </div>

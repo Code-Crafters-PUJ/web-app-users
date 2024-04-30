@@ -75,16 +75,21 @@
     background-color: #5CAEFA;
 }
 
-/* Styling for quotes inside the main container */
-#main-container p{
-    font-size: 1.3vb;
-    padding-right: 4vw;
-    padding-left: 4vw;
-    padding-bottom:5vh;
+#description{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     text-align: center;
+    justify-content: space-around;
+    align-items:center;
+}
+
+/* Styling for quotes inside the main container */
+#main-container a{
+    font-size: 1.3vb;
+    text-align: center;
+    text-align: center;
+    justify-content: space-around;
+    align-items:center;
 }
 
 /* Media query for smaller screens (max-width: 1100px) */
@@ -114,9 +119,14 @@
         padding-bottom:2vh;
         padding-right:10vw;
     }
-    #main-container p{
+    #main-container a{
         padding-left: 15vw;
         padding-right: 15vw;
+        padding-top:5vh;
+    }
+    #description{
+        flex-direction: column;
+        padding-top:2vh;
     }
 }
 
