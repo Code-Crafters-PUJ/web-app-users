@@ -48,10 +48,24 @@ export class ShowAllSuppliersPageComponent implements OnInit{
   }
   handleSupplierDisabled(disabled: boolean) {
     this.showSupplierComponent = !disabled;
+    //update the suppliers
+    this.supplierService.getAllSuppliersByCompany(this.companyId).subscribe(suppliers => {
+      this.allSuppliers = suppliers;
+      this.totalPages = Math.ceil(this.allSuppliers.length / this.pageSize);
+      this.updatePaginatedSuppliers();
+    });
   }
 
   supplierDetails(id: number | null){
+    if (id == null) {
+      return;
+    }
+    this.saveSupplierId(id);
     this.router.navigate(['home/inventory/show/supplier/detail']);
+  }
+  saveSupplierId(id: number): void {
+    const supplierId: string = id.toString();
+    sessionStorage.setItem('supplierId', supplierId);
   }
 
   updatePaginatedSuppliers(): void {

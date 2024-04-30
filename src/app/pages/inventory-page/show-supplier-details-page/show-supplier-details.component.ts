@@ -48,20 +48,14 @@ export class ShowSupplierDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.supplierId = parseInt(id, 10);
-      }
-    });
-    this.supplierId = 10;
-    if (this.supplierId !== -1) {
+    const supplierIdString = sessionStorage.getItem('supplierId');
+    if (supplierIdString !== null) {
+      this.supplierId = parseInt(supplierIdString);
       this.supplierService.getSupplierById(this.supplierId, this.companyId).subscribe(supplier => {
         this.supplier = supplier;
       });
     }
   }
-
 
   saveSupplierChanges() {
     if(this.validateForm()){
