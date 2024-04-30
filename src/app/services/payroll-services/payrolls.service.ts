@@ -25,11 +25,16 @@ export class PayrollsService {
     return of(payroll);
   }
 
+  addEmployee(employee: Employee): Observable<Employee> {
+    this.employees.push(employee);
+    return of(employee);
+  }
+
   //servicios para empleados
 
   // Método para obtener empleados
   getEmployees(): Observable<Employee[]> {
-    const simulatedEmployees: Employee[] = [
+    /*const simulatedEmployees: Employee[] = [
       {
         id: 1,
         idCard: '123456789',
@@ -122,14 +127,11 @@ export class PayrollsService {
         ],
       }
     ];
-
-    return of(simulatedEmployees);
+*/
+    return of(this.employees);
   }
 
-  addEmployee(employee: Employee): Observable<Employee> {
-    this.employees.push(employee);
-    return of(employee);
-  }
+
 
   getPayrollDetails(id: string | null): Observable<any> {
     //return this.http.get(`/api/payroll/${id}`);

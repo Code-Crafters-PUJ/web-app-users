@@ -8,7 +8,7 @@
   <h6>Datos Demograficos</h6>
 
 
-  <form class="mt-3" (ngSubmit)="saveEmployee()">
+  <form class="mt-3" (ngSubmit)="onSubmit()" #employeeForm="ngForm">
 
     <div class="row mb-3">
       <div class="col-md-3">
@@ -25,7 +25,7 @@
     <div class="row mb-3">
       <div class="col-md-3">
         <label for="nacimientoEmpleadoNuevo" class="form-label">Fecha De Nacimiento</label>
-        <input type="text" id="nacimientoEmpleadoNuevo" [(ngModel)]="employee.dateOfBirth" name="nacimientoEmpleadoNuevo" class="form-control" required>
+        <input type="date" id="nacimientoEmpleadoNuevo" [(ngModel)]="employee.dateOfBirth" name="nacimientoEmpleadoNuevo" class="form-control" required>
       </div>
       <div class="col-md-3">
         <div>
@@ -126,7 +126,7 @@
 
     <div class="row mb-3">
       <div class="col-md-3">
-        <label for="nombreContactoNuevoEmpleado" class="form-label">Nombre Completo del contacto</label>
+        <label for="nombreContactoNuevoEmpleado" class="form-label">Nombre del contacto</label>
         <input type="text" id="nombreContactoNuevoEmpleado" [(ngModel)]="employee.contact.name" name="nombreContactoNuevoEmpleado" class="form-control" required>
       </div>
 
@@ -140,15 +140,6 @@
       <div class="col-md-3">
         <label for="telefonoNuevoEmpleado" class="form-label">Teléfono</label>
         <input type="text" id="telefonoNuevoEmpleado" [(ngModel)]="employee.contact.phone" name="telefonoNuevoEmpleado" class="form-control " required>
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-3">
-        <button type="submit" class="btn btn-primary">Guardar Empleado</button>
-      </div>
-      <div class="col-md-3">
-        <button type="button" class="btn btn-primary-border" (click)="cancel()">Cancelar</button>
       </div>
     </div>
 
@@ -266,20 +257,17 @@
 
     <div class="row mb-3">
       <div class="col-md-3">
-        <button class="btn btn-secondary-border">Generar Contrato</button>
-      </div>
-      <div class="col-md-3">
-        <button class="btn btn-secondary-border">Renovar Contrato</button>
+        <button type="button" class="btn btn-secondary-border">Generar Contrato</button>
       </div>
     </div>
 
 
     <div class="row mb-3">
       <div class="col-md-3">
-        <button class="btn btn-secondary">Descargar Contrato</button>
+        <button type="button" class="btn btn-secondary">Descargar Contrato</button>
       </div>
       <div class="col-md-3">
-        <button class="btn btn-secondary">Subir Contrato</button>
+        <button type="button" class="btn btn-secondary">Subir Contrato</button>
       </div>
     </div>
 
@@ -287,20 +275,15 @@
 
     <div class="row mb-3">
       <div class="col-md-3">
-        <button class="btn btn-primary">Guardar Cambios</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid"  >Guardar Empleado</button>
       </div>
       <div class="col-md-3">
-        <button class="btn btn-primary-border">Cancelar Cambios</button>
+        <button type="button" class="btn btn-primary-border">Cancelar Empleado</button>
       </div>
     </div>
 
 
-    <div class="row mb-3">
-      <div class="col-md-3">
-        <button class="btn btn-danger">Eliminar Empleado</button>
-      </div>
 
-    </div>
 
   </form>
 </div>

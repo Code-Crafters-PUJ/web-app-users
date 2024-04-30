@@ -1,8 +1,8 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
 import {Employee} from "../../../models/payroll-models/employee";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, NgForm} from "@angular/forms";
 import {ContractType} from "../../../models/payroll-models/contractType";
 import {CurrencyPipe, NgIf} from "@angular/common";
 
@@ -18,7 +18,7 @@ import {CurrencyPipe, NgIf} from "@angular/common";
   styleUrl: './new-employee-page.component.css'
 })
 export class NewEmployeePageComponent implements OnInit {
-
+  @ViewChild('employeeForm') employeeForm!: NgForm;
   employee: Employee = {
     id: 0,
     firstName: '',
@@ -72,17 +72,22 @@ export class NewEmployeePageComponent implements OnInit {
 
   ngOnInit(): void {
 
+
   }
 
   saveEmployee(): void {
-    this.payrollsService.addEmployee(this.employee).subscribe({
-      next: (res) => {
-        console.log('Empleado guardado', res);
-        // Aquí podrías redireccionar o mostrar un mensaje de éxito
+    if (!this.employeeForm.valid) {
+      this.employeeForm.form.markAllAsTouched();
+      alert('Por favor complete todos los campos requeridos y seleccione al menos un empleado.');
+      return;
+    }
+      this.payrollsService.addEmployee(this.employee).subscribe({
+      next: () => {
+        console.log('employee saved successfully!' , this.employee);
+        this.router.navigate(['/home/payroll/show/all/employees']);
       },
-      error: (err) => {
-        console.error('Error al guardar empleado', err);
-        // Manejo de errores, por ejemplo mostrar un mensaje de error
+      error: (error) => {
+        console.error('Error al guardar la nómina:', error);
       }
     });
   }
@@ -108,6 +113,10 @@ export class NewEmployeePageComponent implements OnInit {
     return total;
   }
 
+
+  onSubmit() {
+    this.saveEmployee();
+  }
 
 
 
