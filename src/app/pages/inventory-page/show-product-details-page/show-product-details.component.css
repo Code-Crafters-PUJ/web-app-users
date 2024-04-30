@@ -30,3 +30,8 @@ input{
   color: #21325B33;
 
 }
+
+.form-check-input:checked {
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-secondary);
+}
