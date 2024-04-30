@@ -35,6 +35,7 @@ import { AccountingPageComponent } from './pages/analytics-page/accounting-page/
 import { AccountingRecordComponent } from './pages/accounting-page/accounting-record-page/accounting-record.component';
 import { ElectronicPayrollComponent } from './pages/accounting-page/electronic-payroll-page/electronic-payroll.component';
 import { ElectronicBillComponent } from './pages/accounting-page/electronic-bill-page/electronic-bill.component';
+import {PayrollComponent} from "./pages/payroll-page/payroll.component";
 
 export const routes: Routes = [
 
@@ -60,7 +61,7 @@ export const routes: Routes = [
     {
         path: "home/payroll",
         children: [
-            { path: 'general', component:PayrollPageComponent },
+            { path: 'general', component:PayrollComponent },
             { path: 'show/all/payrolls', component:ShowPayrollsPageComponent },
           { path: 'show/detail/payroll/:id', component: ShowDetailsPayrollPageComponent },
             { path: 'register/payroll', component: NewPayrollPageComponent },

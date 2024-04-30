@@ -11,6 +11,7 @@ body {
   --bs-primary: #51BDFF;
   --bs-primary-hover: #39a0d7;
   --bs-primary-active: #2797dc;
+  --bs-primary-light: #9fd1f6;
 
   --bs-secondary: #21325B;
   --bs-secondary-hover: #053a88;
@@ -236,4 +237,8 @@ form label {
 /* Estilo de iconos */
 .icon-color{
   color: var(--bs-secondary) !important;
+}
+
+.btn.btn-custom-icon {
+  border-color: var(--bs-secondary);
 }
