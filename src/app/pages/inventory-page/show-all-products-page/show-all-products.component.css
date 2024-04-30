@@ -1,24 +1,50 @@
-.all-content{
-  margin: 3% 4% 2%;
+.edit-info{
+  padding: 0;
+  margin: 1rem 0;
 }
 
+h5, h6{
+  margin-top: 1rem;
+}
+h6{
+  color: var(--bs-secondary);
+  font-family: Inter, sans-serif;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+label{
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+}
+
+input{
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  border: 1px solid #21325B33;
+}
+
+::placeholder{
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  color: #21325B33;
+
+}
 .InputContainer {
   height: 40px;
   width: 40%;
   display: flex;
   align-items: center;
-  justify-content: center;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
   padding-left: 15px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
-  margin-top: 2%;
+  border: 1px solid #21325B33;
 }
 
 .input {
-  width: 170px;
+  width: 90%;
   height: 100%;
   border: none;
   outline: none;
@@ -41,28 +67,23 @@
   background-color: rgb(223, 223, 223);
 }
 
-.micIcon {
-  width: 12px;
-}
-
-.micButton {
-  padding: 0px 15px 0px 12px;
-  border: none;
-  background-color: transparent;
-  height: 40px;
-  cursor: pointer;
-  transition-duration: .3s;
-}
 
 .searchIcon path {
   fill: rgb(114, 114, 114);
 }
 
-.micIcon path {
-  fill: rgb(255, 81, 0);
+.navegation{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2% 0;
 }
 
-.micButton:hover {
-  background-color: rgb(255, 230, 230);
-  transition-duration: .3s;
+.clickable {
+  text-decoration: underline; /* Subrayado */
+  cursor: pointer; /* Cambia el cursor a un puntero para indicar que es clickeable */
+}
+
+.clickable:hover {
+  color: #0056b3; /* Cambia el color cuando se pasa el mouse por encima */
 }
