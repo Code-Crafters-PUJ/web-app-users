@@ -1,0 +1,32 @@
+.edit-info{
+  padding: 0;
+  margin: 1rem 0;
+}
+
+h5, h6{
+  margin-top: 1rem;
+}
+h6{
+  color: var(--bs-secondary);
+  font-family: Inter, sans-serif;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+label{
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+}
+
+input{
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  border: 1px solid #21325B33;
+}
+
+::placeholder{
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  color: #21325B33;
+
+}
