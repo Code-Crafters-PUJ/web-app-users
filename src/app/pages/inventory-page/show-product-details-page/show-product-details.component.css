@@ -35,3 +35,7 @@ input{
   background-color: var(--bs-secondary);
   border-color: var(--bs-secondary);
 }
+
+.cont-style{
+  margin-left: 5%;
+}

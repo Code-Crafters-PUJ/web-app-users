@@ -8,6 +8,7 @@ import {ProductService} from "../../../services/inventory-services/product/produ
 import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-show-product-details',
@@ -15,7 +16,8 @@ import Swal from "sweetalert2";
   imports: [
     CreateProductComponent,
     FormsModule,
-    NgForOf
+    NgForOf,
+    SidebarComponent
   ],
   templateUrl: './show-product-details.component.html',
   styleUrl: './show-product-details.component.css'
