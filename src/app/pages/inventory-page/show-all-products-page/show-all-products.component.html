@@ -26,7 +26,7 @@
       >
         <i class="fas fa-chevron-left"></i>
       </button>
-      <div>Página {{ pagination[branch.name].currentPage }} de {{pagination[branch.name].totalPages}}</div>
+      <div>Página {{ pagination[branch.name].currentPage }} de {{ pagination[branch.name].totalPages }}</div>
       <button
         class="btn btn-light mx-1"
         (click)="changePage(branch.name, 1)"
@@ -53,6 +53,73 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div *ngIf="showProductbuy">
+    <h5>Registrar nuevo artículo</h5>
+    <h6>Información General</h6>
+    <div class="container edit-info">
+      <div class="row">
+        <div class="form-group col-md-3 mb-3">
+          <label for="productName">Nombre</label>
+
+          <select class="form-control" id="productName" [(ngModel)]="productOrder.productName" required>
+            <option *ngFor="let option of productOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3 mb-3">
+          <label for="supplier">Proveedor</label>
+          <select class="form-control" id="supplier" [(ngModel)]="productOrder.supplierName" required>
+            <option *ngFor="let option of supplierOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3 mb-3">
+          <label for="costPrice">Precio de costo</label>
+          <input type="text" class="form-control" id="costPrice" placeholder="Precio de costo"  [(ngModel)]="productOrder.costPrice" (change)="updateTotalProducts()">
+        </div>
+        <div class="form-group col-md-3 mb-3">
+          <label for="purchaseDate">Fecha de adquisición</label>
+          <input type="date" class="form-control" id="purchaseDate" placeholder="Fecha de adquisición" [(ngModel)]="productOrder.purchaseDate">
+        </div>
+      </div>
+      <div *ngFor="let sucursalOr of sucursalOrder; let i = index" class="row mb-3">
+        <div class="form-group col-md-1">
+          <label for="enable-{{i}}">Activar</label>
+          <div class="form-control form-check form-switch d-flex justify-content-center align-items-center border-0">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="enable-{{i}}"
+              [(ngModel)]="sucursalOr.enabled"
+              (change)="handleBranchToggle(sucursalOr, i)"
+            />
+          </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="branch-{{i}}">Sucursal</label>
+          <input type="text" class="form-control" id="branch-{{i}}" [(ngModel)]="sucursalOr.branchName" disabled>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="quantity-{{i}}">Cantidad</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantity-{{i}}"
+            [(ngModel)]="sucursalOr.quantity"
+            placeholder="Cantidad"
+            [disabled]="!sucursalOr.enabled"
+            (change)="updateTotalProducts()"/>
+        </div>
+      </div>
+    </div>
+    <h6>Total compra</h6>
+    <p>{{ total }} COP</p>
+
+    <button class="btn btn-primary" (click)="sendOrder()">Finalizar pedido</button>
   </div>
 
   <div *ngIf="showProductRegister">

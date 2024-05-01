@@ -4,8 +4,13 @@ import {CreateProductComponent} from "../create-product-page/create-product.comp
 import {NgForOf, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {branch} from "../../../Models/Inventory/branch";
+import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
+import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
+import {order} from "../../../Models/Inventory/order";
+import Swal from "sweetalert2";
+import {branchOrder} from "../../../Models/Inventory/branchOrder";
 
 @Component({
   selector: 'app-show-all-products',
@@ -15,7 +20,8 @@ import {branch} from "../../../Models/Inventory/branch";
     CreateProductComponent,
     NgIf,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './show-all-products.component.html',
   styleUrl: './show-all-products.component.css'
@@ -25,9 +31,26 @@ export class ShowAllProductsComponent implements OnInit{
   branches: branch[] = [];
   showProductRegister: boolean = false;
   showProductbuy: boolean = false;
+  branchesProducts: branchesProductTemplate[] = [];
   pagination: { [branchName: string]: { currentPage: number, pageSize: number, totalItems: number, totalPages:number } } = {};
+  branchesNames: string[] = [];
+  supplierOptions:string[] = [];
+  sucursalOrder: branchOrder[] = [];
+  orderProducts: any[] = [];
+  productOptions: string[] = [];
+  productOrder: order = {
+    productName: '',
+    supplierName: '',
+    costPrice: 0,
+    branchOrders: [],
+    purchaseDate: new Date()
+
+  };
+  total: number = 0;
+
   constructor(
     private productService: ProductService,
+    private supplierService: SupplierService,
     private router: Router
   ) {
 
@@ -60,6 +83,7 @@ export class ShowAllProductsComponent implements OnInit{
     this.saveProduct(id);
     this.router.navigate(['home/inventory/show/product/detail']);
   }
+
   saveProduct(id: number | null) {
     if (id === null) {
       return;
@@ -69,11 +93,6 @@ export class ShowAllProductsComponent implements OnInit{
 
   enableProductRegistrer() {
     this.showProductRegister = true;
-
-  }
-
-  enablebuy() {
-    this.showProductbuy = true;
 
   }
 
@@ -89,5 +108,126 @@ export class ShowAllProductsComponent implements OnInit{
         this.initializePagination();
       });
     }
+  }
+
+
+  enablebuy() {
+    this.supplierService.getAllSuppliersByCompany(1).subscribe((suppliers) => {
+      this.supplierOptions = suppliers.map(supplier => supplier.name);
+    });
+    this.productService.getAllProductsByCompany(1).subscribe((products) => {
+      this.productOptions = products.map(product => product.name);
+    });
+    this.productService.getAllBranchesNames().subscribe(branches => {
+      this.branchesNames = branches;
+      this.branchesNames.forEach(branchName => {
+        this.sucursalOrder.push({
+          branchName: branchName,
+          quantity: 0,
+          enabled: false
+        });
+      });
+    });
+    this.showProductbuy = true;
+
+  }
+
+  handleBranchToggle(sucursalOrder: branchOrder, index: number) {
+    if (sucursalOrder.enabled) {
+      // If the branch is enabled, we don't need confirmation
+      return;
+    }
+    // Display the confirmation alert
+    Swal.fire({
+      title: 'Borrar sucursal del pedido',
+      text: 'Al desactivar, se perderán los cambios realizados para esta sucursal. ¿Estás seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If confirmed, disable the branch and reset related data
+        sucursalOrder.enabled = false;
+        sucursalOrder.quantity = 0;
+        this.updateTotalProducts();
+      } else {
+        // If not confirmed, re-enable the checkbox
+        sucursalOrder.enabled = true;
+      }
+    });
+  }
+
+  sendOrder(){
+    if(this.validateOrder()){
+      this.productOrder.branchOrders = this.sucursalOrder.filter(branchOrder => branchOrder.enabled);
+      this.productService.sendOrder(this.productOrder).subscribe((result) => {
+        if (result){
+          Swal.fire({
+            title: '¡Éxito!',
+            text: 'El pedido ha sido enviado con éxito',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          this.showProductbuy = false;
+        }
+        else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'Ha ocurrido un error al enviar el pedido',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+
+      });
+    }
+
+  }
+
+  validateOrder(){
+
+    if (this.productOrder.productName === '' || this.productOrder.supplierName === '' || this.productOrder.costPrice <= 0 ||this.productOrder.purchaseDate.toString().length > 10){
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Por favor, completa todos los campos',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return false;
+    }
+      for (let branchOrder of this.sucursalOrder) {
+        if (branchOrder.enabled && branchOrder.quantity <= 0) {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'la cantidad de productos debe ser mayor a 0',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+          return false;
+        }
+      }
+    if(this.sucursalOrder.filter(branchOrder => branchOrder.enabled).length === 0) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Por favor, selecciona al menos una sucursal',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return false;
+    }
+
+    return true;
+
+  }
+
+
+  updateTotalProducts() {
+    this.sucursalOrder.forEach(branchOrder => {
+      if (branchOrder.enabled) {
+        this.total += branchOrder.quantity* this.productOrder.costPrice;
+      }
+    });
+
   }
 }
