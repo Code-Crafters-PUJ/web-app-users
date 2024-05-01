@@ -1,35 +1,37 @@
-.edit-info{
+.edit-info {
   padding: 0;
   margin: 1rem 0;
 }
 
-h5, h6{
+h5, h6 {
   margin-top: 1rem;
 }
-h6{
+
+h6 {
   color: var(--bs-secondary);
   font-family: Inter, sans-serif;
   padding-bottom: 5px;
   font-weight: bold;
 }
 
-label{
+label {
   font-family: Inter, sans-serif;
   font-weight: 400;
 }
 
-input{
+input {
   font-family: Inter, sans-serif;
   font-weight: 400;
   border: 1px solid #21325B33;
 }
 
-::placeholder{
+::placeholder {
   font-family: Inter, sans-serif;
   font-weight: 400;
   color: #21325B33;
 
 }
+
 .InputContainer {
   height: 40px;
   width: 40%;
@@ -72,12 +74,13 @@ input{
   fill: rgb(114, 114, 114);
 }
 
-.navegation{
+.navegation {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 2% 0;
 }
+
 
 .clickable {
   text-decoration: underline;
@@ -87,3 +90,10 @@ input{
 .clickable:hover {
   color: #0056b3;
 }
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start; /* Distribuir botones desde la izquierda */
+  gap: 1rem; /* Espacio entre botones */
+}
+
