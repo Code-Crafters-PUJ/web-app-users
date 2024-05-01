@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {supplier} from "../../../Models/Inventory/supplier";
 import {supplierType} from "../../../Models/Inventory/supplierType";
 import {FormsModule} from "@angular/forms";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-show-all-suppliers-page',
@@ -14,7 +15,8 @@ import {FormsModule} from "@angular/forms";
     CreateSupplierComponent,
     NgIf,
     NgForOf,
-    FormsModule
+    FormsModule,
+    SidebarComponent
   ],
   templateUrl: './show-all-suppliers-page.component.html',
   styleUrl: './show-all-suppliers-page.component.css'

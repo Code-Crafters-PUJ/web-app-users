@@ -188,7 +188,7 @@ export class ShowAllProductsComponent implements OnInit{
             icon: 'success',
             confirmButtonText: 'Aceptar'
           });
-          this.showProductbuy = false;
+          this.cancelOrder();
         }
         else {
           Swal.fire({
@@ -248,5 +248,9 @@ export class ShowAllProductsComponent implements OnInit{
       }
     });
 
+  }
+
+  cancelOrder() {
+    this.showProductbuy = false;
   }
 }

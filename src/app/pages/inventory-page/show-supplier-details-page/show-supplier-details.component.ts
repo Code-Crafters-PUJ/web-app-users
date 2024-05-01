@@ -6,6 +6,7 @@ import {supplierType} from "../../../Models/Inventory/supplierType";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
 import Swal from "sweetalert2";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-show-supplier-details',
@@ -13,7 +14,8 @@ import Swal from "sweetalert2";
   imports: [
     NgForOf,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SidebarComponent
   ],
   templateUrl: './show-supplier-details.component.html',
   styleUrl: './show-supplier-details.component.css'
