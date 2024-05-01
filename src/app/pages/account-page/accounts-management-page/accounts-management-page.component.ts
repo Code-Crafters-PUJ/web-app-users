@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SidebarComponent } from '../../../general/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-accounts-management-page',
   standalone: true,
-  imports: [],
+  imports: [SidebarComponent],
   templateUrl: './accounts-management-page.component.html',
   styleUrl: './accounts-management-page.component.css'
 })
