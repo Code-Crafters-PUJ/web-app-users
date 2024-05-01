@@ -51,9 +51,11 @@ export class LoginComponent {
           else {
             var role = JSON.parse(value).role;
             var jwt = JSON.parse(value).jwt;
-            // Autenticación exitosa
+            var id_account = JSON.parse(value).id_account;
+            var id_company = JSON.parse(value).id_company
+
             this.handleSuccessfulAuthentication(role);
-            this.storageService.saveAccount(role,jwt);
+            this.storageService.saveAccount(id_account,id_company, role, jwt);
           }
         } else {
           // Autenticación fallida
@@ -71,7 +73,7 @@ export class LoginComponent {
       confirmButtonText: 'OK'
     });
 
-    if (role === "ROOT") {
+    if (role === "Raiz") {
       this.router.navigate(['/home/admin']);
 
     } else if (role === "HR"){

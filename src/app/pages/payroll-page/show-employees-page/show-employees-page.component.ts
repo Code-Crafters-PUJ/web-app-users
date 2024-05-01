@@ -74,5 +74,10 @@ export class ShowEmployeesPageComponent implements OnInit {
     this.router.navigate(['/home/payroll/register/employee']);
   }
 
+  viewEmployeeDetail(employee: Employee): void {
+    // Navegar a la ruta de detalles de employee
+    this.router.navigate(['home/payroll/show/detail/employee', employee.id]);
+  }
+
 
 }
