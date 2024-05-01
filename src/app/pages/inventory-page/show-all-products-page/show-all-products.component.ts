@@ -47,6 +47,7 @@ export class ShowAllProductsComponent implements OnInit{
 
   };
   total: number = 0;
+  searchText = '';
 
   constructor(
     private productService: ProductService,
@@ -73,12 +74,30 @@ export class ShowAllProductsComponent implements OnInit{
   changePage(branchName: string, direction: number) {
     if (this.pagination[branchName]) {
       const currentPage = this.pagination[branchName].currentPage;
-      const totalPages = Math.ceil(this.pagination[branchName].totalItems / this.pagination[branchName].pageSize);
+      const totalPages = Math.ceil(
+        this.pagination[branchName].totalItems /
+        this.pagination[branchName].pageSize
+      );
 
-      this.pagination[branchName].currentPage = Math.max(1, Math.min(totalPages, currentPage + direction));
+      this.pagination[branchName].currentPage = Math.max(
+        1,
+        Math.min(totalPages, currentPage + direction)
+      );
     }
   }
 
+  filterProducts() {
+    const searchLower = this.searchText.toLowerCase();
+    this.branches.forEach((branch) => {
+      branch.products = branch.products.filter((product) =>
+        product.product.name.toLowerCase().includes(searchLower)
+      );
+    });
+  }
+
+  onSearchChange() {
+    this.filterProducts();
+  }
   productDetails(id: number | null){
     this.saveProduct(id);
     this.router.navigate(['home/inventory/show/product/detail']);
