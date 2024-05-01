@@ -27,6 +27,7 @@ export class LoginComponent {
   }
 
   signInUser(email: string, password: string) {
+    /*
     if (email === "" || password === "") {
       Swal.fire({
         title: 'Uppss algo pasó',
@@ -63,6 +64,8 @@ export class LoginComponent {
         }
       });
     }
+    */
+    this.router.navigate(['/home/admin/myaccount']);
   }
   private handleSuccessfulAuthentication(role: string) {
     
