@@ -22,8 +22,10 @@
         <div class="form-group col-md-3 mb-3">
           <label for="supplierType">Tipo de proveedor</label>
           <select class="form-control" id="supplierType" [(ngModel)]="supplier.supplierType" required>
-            <!--TODO: Show Default supplierType of the actual supplier-->
-            <option *ngFor="let option of supplierOptions" [value]="option.value">{{ option.text }}</option>
+            <option value="1">Persona</option>
+            <option value="2">Empresa</option>
+            <option value="3">Organización</option>
+            <option value="4">Fundación</option>
           </select>
         </div>
       </div>
