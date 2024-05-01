@@ -291,7 +291,7 @@
         <button type="submit" class="btn btn-primary"  (click)="onSubmit()"  [disabled]="!employeeForm.valid"  >Guardar Cambios Empleado</button>
       </div>
       <div class="col-md-3">
-        <button type="button" class="btn btn-primary-border">Eliminar Empleado</button>
+        <button type="button" (click)="deleteEmployee()" class="btn btn-danger-border">Eliminar Empleado</button>
       </div>
     </div>
 

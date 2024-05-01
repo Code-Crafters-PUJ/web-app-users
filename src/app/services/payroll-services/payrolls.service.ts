@@ -10,7 +10,99 @@ import {Employee} from "../../models/payroll-models/employee";
 export class PayrollsService {
   private apiUrl = 'https://localhost:3000/';
   private payrolls: Payroll[] = [];
-  private employees: Employee[] = [];
+  private employees: Employee[] = [
+    {
+      id: 1,
+      idCard: '123456789',
+      typeCard: 'Cédula de ciudadanía',
+      firstName: 'Juan',
+      lastName: 'Pérez',
+      dateOfBirth: new Date('1990-05-15'),
+      address: 'Calle 123, Ciudad XYZ',
+      city: 'Ciudad XYZ',
+      maritalStatus: 'Soltero',
+      phoneNumber: '123-456-7890',
+      gender: 'Masculino',
+      education: {
+        id: 1,
+        nameInstitution: 'Universidad ABC',
+        level: 'Licenciatura',
+        endDate: new Date('2012-12-31'),
+        title: 'Licenciado en Ingeniería',
+      },
+      companyId: 101,
+      contact: {
+        id: 1,
+        name: 'María Pérez',
+        phone: '555-1234',
+        relationship: 'Hermana',
+      },
+      contract: [
+        {
+          id: 1,
+          startDate: new Date('2023-01-01'),
+          endDate: new Date('2023-12-31'),
+          contractType: {
+            id: 1,
+            type: 'Tiempo completo',
+          },
+          duration: '12 meses',
+          position: 'Analista de sistemas',
+          baseSalary: 2000,
+          transportAllowance: true,
+          healthAndPensions: true,
+          severancePay: true,
+          serviceBonus: true,
+          totalSalary: 2500,
+        },
+      ],
+    }, {
+      id: 2,
+      idCard: '1263786789',
+      typeCard: 'Tarjeta de identidad',
+      firstName: 'Felipe',
+      lastName: 'Pérez',
+      dateOfBirth: new Date('1990-05-15'),
+      address: 'Calle 123, Ciudad XYZ',
+      city: 'Ciudad XYZ',
+      maritalStatus: 'Soltero',
+      phoneNumber: '123-456-7890',
+      gender: 'Masculino',
+      education: {
+        id: 1,
+        nameInstitution: 'Universidad ABC',
+        level: 'Licenciatura',
+        endDate: new Date('2012-12-31'),
+        title: 'Licenciado en Ingeniería',
+      },
+      companyId: 101,
+      contact: {
+        id: 1,
+        name: 'María Pérez',
+        phone: '555-1234',
+        relationship: 'Hermana',
+      },
+      contract: [
+        {
+          id: 1,
+          startDate: new Date('2023-01-01'),
+          endDate: new Date('2023-12-31'),
+          contractType: {
+            id: 1,
+            type: 'Tiempo completo',
+          },
+          duration: '12 meses',
+          position: 'Analista de sistemas',
+          baseSalary: 2000,
+          transportAllowance: true,
+          healthAndPensions: true,
+          severancePay: true,
+          serviceBonus: true,
+          totalSalary: 2500,
+        },
+      ],
+    }
+  ];
 
 
   constructor(private http: HttpClient) {
@@ -20,12 +112,13 @@ export class PayrollsService {
   getPayrolls(): Observable<Payroll[]> {
 
     console.log(this.http.get<Payroll[]>(this.apiUrl + 'payroll/all'));
-    return this.http.get<Payroll[]>(this.apiUrl + 'payroll/all').pipe(
+
+    /*return this.http.get<Payroll[]>(this.apiUrl + 'payroll/all').pipe(
       catchError(this.handleError)
-    );
+    );*/
 
     //return of(this.payrolls);
-    /* this.payrolls  = [
+     /*this.payrolls  = [
        {
          "id": "PR12345",
          "state": "en espera",
@@ -85,8 +178,8 @@ export class PayrollsService {
          "totalDeductions": 32000,
          "totalNet": 128000
        }
-     ]
-     return of(this.payrolls);*/
+     ]*/
+     return of(this.payrolls);
   }
 
   addPayroll(payroll: Payroll): Observable<Payroll> {
@@ -197,7 +290,7 @@ export class PayrollsService {
       }
     ];
 
-    return of(simulatedEmployees);
+    return of(this.employees);
   }
 
 
@@ -220,6 +313,11 @@ export class PayrollsService {
     // Simulamos la eliminación filtrando las nóminas que no coincidan con el ID
     this.payrolls = this.payrolls.filter(payroll => payroll.id !== id);
     return of({status: 'success'});
+  }
+
+  deleteEmployee(id: string): Observable<any> {
+    this.employees = this.employees.filter(payroll => payroll.id.toString() !== id);
+    return of(null);
   }
 
   updatePayrollStatus(id: string, newState: string): Observable<any> {
@@ -271,6 +369,9 @@ export class PayrollsService {
       return throwError(`Error ${error.status}: ${error.message}`);
     }
   }
+
+
+
 
 
 

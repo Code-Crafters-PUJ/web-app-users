@@ -124,6 +124,21 @@ export class ShowDetailsEmployeePageComponent implements OnInit {
   }
 
 
+  deleteEmployee() {
+    if (confirm('¿Estás seguro de querer eliminar esta nómina?')) {
+      this.payrollsService.deleteEmployee(this.employee.id.toString()).subscribe({
+        next: (response) => {
+          alert('Empleado eliminada con éxito');
+          this.router.navigate(['/home/payroll/show/all/employees']);
+        },
+        error: (err) => {
+          console.error('Error al eliminar el Empleado:', err);
+        }
+      });
+    }
+  }
+
+
 
 
 }
