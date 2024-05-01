@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password',
@@ -8,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrl: './password.component.css'
 })
 export class PasswordComponent {
+  constructor(private router: Router) {} 
 
+  cancel() {
+    
+    this.router.navigate(['/login']);
+  }
+
+  continue() {
+    
+    this.router.navigate(['/login']);
+  }
 }

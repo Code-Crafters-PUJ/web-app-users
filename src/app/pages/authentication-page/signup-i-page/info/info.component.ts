@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../../services/login-services/auth.service';
 import Swal from 'sweetalert2';
 import { Account } from '../../../../models/user-models/account';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +13,12 @@ import { Account } from '../../../../models/user-models/account';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent {
-  router: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  signUpUser(accountData: Account): void {
+  signUpUser(): void {
 
-    this.authService.signup(accountData).then((value) => {
+    /*this.authService.signup(accountData).then((value) => {
       if (value){
         var jwt = JSON.parse(value).jwt;
         // TO DO: Complete in case of Authentication
@@ -27,7 +27,8 @@ export class InfoComponent {
       else {
         this.handleFailedAuthentication();
       }
-    })
+    })*/
+    this.router.navigate(['/payment']);
   }
 
   private handleSuccessfulAuthentication() {
