@@ -93,7 +93,7 @@ input {
 
 .buttonContainer {
   display: flex;
-  justify-content: flex-start; /* Distribuir botones desde la izquierda */
-  gap: 1rem; /* Espacio entre botones */
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
