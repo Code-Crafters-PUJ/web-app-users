@@ -1,0 +1,19 @@
+a{
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+}
+a:hover{
+  color: #FFC107;
+}
+
+p{
+  margin-left: 6%;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: x-large;
+}
+
+.title{
+  font-size: xx-large;
+}
