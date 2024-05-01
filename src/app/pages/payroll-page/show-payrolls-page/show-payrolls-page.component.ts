@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
 import {Payroll} from "../../../models/payroll-models/payroll";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 
 @Component({
   selector: 'app-show-payrolls-page',
   standalone: true,
-  imports: [CommonModule],
+    imports: [CommonModule, SidebarComponent],
   templateUrl: './show-payrolls-page.component.html',
   styleUrl: './show-payrolls-page.component.css'
 })

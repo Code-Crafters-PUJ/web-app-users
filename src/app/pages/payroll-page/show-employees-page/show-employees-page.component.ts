@@ -5,15 +5,17 @@ import {v4 as uuidv4} from "uuid";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
 import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-show-employees-page',
   standalone: true,
-  imports: [
-    CurrencyPipe,
-    DatePipe,
-    NgForOf
-  ],
+    imports: [
+        CurrencyPipe,
+        DatePipe,
+        NgForOf,
+        SidebarComponent
+    ],
   templateUrl: './show-employees-page.component.html',
   styleUrl: './show-employees-page.component.css'
 })

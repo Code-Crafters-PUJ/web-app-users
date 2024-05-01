@@ -5,15 +5,17 @@ import {Employee} from "../../../models/payroll-models/employee";
 import {FormsModule, NgForm} from "@angular/forms";
 import {ContractType} from "../../../models/payroll-models/contractType";
 import {CurrencyPipe, NgIf} from "@angular/common";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-new-employee-page',
   standalone: true,
-  imports: [
-    FormsModule,
-    CurrencyPipe,
-    NgIf
-  ],
+    imports: [
+        FormsModule,
+        CurrencyPipe,
+        NgIf,
+        SidebarComponent
+    ],
   templateUrl: './new-employee-page.component.html',
   styleUrl: './new-employee-page.component.css'
 })

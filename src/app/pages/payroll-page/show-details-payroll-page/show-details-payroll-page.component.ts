@@ -6,16 +6,18 @@ import {Payroll} from "../../../models/payroll-models/payroll";
 import {v4 as uuidv4} from "uuid";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PayrollsService} from "../../../services/payroll-services/payrolls.service";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-show-details-payroll-page',
   standalone: true,
-    imports: [
-        CurrencyPipe,
-        DatePipe,
-        FormsModule,
-        NgForOf
-    ],
+  imports: [
+    CurrencyPipe,
+    DatePipe,
+    FormsModule,
+    NgForOf,
+    SidebarComponent
+  ],
   templateUrl: './show-details-payroll-page.component.html',
   styleUrl: './show-details-payroll-page.component.css'
 })
