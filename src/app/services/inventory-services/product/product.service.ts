@@ -6,6 +6,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {product} from "../../../Models/Inventory/product";
 import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
+import {order} from "../../../Models/Inventory/order";
 
 @Injectable({
   providedIn: 'root'
@@ -262,5 +263,58 @@ export class ProductService {
 
     }
     return of(result);
+  }
+
+  generateOrderId(): Observable<number> {
+    //return this.http.get<number>(`${environment.baseURL}/supplier/generate/id`);
+    //return this.http.get<number>('https://localhost:7071/api/supplier/generate/id');
+    //generate a random number that is different from the ones in the database
+
+    let num = Math.floor(Math.random() * 100000);
+    let i = 0;
+    while (i < this.products.length) {
+      if (this.products[i].id == num) {
+        num = Math.floor(Math.random() * 100000);
+        i = 0;
+      } else {
+        i++;
+      }
+    }
+    return of(num);
+  }
+
+  getAllProductsByCompany(number: number) {
+    return of(this.products);
+
+  }
+
+  sendOrder(orderProducts: order) {
+    let answer = true;
+      const product = this.products.find(product => product.name === orderProducts.productName);
+      if(product) {
+        //For each branchOrder on orderProdcuts, add the quantity to the product
+        orderProducts.branchOrders.forEach(branchOrder => {
+          const branch = this.branches.find(branch => branch.name === branchOrder.branchName);
+          if (branch) {
+            const productIndex = branch.products.findIndex(p => p.product.id === product.id);
+            if (productIndex !== -1) {
+              branch.products[productIndex].quantity += branchOrder.quantity;
+            } else {
+              branch.products.push({
+                discount: 0,
+                quantity: branchOrder.quantity,
+                product: product
+              });
+            }
+          } else {
+            console.error('Branch not found');
+            answer = false;
+          }
+        });
+      }else {
+        console.error('Product not found');
+        answer = false;
+      }
+    return of(answer);
   }
 }
