@@ -5,6 +5,7 @@ import {SupplierService} from "../../../services/inventory-services/supplier/sup
 import {Router} from "@angular/router";
 import {supplier} from "../../../Models/Inventory/supplier";
 import {supplierType} from "../../../Models/Inventory/supplierType";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-show-all-suppliers-page',
@@ -12,7 +13,8 @@ import {supplierType} from "../../../Models/Inventory/supplierType";
   imports: [
     CreateSupplierComponent,
     NgIf,
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './show-all-suppliers-page.component.html',
   styleUrl: './show-all-suppliers-page.component.css'
@@ -25,6 +27,7 @@ export class ShowAllSuppliersPageComponent implements OnInit{
   pageSize = 10;
   paginatedSuppliers: supplier[] = [];
   totalPages = 0;
+  searchText: string = '';
 
   constructor(
     private supplierService: SupplierService,
@@ -69,9 +72,17 @@ export class ShowAllSuppliersPageComponent implements OnInit{
   }
 
   updatePaginatedSuppliers(): void {
+    const filteredSuppliers = this.allSuppliers.filter((supplier) =>
+      supplier.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+
     const start = (this.currentPage - 1) * this.pageSize;
     const end = start + this.pageSize;
-    this.paginatedSuppliers = this.allSuppliers.slice(start, end);
+    this.paginatedSuppliers = filteredSuppliers.slice(start, end);
+  }
+  handleSearchChange(): void {
+    this.currentPage = 1; // Reiniciar a la primera página cada vez que se realiza una búsqueda
+    this.updatePaginatedSuppliers();
   }
 
   nextPage(): void {

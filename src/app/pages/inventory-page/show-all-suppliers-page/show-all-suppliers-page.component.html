@@ -3,7 +3,8 @@
 
   <div class="navegation">
     <div class="InputContainer">
-      <input type="text" name="text" class="input" id="input" placeholder="Search">
+      <input type="text" name="text" class="input" id="input" placeholder="Busca por el nombre del proveedor" [(ngModel)]="searchText"
+             (ngModelChange)="handleSearchChange()">
       <label for="input" class="labelforsearch">
         <svg viewBox="0 0 512 512" class="searchIcon">
           <path
