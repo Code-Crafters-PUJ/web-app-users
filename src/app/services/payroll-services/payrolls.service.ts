@@ -8,7 +8,7 @@ import {Employee} from "../../models/payroll-models/employee";
   providedIn: 'root',
 })
 export class PayrollsService {
-  private apiUrl = 'https://localhost:3000/';
+  private apiUrl = 'http://localhost:3000/';
   private payrolls: Payroll[] = [];
   private employees: Employee[] = [];
 
@@ -203,7 +203,7 @@ export class PayrollsService {
 
   getPayrollDetails(id: string | null): Observable<any> {
     //return this.http.get(`/api/payroll/${id}`);
-
+/*
     if (id) {
       const payroll = this.payrolls.find(p => p.id === id);
       if (payroll) {
@@ -214,6 +214,16 @@ export class PayrollsService {
     } else {
       return throwError('Invalid ID');
     }
+    */
+
+    if (id) {
+      return this.http.get<Payroll>(`${this.apiUrl}payroll/${id}`).pipe(
+        catchError(this.handleError)  // Manejo de errores
+      );
+    } else {
+      return throwError('Invalid ID');  // Lanzar error si el ID es nulo o inválido
+    }
+
   }
 
   deletePayroll(id: string): Observable<any> {
