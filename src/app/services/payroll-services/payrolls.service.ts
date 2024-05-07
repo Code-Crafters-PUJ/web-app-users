@@ -90,8 +90,12 @@ export class PayrollsService {
   }
 
   addPayroll(payroll: Payroll): Observable<Payroll> {
-    this.payrolls.push(payroll);
-    return of(payroll);
+    /*this.payrolls.push(payroll);
+    return of(payroll);*/
+
+    return this.http.post<Payroll>(`${this.apiUrl}payroll/create`, payroll).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
@@ -103,7 +107,7 @@ export class PayrollsService {
 
   // Método para obtener empleados
   getEmployees(): Observable<Employee[]> {
-    const simulatedEmployees: Employee[] = [
+    /*const simulatedEmployees: Employee[] = [
       {
         id: 1,
         idCard: '123456789',
@@ -197,7 +201,15 @@ export class PayrollsService {
       }
     ];
 
-    return of(simulatedEmployees);
+    return of(simulatedEmployees);*/
+
+    console.log(this.http.get<Employee[]>(this.apiUrl + 'employee/all'));
+    return this.http.get<Employee[]>(this.apiUrl + 'employee/all').pipe(
+      catchError(this.handleError)
+    );
+
+
+
   }
 
 
