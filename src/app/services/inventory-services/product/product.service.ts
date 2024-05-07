@@ -152,11 +152,11 @@ export class ProductService {
     }
     return of(num);
   }
-  getAllBranchesNames(): Observable<string[]> {
+  getAllBranchesNamesByCompany(companyId:number): Observable<string[]> {
     return of(this.branches.map(branch => branch.name));
   }
 
-  createProduct(newProduct: product, branchesProducts: branchesProductTemplate[]) {
+  createProduct(companyId:number, newProduct: product, branchesProducts: branchesProductTemplate[]) {
     //return this.http.post<product>(`${environment.baseURL}/create/product`, newProduct);
     //return this.http.post<product>('https://localhost:7071/api/product', newProduct);
 
@@ -178,7 +178,7 @@ export class ProductService {
     return of(true);
 
   }
-  getProductById(id: number): Observable<product> {
+  getProductById(companyId:number, id: number): Observable<product> {
     //return this.http.get<product>(`${environment.baseURL}/get/product`, { params: { productId: id.toString() } });
     //return this.http.get<product>(`https://localhost:7071/api/product/${id}`);
     const product = this.products.find(product => product.id === id);
@@ -197,7 +197,7 @@ export class ProductService {
 
   }
 
-  getAllBranchesByProduct(productId: number): Observable<branchesProductTemplate[]> {
+  getAllBranchesByProduct(companyId:number,productId: number): Observable<branchesProductTemplate[]> {
     //return this.http.get<branchesProductTemplate[]>(`${environment.baseURL}/get/branches/product`, { params: { productId: productId.toString() } });
     //return this.http.get<branchesProductTemplate[]>(`https://localhost:7071/api/product/${productId}/branches`);
     const branchesProducts: branchesProductTemplate[] = [];
@@ -216,7 +216,7 @@ export class ProductService {
     return of(branchesProducts);
   }
 
-  deleteProduct(productId: number) {
+  deleteProduct(companyId:number, productId: number) {
     //return this.http.delete(`${environment.baseURL}/delete/product`, { params: { productId: productId.toString() } });
     //return this.http.delete(`https://localhost:7071/api/product/${productId}`);
     this.products = this.products.filter(product => product.id !== productId);
@@ -227,7 +227,7 @@ export class ProductService {
 
   }
 
-  updateProduct(product: product, enabledBranches: branchesProductTemplate[]) {
+  updateProduct(companyId:number, product: product, enabledBranches: branchesProductTemplate[]) {
     //return this.http.put<product>(`${environment.baseURL}/update/product`, product);
     //return this.http.put<product>(`https://localhost:7071/api/product`, product);
     let result =false;
@@ -288,7 +288,7 @@ export class ProductService {
 
   }
 
-  sendOrder(orderProducts: order) {
+  sendOrder(companyId:number, orderProducts: order) {
     let answer = true;
       const product = this.products.find(product => product.name === orderProducts.productName);
       if(product) {

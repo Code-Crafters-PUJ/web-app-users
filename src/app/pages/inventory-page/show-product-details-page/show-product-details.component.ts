@@ -36,6 +36,7 @@ export class ShowProductDetailsComponent implements OnInit {
   branchesProducts: branchesProductTemplate[] = [];
   productId: number = -1;
   total=0;
+  companyId: number = -1;
   constructor(
     private productService: ProductService,
     private router: Router
@@ -48,13 +49,13 @@ export class ShowProductDetailsComponent implements OnInit {
     const productIdString = sessionStorage.getItem('productId');
     if (productIdString !== null) {
       this.productId = parseInt(productIdString);
-      this.productService.getProductById(this.productId).subscribe((product) => {
+      this.productService.getProductById(this.companyId,this.productId).subscribe((product) => {
         this.product = product;
       });
 
       //Get all branches and set them enabled or disabled depending if they have the product
-      this.productService.getAllBranchesByCompany(1).subscribe((allBranches) => {
-        this.productService.getAllBranchesByProduct(this.productId).subscribe((productBranches) => {
+      this.productService.getAllBranchesByCompany(this.companyId).subscribe((allBranches) => {
+        this.productService.getAllBranchesByProduct(this.companyId, this.productId).subscribe((productBranches) => {
           //Create a map of branches with products
           const productBranchNames = productBranches.map((b) => b.branchName);
           // Start all branches, but only enable those that have the product
@@ -98,7 +99,7 @@ export class ShowProductDetailsComponent implements OnInit {
         });
         return;
       }
-      this.productService.updateProduct(product, enabledBranches).subscribe(result => {
+      this.productService.updateProduct(this.companyId, product, enabledBranches).subscribe(result => {
         if (result) {
           Swal.fire({
             title: 'Producto actualizado',
@@ -125,7 +126,7 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
   deleteProduct(productId: number) {
-    this.productService.deleteProduct(productId).subscribe(() => {
+    this.productService.deleteProduct(this.companyId, productId).subscribe(() => {
       this.router.navigate(['home/inventory/show/product/all']);
     });
 

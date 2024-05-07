@@ -33,6 +33,7 @@ export class CreateProductComponent implements OnInit{
     sellPrice: 0,
   }
   productBranches: branchProductInventory[] = [];
+  companyId: number = -1;
   constructor(
     private productService: ProductService
   ) {
@@ -43,7 +44,11 @@ export class CreateProductComponent implements OnInit{
     this.productService.generateproductId().subscribe(id => {
       this.newProduct.id = id;
     });
-    this.productService.getAllBranchesNames().subscribe(branches => {
+    const company = sessionStorage.getItem('companyId');
+    if (company != null) {
+      this.companyId = parseInt(company);
+    }
+    this.productService.getAllBranchesNamesByCompany(this.companyId).subscribe(branches => {
       this.branchesNames = branches;
       this.branchesNames.forEach(branchName => {
         this.branchesProducts.push({
@@ -60,7 +65,6 @@ export class CreateProductComponent implements OnInit{
 
   createProdcut() {
     if (this.validateForm()){
-
       //get the branches that are enabled
       const branchesProducts = this.branchesProducts.filter(branch => branch.enabled);
       //Verify that the product has at least one branch
@@ -73,7 +77,7 @@ export class CreateProductComponent implements OnInit{
         });
         return;
       }
-      this.productService.createProduct(this.newProduct, branchesProducts).subscribe(result => {
+      this.productService.createProduct(this.companyId, this.newProduct, branchesProducts).subscribe(result => {
         if (result) {
           Swal.fire({
             title: '¡Producto creado!',

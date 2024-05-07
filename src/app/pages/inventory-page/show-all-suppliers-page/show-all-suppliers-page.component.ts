@@ -40,6 +40,10 @@ export class ShowAllSuppliersPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.companyId = 1;
+    const company = sessionStorage.getItem('companyId');
+    if (company != null) {
+      this.companyId = parseInt(company);
+    }
     this.supplierService.getAllSuppliersByCompany(this.companyId).subscribe(suppliers => {
       this.allSuppliers = suppliers;
       this.totalPages = Math.ceil(this.allSuppliers.length / this.pageSize);

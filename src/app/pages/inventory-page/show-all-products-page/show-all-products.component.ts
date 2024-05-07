@@ -28,6 +28,7 @@ import {branchOrder} from "../../../Models/Inventory/branchOrder";
 })
 export class ShowAllProductsComponent implements OnInit{
   protected readonly Math = Math;
+  companyId: number = -1 ;
   branches: branch[] = [];
   showProductRegister: boolean = false;
   showProductbuy: boolean = false;
@@ -58,10 +59,14 @@ export class ShowAllProductsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productService.getAllBranchesByCompany(1).subscribe(branches => {
-      this.branches = branches;
-      this.initializePagination();
-    });
+
+    const companyIdStr = sessionStorage.getItem('companyId');
+    this.companyId = companyIdStr !== null ? parseInt(companyIdStr) : -1;
+    this.productService.getAllBranchesByCompany(this.companyId).subscribe(branches => {
+        this.branches = branches;
+        this.initializePagination();
+      });
+
   }
 
   initializePagination() {
@@ -122,7 +127,7 @@ export class ShowAllProductsComponent implements OnInit{
     // If the component is disabled, reload or update information
     if (disabled) {
       // Reload branches or product information
-      this.productService.getAllBranchesByCompany(1).subscribe((branches) => {
+      this.productService.getAllBranchesByCompany(this.companyId).subscribe((branches) => {
         this.branches = branches;
         this.initializePagination();
       });
@@ -131,13 +136,13 @@ export class ShowAllProductsComponent implements OnInit{
 
 
   enablebuy() {
-    this.supplierService.getAllSuppliersByCompany(1).subscribe((suppliers) => {
+    this.supplierService.getAllSuppliersByCompany(this.companyId).subscribe((suppliers) => {
       this.supplierOptions = suppliers.map(supplier => supplier.name);
     });
-    this.productService.getAllProductsByCompany(1).subscribe((products) => {
+    this.productService.getAllProductsByCompany(this.companyId).subscribe((products) => {
       this.productOptions = products.map(product => product.name);
     });
-    this.productService.getAllBranchesNames().subscribe(branches => {
+    this.productService.getAllBranchesNamesByCompany(this.companyId).subscribe(branches => {
       this.branchesNames = branches;
       this.branchesNames.forEach(branchName => {
         this.sucursalOrder.push({
@@ -180,7 +185,7 @@ export class ShowAllProductsComponent implements OnInit{
   sendOrder(){
     if(this.validateOrder()){
       this.productOrder.branchOrders = this.sucursalOrder.filter(branchOrder => branchOrder.enabled);
-      this.productService.sendOrder(this.productOrder).subscribe((result) => {
+      this.productService.sendOrder(this.companyId, this.productOrder).subscribe((result) => {
         if (result){
           Swal.fire({
             title: '¡Éxito!',
@@ -235,7 +240,6 @@ export class ShowAllProductsComponent implements OnInit{
       });
       return false;
     }
-
     return true;
 
   }

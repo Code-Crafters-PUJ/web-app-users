@@ -45,10 +45,13 @@ export class CreateSupplierComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const company= sessionStorage.getItem('companyId');
+    if (company != null) {
+      this.companyId = parseInt(company);
+    }
     this.supplierService.generateSupplierId().subscribe(id => {
       this.newSupplier.id = id;
     });
-    //TODO: 'obtain company id from the session'
   }
 
   disableSupplierComponent() {
