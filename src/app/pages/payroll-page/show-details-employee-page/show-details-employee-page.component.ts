@@ -124,6 +124,24 @@ export class ShowDetailsEmployeePageComponent implements OnInit {
   }
 
 
+  deleteEmployee(): void {
+    if (!this.employeeId) {
+      alert("No se ha especificado un ID de empleado válido.");
+      return;
+    }
+    if (confirm("¿Estás seguro de que deseas eliminar este empleado?")) {
+      this.payrollsService.deleteEmployee(this.employeeId).subscribe({
+        next: () => {
+          alert("Empleado eliminado con éxito.");
+          this.router.navigate(['/home/payroll/show/all/employees']);
+        },
+        error: (error) => {
+          console.error('Error deleting employee', error);
+          alert("Error al eliminar el empleado.");
+        }
+      });
+    }
+  }
 
 
 }

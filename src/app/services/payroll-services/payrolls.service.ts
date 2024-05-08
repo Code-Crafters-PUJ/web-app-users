@@ -99,8 +99,13 @@ export class PayrollsService {
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
-    this.employees.push(employee);
-    return of(employee);
+   /* this.employees.push(employee);
+    return of(employee);*/
+
+    return this.http.post<Employee>(`${this.apiUrl}employee/create`, employee).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
+
   }
 
   //servicios para empleados
@@ -251,6 +256,21 @@ export class PayrollsService {
     );
   }
 
+
+
+  deleteEmployee(id: string): Observable<any> {
+
+
+    // La URL incluye el ID del empleado  a eliminar
+    const url = `${this.apiUrl}employee/delete/${id}`;
+
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
+  }
+
+
+
   updatePayrollStatus(id: string, newState: string): Observable<any> {
     /*const payroll = this.payrolls.find(p => p.id === id);
     if (payroll) {
@@ -274,7 +294,7 @@ export class PayrollsService {
 
 
   getEmployeeDetails(id: string | null): Observable<any> {
-    //return this.http.get(`/api/payroll/${id}`);
+    /*//return this.http.get(`/api/payroll/${id}`);
     if (id) {
       const employee = this.employees.find(p => p.id.toString() === id);
       if (employee) {
@@ -284,7 +304,19 @@ export class PayrollsService {
       }
     } else {
       return throwError('Invalid ID');
+    }*/
+
+    if (id) {
+      // Construye la URL incluyendo el ID del empleado
+      const url = `${this.apiUrl}employee/${id}`;
+      return this.http.get<Employee>(url).pipe(
+        catchError(this.handleError)  // Manejo de errores
+      );
+    } else {
+      return throwError('Invalid ID');  // Lanzar un error si el ID es nulo o inválido
     }
+
+
   }
 
 
