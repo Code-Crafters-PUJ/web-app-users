@@ -239,9 +239,16 @@ export class PayrollsService {
   }
 
   deletePayroll(id: string): Observable<any> {
-    // Simulamos la eliminación filtrando las nóminas que no coincidan con el ID
+    /*// Simulamos la eliminación filtrando las nóminas que no coincidan con el ID
     this.payrolls = this.payrolls.filter(payroll => payroll.id !== id);
-    return of({status: 'success'});
+    return of({status: 'success'});*/
+
+    // La URL incluye el ID de la nómina a eliminar
+    const url = `${this.apiUrl}payroll/delete/${id}`;
+
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
   updatePayrollStatus(id: string, newState: string): Observable<any> {
