@@ -245,13 +245,24 @@ export class PayrollsService {
   }
 
   updatePayrollStatus(id: string, newState: string): Observable<any> {
-    const payroll = this.payrolls.find(p => p.id === id);
+    /*const payroll = this.payrolls.find(p => p.id === id);
     if (payroll) {
       payroll.state = newState;
       return of({status: 'success'});
     } else {
       return throwError('Payroll not found');
-    }
+    }*/
+
+    // La URL incluye el ID de la nómina a actualizar
+    const url = `${this.apiUrl}payroll/update/${id}`;
+    // Crea un objeto que solo contiene el nuevo estado
+    const body = { newState };
+
+    return this.http.put(url, body).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
+
+
   }
 
 
