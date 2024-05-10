@@ -84,7 +84,6 @@ export class SalesPageComponent implements OnInit {
   }
 
 
-
   branchVsSalesChart(data: { branches: any; sales: any; }) {
     this.branchChart = new Chart("branchVsSales", {
       type: 'bar',
@@ -104,5 +103,4 @@ export class SalesPageComponent implements OnInit {
       }
     })
   }
-
 }
