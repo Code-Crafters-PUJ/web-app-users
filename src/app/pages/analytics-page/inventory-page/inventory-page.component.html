@@ -1,1 +1,43 @@
-<p>inventory-page works!</p>
+<div class="container">
+  <div class="header-container">
+    <h1>Contabilidad</h1>
+    <h5>/Datos Generales</h5>
+  </div>
+
+  <div class="row">
+
+    <div class="row">
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body card-custom  text-center">
+            <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+            <canvas id="categoryVsStockPercentage" style="max-width: 100%; max-height: 100%;">{{ categoryStockChart }}</canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body card-custom  text-center">
+            <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+            <canvas id="productVsTop5lessStock" style="max-width: 100%; max-height: 100%;">{{ lessStockChart }}
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body card-custom  text-center">
+            <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+            <canvas id="providerVsStockPercentage" style="max-width: 100%; max-height: 100%;">{{ providerStockChart }}
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
