@@ -320,14 +320,21 @@ export class PayrollsService {
   }
 
 
-  updateEmployee(employeeId: string, updatedEmployee: Employee): Observable<Employee> {
-    const index = this.employees.findIndex(e => e.id.toString() === employeeId);
+  updateEmployee(id: string, updatedEmployee: Employee): Observable<Employee> {
+    /*const index = this.employees.findIndex(e => e.id.toString() === employeeId);
     if (index !== -1) {
       this.employees[index] = updatedEmployee;
       return of(this.employees[index]);
     } else {
       return throwError(`Employee with ID ${employeeId} not found`);
-    }
+    }*/
+
+    // Construye la URL incluyendo el ID del empleado
+    const url = `${this.apiUrl}employee/update/${id}`;
+
+    return this.http.put<Employee>(url, updatedEmployee).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
   // Método para manejar errores de la solicitud HTTP
