@@ -21,5 +21,7 @@ export class AuthService {
     var responseBody = await this.http.post(`${environment.baseURL}/user/signin`, { account: account }, { withCredentials: false, responseType: "text" }).toPromise();
     return responseBody;
   }
+
+  
   
 }
