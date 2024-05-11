@@ -331,7 +331,6 @@ export class PayrollsService {
 
     // Construye la URL incluyendo el ID del empleado
     const url = `${this.apiUrl}employee/update/${id}`;
-
     return this.http.put<Employee>(url, updatedEmployee).pipe(
       catchError(this.handleError)  // Manejo de errores
     );

@@ -76,7 +76,7 @@
 
       <div class="col-md-3">
         <label for="direccionEmpleadoNuevo" class="form-label">Direccion</label>
-        <input type="text" id="direccionEmpleadoNuevo" [(ngModel)]="employee.idCard" name="direccionEmpleadoNuevo" class="form-control" required>
+        <input type="text" id="direccionEmpleadoNuevo" [(ngModel)]="employee.address" name="direccionEmpleadoNuevo" class="form-control" required>
       </div>
     </div>
 
@@ -122,7 +122,7 @@
     <div class="row mb-3">
       <div class="col-md-3">
         <label for="fechaTituloNuevoEmpleado" class="form-label">Fecha de Finalizacion</label>
-        <input type="date" id="fechaTituloNuevoEmpleado" [(ngModel)]="employee.education.endDate" name="fechaTituloNuevoEmpleado" class="form-control" required>
+        <input type="text" id="fechaTituloNuevoEmpleado" [(ngModel)]="employee.education.endDate" name="fechaTituloNuevoEmpleado" class="form-control" required>
       </div>
 
       <div class="col-md-3">
@@ -265,9 +265,6 @@
     </div>
 
 
-
-
-
     <div class="row mb-3">
       <div class="col-md-3">
         <button type="button" class="btn btn-secondary-border">Generar Nuevo Contrato</button>
@@ -294,9 +291,6 @@
         <button type="button" class="btn btn-danger-border" (click)="deleteEmployee()" >Eliminar Empleado</button>
       </div>
     </div>
-
-
-
 
   </form>
 </div>

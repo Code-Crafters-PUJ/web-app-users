@@ -42,7 +42,7 @@
         <td>{{ employee.contract.length > 0 ? (employee.contract[0].startDate | date:'yyyy-MM-dd') : '' }}</td>
         <td>{{ employee.contract.length > 0 ? (employee.contract[0].endDate | date:'yyyy-MM-dd') : '' }}</td>
         <td>{{ employee.contract.length > 0 ? (employee.contract[0].baseSalary | currency:'USD':true:'1.2-2') : '' }}</td>
-        <td>{{ employee.contract.length > 0 ? employee.contract[0].totalSalary : '' }}</td>
+        <td>{{ employee.contract.length > 0 ? employee.contract[0].contractType.type : '' }}</td>
       </tr>
       </tbody>
     </table>
