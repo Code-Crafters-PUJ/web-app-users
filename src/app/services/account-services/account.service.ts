@@ -135,4 +135,27 @@ export class AccountService {
     return of(plans);
 
   }
+
+  getCompanyById(companyId: number):Observable<any> {
+    let company = this.companies.find(company => company.id === companyId);
+    if(company){
+      this.company = company;
+    }
+    return of(this.company);
+    //return this.http.get<Company>(environment.baseURL + "/company/" + companyId);
+  }
+
+  getRootAccount(companyId: number):Observable<any> {
+    let profile = {
+      name: "Fabio",
+      lastname:"Cuevas",
+      phone:"3510020",
+      email:"fabio@kajfn.jslf",
+      password:"jsjdf",
+      businessNit:"800.328",
+      role:"Administrador"
+    }
+    return of(profile);
+    //return this.http.get<Profile>(environment.baseURL + "/root/" + companyId);
+  }
 }
