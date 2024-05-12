@@ -15,7 +15,6 @@ export class InventoryPageComponent implements OnInit {
   public categoryStockChart: any;
   public lessStockChart: any;
   public providerStockChart: any;
-  dataStock: any ;
 
   ngOnInit(): void {
     this.loadData( );
@@ -42,14 +41,14 @@ export class InventoryPageComponent implements OnInit {
   }
 
 
-  categoryVsStockPercentageChart(data: { categories: any; stock: any; }) {
+  categoryVsStockPercentageChart(data: { categories: any; stock_percentage: any; }) {
     this.categoryStockChart = new Chart("categoryVsStockPercentage", {
       type: 'doughnut',
       data: {
         labels: data.categories,
         datasets: [{
           label: 'Porcentaje de perdida y ganancia',
-          data: data.stock,
+          data: data.stock_percentage,
           backgroundColor: [
             'rgb(33,50,91)',
             'rgb(81,189,255)',
@@ -98,14 +97,14 @@ export class InventoryPageComponent implements OnInit {
   }
 
 
-  providerVsStockPercentageChart(data: { providers: any; stock: any; }) {
+  providerVsStockPercentageChart(data: { providers: any; stock_percentage: any; }) {
     this.providerStockChart = new Chart("providerVsStockPercentage", {
       type: 'doughnut',
       data: {
         labels: data.providers,
         datasets: [{
           label: 'Porcentaje de perdida y ganancia',
-          data: data.stock,
+          data: data.stock_percentage,
           backgroundColor: [
             'rgb(33,50,91)',
             'rgb(81,189,255)'
@@ -127,8 +126,5 @@ export class InventoryPageComponent implements OnInit {
       }
     });
   }
-
-
-
 
 }
