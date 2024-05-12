@@ -5,5 +5,6 @@ export interface Company {
   businessArea: string;
   employeeNumber: number;
   electronicPayroll: number;
-  electronicoBill: number;
+  electronicBill: number;
+  planId:number;
 }
