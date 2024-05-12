@@ -1,1 +1,40 @@
-<p>electronic-payroll works!</p>
+<div class="container">
+    <h1>Nómina Electrónica</h1>
+
+    <section>
+      <h2>Perfil de Compañía</h2>
+      <p>Diligencia la información que tienes registrada ante la DIAN. Recuerda que debe corresponder a la información que tienes en RUT de tu empresa </p>
+      <form>
+        <div class="form-group">
+          <label>Tipo de razón social</label>
+          <div>
+            <input type="radio" id="empresa" name="tipoRazonSocial"> Empresa
+            <input type="radio" id="personaNatural" name="tipoRazonSocial"> Persona Natural
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Razón Social</label>
+          <input type="text" id="razonSocial">
+        </div>
+        <div class="form-group">
+          <label>Correo Electrónico</label>
+          <input type="email" id="email">
+        </div>
+      </form>
+    </section>
+  
+    <section>
+      <h2>Certificado Digital</h2>
+      <p>Aun no cuentas con un certificado digital. Con este documento autorizas el uso del certificado digital de StockWage para el envió de nomina electrónica.</p>
+      <button>Descargar carta de exoneración</button>
+      <button>Sube la carta firmada</button>
+    </section>
+  
+    <section>
+      <h2>Envío del set de pruebas</h2>
+      <p>Para activar el set de pruebas, sigue estos pasos.</p>
+      <input type="text" placeholder="Identificador del set de pruebas DIAN">
+      <button>Finalizar Activación</button>
+    </section>
+  </div>
+  
