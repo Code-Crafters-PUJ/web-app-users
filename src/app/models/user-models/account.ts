@@ -1,6 +1,5 @@
 import { Company } from "./company";
-import { Role } from "./role";
-import {Permission} from "./permission";
+import { Profile } from "./profile";
 
 export interface Account {
     id:number;
@@ -10,5 +9,5 @@ export interface Account {
     last_connection:Date;
     connected:number;
     company: Company;
-    permissions: Permission[]
+    profile: Profile;
 }

@@ -17,12 +17,20 @@ export class PlanComponent {
   constructor(private router: Router, private planService: PlanService) { }
 
   ngOnInit(): void {
-    this.planService.getPlan().subscribe(plan => {
-      if (plan !== null){
-        this.plan = plan;
-        console.log(plan);
-      }
-    });
+    
+    const planString = localStorage.getItem('plan');
+    if (planString) {
+      this.plan = JSON.parse(planString);
+    } else {
+      
+      this.planService.getPlan().subscribe(plan => {
+        if (plan !== null){
+          this.plan = plan;
+          
+          localStorage.setItem('plan', JSON.stringify(plan));
+        }
+      });
+    }
   }
 
 }
