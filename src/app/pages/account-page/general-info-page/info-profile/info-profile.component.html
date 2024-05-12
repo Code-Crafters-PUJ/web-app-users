@@ -6,14 +6,14 @@
     <hr>
 
     <div class="row">
-        
+
         <div class="col-md-4">
             <p>CORREO ELECTRÓNICO</p>
         </div>
         <div class="col-md-8">
-            <p>andresarmandojaveriana.edu.co</p>
+            <p>{{ rootProfile.email }}</p>
         </div>
-        
+
     </div>
 
     <hr>
@@ -23,10 +23,10 @@
             <p>NOMBRE</p>
         </div>
         <div class="col-md-8">
-            <p>Andrés Armando</p>
+            <p>{{ rootProfile.name }}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -34,10 +34,10 @@
             <p>APELLIDO</p>
         </div>
         <div class="col-md-8">
-            <p>Castilblanco Montoya</p>
+            <p>{{ rootProfile.lastname }}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -45,10 +45,10 @@
             <p>CARGO</p>
         </div>
         <div class="col-md-8">
-            <p>Presidente</p>
+            <p>{{ rootProfile.role }}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -56,23 +56,11 @@
             <p>TELÉFONO</p>
         </div>
         <div class="col-md-8">
-            <p>4115231</p>
+            <p>{{ rootProfile.phone }}</p>
         </div>
     </div>
-    
-    <hr>
 
-    <div class="row">
-        <div class="col-md-4">
-            <p>CELULAR</p>
-        </div>
-        <div class="col-md-8">
-            <p>(+57) 310 467 1234</p>
-        </div>
-    </div>
-    
     <hr>
-
     <p>CONFIGURACIÓN DE EMPRESA</p>
     <h5>Información de la empresa</h5>
     <p>Puedes editar el nombre y la información general de la empresa.</p>
@@ -84,10 +72,10 @@
             <p>INDUSTRIA</p>
         </div>
         <div class="col-md-8">
-            <p>Software</p>
+            <p>{{ company.businessArea }}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -95,10 +83,10 @@
             <p>NEGOCIO</p>
         </div>
         <div class="col-md-8">
-            <p>SalesForce</p>
+            <p>{{ company.name }}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -106,10 +94,10 @@
             <p>NIT</p>
         </div>
         <div class="col-md-8">
-            <p>ABC123123123</p>
+            <p>{{company.NIT}}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -117,10 +105,10 @@
             <p>EMPLEADOS</p>
         </div>
         <div class="col-md-8">
-            <p>200</p>
+            <p>{{ company.employeeNumber }}</p>
         </div>
     </div>
-    
+
     <hr>
 
     <div class="row">
@@ -128,5 +116,5 @@
             <a href="/home/admin/configinfo">Ver más en configuración general</a>
         </div>
     </div>
-    
+
 </div>
