@@ -3,6 +3,8 @@ import { AuthService } from '../../../../services/login-services/auth.service';
 import Swal from 'sweetalert2';
 import { Account } from '../../../../models/user-models/account';
 import { Router } from '@angular/router';
+import { PlanService } from '../../../../services/plan-services/plan.service';
+import { Plan } from '../../../../models/user-models/plan';
 
 
 @Component({
@@ -13,8 +15,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent {
+  
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private planService: PlanService, private router: Router) { }
+
+  plan!: Plan;
+
+  ngOnInit(): void {
+    this.planService.getPlan().subscribe(plan => {
+      if (plan !== null){
+        this.plan = plan;
+      }
+    });
+  }
 
   signUpUser(): void {
 
@@ -33,12 +46,6 @@ export class InfoComponent {
 
   private handleSuccessfulAuthentication() {
     
-    Swal.fire({
-      title: 'Bienvenido',
-      text: "Autenticación exitosa",
-      icon: 'success',
-      confirmButtonText: 'OK'
-    });
 
     this.router.navigate(['/home/admin']);
 

@@ -1,9 +1,11 @@
 <div class="container p-5 d-flex flex-column min-vh-100">
-    <h1>Plan Golden</h1>
+    <h1>Plan {{ plan?.type }}</h1>
     <p>Suscripción mensual para tu negocio</p>
     <div class="row mb-3">
         <h4 class="col-md-6">Total a pagar</h4>
-        <h4 class="col-md-6">$25/mes</h4>
+        <h4 class="col-md-6">$ {{ plan?.price }} /mes</h4>
     </div>
-    <p>Lo que obtienes con el plan</p>
+    <h5>Lo que obtienes con el plan</h5>
+    <p>Cantidad de usuarios máxima: {{ plan?.maxUsers }} </p>
+    <p>Módulos máximos disponibles: Disponibles </p>
 </div>
