@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Plan} from "../../Models/user-models/plan";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
@@ -40,7 +40,7 @@ export class AccountService {
     }
   ];
 
-  companies : Company[] = [
+  companies: Company[] = [
     {
       id: 1,
       NIT: '800.328',
@@ -91,7 +91,7 @@ export class AccountService {
       electronicBill: 2893749,
       planId: 1,
     }
-    ];
+  ];
 
   company: Company = {
     id: 0,
@@ -113,15 +113,16 @@ export class AccountService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  getPlanByCompanyId(companyId: number):Observable<Plan> {
-    let comp= this.companies.find(company => company.id === companyId);
-    if(comp){
+  getPlanByCompanyId(companyId: number): Observable<Plan> {
+    let comp = this.companies.find(company => company.id === companyId);
+    if (comp) {
       this.company = comp;
     }
     let plan = this.plans.find(plan => plan.id === this.company.planId);
-    if (plan){
+    if (plan) {
       this.plan = plan;
 
     }
@@ -129,33 +130,71 @@ export class AccountService {
     //return this.http.get<Plan>(environment.baseURL + "/plan/" + companyId);
   }
 
-  getAllPlans():Observable<Plan[]> {
+  getAllPlans(): Observable<Plan[]> {
     let plans: Plan[] = this.plans;
     //return this.http.get<Plan[]>(environment.baseURL + "/plans";
     return of(plans);
 
   }
 
-  getCompanyById(companyId: number):Observable<any> {
+  getCompanyById(companyId: number): Observable<any> {
     let company = this.companies.find(company => company.id === companyId);
-    if(company){
+    if (company) {
       this.company = company;
     }
     return of(this.company);
     //return this.http.get<Company>(environment.baseURL + "/company/" + companyId);
   }
 
-  getRootAccount(companyId: number):Observable<any> {
+  getRootAccount(companyId: number): Observable<any> {
     let profile = {
       name: "Fabio",
-      lastname:"Cuevas",
-      phone:"3510020",
-      email:"fabio@kajfn.jslf",
-      password:"jsjdf",
-      businessNit:"800.328",
-      role:"Administrador"
+      lastname: "Cuevas",
+      phone: "3510020",
+      email: "fabio@kajfn.jslf",
+      password: "jsjdf",
+      businessNit: "800.328",
+      role: "Administrador"
     }
     return of(profile);
     //return this.http.get<Profile>(environment.baseURL + "/root/" + companyId);
+  }
+
+  getAllBranchesByCompany(companyId: number): Observable<any> {
+    let branches = [
+      {
+        id: 1,
+        name: 'sucursal 1',
+        address: 'calle 1',
+
+      },
+      {
+        id: 2,
+        name: 'sucursal 2',
+        address: 'calle 2',
+      },
+      {
+        id: 3,
+        name: 'sucursal 3',
+        address: 'calle 3',
+      },
+      {
+        id: 4,
+        name: 'sucursal 4',
+        address: 'calle 4',
+      },
+      {
+        id: 5,
+        name: 'sucursal 5',
+        address: 'calle 5',
+      },
+    ];
+    return of(branches);
+  }
+
+  changePassword(companyId: number, newPassword: string, actualPassword: string):Observable<any> {
+    let okActualPassword = false;
+    //answer = this.http.post(environment.baseURL + "/changePassword", {companyId, newPassword, actualPassword});
+    return of(true);
   }
 }
