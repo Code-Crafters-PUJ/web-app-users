@@ -36,20 +36,19 @@ export class InfoPlanComponent implements OnInit {
     if(companyIdString != null){
       this.companyId = parseInt(companyIdString);
     }
+    //TODO: Remove companyId manual assignment
     this.companyId = 1;
     this.accountService.getPlanByCompanyId(this.companyId).subscribe((plan: Plan) => {
       this.actualPlan = plan;
     });
     this.accountService.getAllPlans().subscribe((plans: Plan[]) => {
       this.plansAvailable = plans;
-      console.log("los planes son", this.plansAvailable);
       //detect the plan that the company has
       for(let i = 0; i < this.plansAvailable.length; i++){
         if(this.plansAvailable[i].id == this.actualPlan.id){
           this.plansAvailable.splice(i, 1);
         }
       }
-      console.log("los planes ahora son", this.plansAvailable);
     });
 
   }
