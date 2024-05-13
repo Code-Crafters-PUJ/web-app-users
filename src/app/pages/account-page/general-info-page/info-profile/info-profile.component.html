@@ -11,7 +11,7 @@
             <p>CORREO ELECTRÓNICO</p>
         </div>
         <div class="col-md-8">
-            <p>{{ rootProfile.email }}</p>
+            <p>{{ rootAccount.email }}</p>
         </div>
 
     </div>
@@ -23,7 +23,7 @@
             <p>NOMBRE</p>
         </div>
         <div class="col-md-8">
-            <p>{{ rootProfile.name }}</p>
+            <p>{{ rootAccount.name }}</p>
         </div>
     </div>
 
@@ -34,18 +34,38 @@
             <p>APELLIDO</p>
         </div>
         <div class="col-md-8">
-            <p>{{ rootProfile.lastname }}</p>
+            <p>{{ rootAccount.lastname }}</p>
         </div>
     </div>
 
     <hr>
+  <div class="row">
+    <div class="col-md-4">
+      <p>TIPO DE DOCUMENTO</p>
+    </div>
+    <div class="col-md-8">
+      <p>{{ rootAccount.typeCardId }}</p>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-4">
+      <p>NUMERO DE DOCUMENTO</p>
+    </div>
+    <div class="col-md-8">
+      <p>{{ rootAccount.cardId }}</p>
+    </div>
+  </div>
+
+  <hr>
 
     <div class="row">
         <div class="col-md-4">
             <p>CARGO</p>
         </div>
         <div class="col-md-8">
-            <p>{{ rootProfile.role }}</p>
+            <p>{{ rootAccount.role }}</p>
         </div>
     </div>
 
@@ -56,7 +76,7 @@
             <p>TELÉFONO</p>
         </div>
         <div class="col-md-8">
-            <p>{{ rootProfile.phone }}</p>
+            <p>{{ rootAccount.phone }}</p>
         </div>
     </div>
 

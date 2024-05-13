@@ -28,11 +28,13 @@ export class PlanService {
     const freeTrialPlan: Plan = {
       id: 1,
       type: 'free',
-      price: 0,
+      mensual_price: 0,
+      semestral_price: 0,
+      anual_price: 0,
       plan_description: 'Plan de prueba gratuita',
       maxUsers: 10
     };
     return of(freeTrialPlan);
   }
-  
+
 }

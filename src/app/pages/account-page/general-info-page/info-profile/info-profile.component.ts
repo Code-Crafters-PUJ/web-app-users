@@ -12,25 +12,22 @@ import {Company} from "../../../../models/user-models/company";
 export class InfoProfileComponent implements OnInit {
   companyId: number = -1;
   company: Company = {
-    id: 0,
     NIT: '',
     name: '',
     businessArea: '',
     employeeNumber: 0,
-    electronicPayroll: 0,
-    electronicBill: 0,
-    planId: 0
   };
-  rootProfile = {
+  rootAccount = {
     name: "",
     lastname: "",
+    typeCardId: "",
+    cardId: "",
     phone: "",
     email: "",
     password: "",
     businessNit: "",
     role: "",
   };
-
 
   constructor(
     private accountService: AccountService
@@ -47,8 +44,8 @@ export class InfoProfileComponent implements OnInit {
     this.accountService.getCompanyById(this.companyId).subscribe((company: Company) => {
       this.company = company;
     });
-    this.accountService.getRootAccount(this.companyId).subscribe(profile => {
-      this.rootProfile = profile;
+    this.accountService.getRootAccount(this.companyId).subscribe(account => {
+      this.rootAccount = account;
     });
 
 
