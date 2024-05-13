@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {Company} from "../../models/user-models/company";
+import {Account} from "../../models/user-models/account";
 
 @Injectable({
   providedIn: 'root'
@@ -254,13 +255,13 @@ export class AccountService {
     return of(this.branches);
   }
 
-  changePassword(companyId: number, newPassword: string, actualPassword: string):Observable<any> {
+  changePassword(companyId: number, newPassword: string, actualPassword: string): Observable<any> {
     let okActualPassword = false;
     //answer = this.http.post(environment.baseURL + "/changePassword", {companyId, newPassword, actualPassword});
     return of(true);
   }
 
-  deleteBranch(id: number, companyId: number):Observable<any> {
+  deleteBranch(id: number, companyId: number): Observable<any> {
     this.branches.splice(this.branches.findIndex(branch => branch.id === id), 1);
     return of(true);
   }
@@ -330,5 +331,220 @@ export class AccountService {
   getHistoricByCompanyId(companyId: number) {
 
     return of(this.historic);
+  }
+
+  getAllAccounts(companyId: number) {
+    let accounts = [
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'contador',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'logistico',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'contador',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'logistico',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      },
+      {
+        email: 'kadjf@kjsdn',
+        password: 'jsnkdjnewrk4j',
+        name: 'Fabio',
+        lastname: 'cuellar',
+        phone: '284',
+        type_id_card: 'C.C',
+        id_card: '29384932',
+        company_NIT: 1,
+        role: 'vendedor',
+      }
+
+    ];
+    return of(accounts);
+
+  }
+
+  getPermissions() {
+    let permissions = [
+      {
+        id: 1,
+        name: 'vendedor',
+        description: 'vende'
+      },
+      {
+        id: 2,
+        name: 'contador',
+        description: 'cuenta'
+      },
+      {
+        id: 3,
+        name: 'logistico',
+        description: 'entrega'
+      }
+    ];
+    return of(permissions);
+  }
+
+  getAllModulesByCompany(companyId: number) {
+    let modules = [
+      {
+        name: 'ventas',
+      },
+      {
+        name: 'contabilidad',
+      },
+      {
+        name: 'logistica',
+      }
+    ];
+    return of(modules);
+  }
+
+  createAccount(account: Account, modules: any[]) {
+    return of(true);
+  }
+
+  verifyCardIdExists(id_card: string) {
+    return of(false);
+  }
+
+  verifyEmailExists(email: string) {
+    return of(false);
+  }
+
+  getTemporalPassword() {
+    let regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    let password = 'Aa123456';
+    return of(password);
+  }
+
+  updateAccount(account: Account, modules: any[]) {
+    return of(true);
+
+  }
+
+  verifyCardIdExistsOnEdit(id_card: string, userId: number) {
+    return of(false);
+
+  }
+
+  verifyEmailExistsOnEdit(email: string, userId: number) {
+    return of(false);
+  }
+
+  getAccountById(id: number) {
+    return of({
+      email: 'kadjf@kjsdn',
+      password: 'jsnkdjnewrk4j',
+      name: 'Fabio',
+      lastname: 'cuellar',
+      phone: '284',
+      type_id_card: 'C.C',
+      id_card: '29384932',
+      company_NIT: 1,
+      role: 'vendedor',
+    });
+  }
+
+  deleteAccount(id_card: string) {
+    return of(true);
   }
 }
