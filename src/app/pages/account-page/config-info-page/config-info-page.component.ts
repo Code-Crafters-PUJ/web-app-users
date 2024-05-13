@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {SidebarComponent} from '../../../general/sidebar/sidebar.component';
 import {AccountService} from "../../../services/account-services/account.service";
 import {FormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-config-info-page',
   standalone: true,
-  imports: [SidebarComponent, FormsModule, NgIf],
+  imports: [SidebarComponent, FormsModule, NgIf, NgForOf],
   templateUrl: './config-info-page.component.html',
   styleUrl: './config-info-page.component.css'
 })
@@ -20,21 +21,27 @@ export class ConfigInfoPageComponent implements OnInit {
     name: '',
     businessArea: '',
     employeeNumber: 0,
-    electronicPayroll: 0,
-    electronicBill: 0,
     planId: 0,
   };
 
   rootProfile = {
     name: "",
     lastname: "",
+    typeCardId: "",
+    cardId: "",
     phone: "",
     email: "",
     password: "",
     businessNit: "",
     role: "",
   };
-  branches = [];
+  branches = [
+    {
+      id: 0,
+      address: '',
+      name: '',
+    }
+  ];
   enablePasswordChange: boolean = false;
   pass = {
     newPassword: '',
@@ -43,12 +50,13 @@ export class ConfigInfoPageComponent implements OnInit {
   }
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    let companyIdString = localStorage.getItem('companyid');
+    let companyIdString = localStorage.getItem('id_company');
     if (companyIdString) {
       this.companyId = parseInt(companyIdString);
     }
@@ -59,6 +67,7 @@ export class ConfigInfoPageComponent implements OnInit {
     });
     this.accountService.getCompanyById(this.companyId).subscribe((company) => {
       this.company = company;
+      this.company.id = this.companyId;
     });
     this.accountService.getAllBranchesByCompany(this.companyId).subscribe((branches) => {
       this.branches = branches;
@@ -68,16 +77,15 @@ export class ConfigInfoPageComponent implements OnInit {
 
 
   updateConfigInfo() {
-    /*
-    if(validateForm()){
+    if (this.validateForm()) {
       this.accountService.updateCompany(this.company).subscribe((response) => {
-        if(response){
+        if (response) {
           Swal.fire(
             'Información actualizada',
             'La información de la empresa se ha actualizado correctamente',
             'success'
           )
-        }else{
+        } else {
           Swal.fire(
             'Error',
             'No se ha podido actualizar la información',
@@ -86,13 +94,13 @@ export class ConfigInfoPageComponent implements OnInit {
         }
       });
       this.accountService.updateRootAccount(this.rootProfile).subscribe((response) => {
-        if(response){
+        if (response) {
           Swal.fire(
             'Información actualizada',
             'La información del administrador se ha actualizado correctamente',
             'success'
           )
-        }else{
+        } else {
           Swal.fire(
             'Error',
             'No se ha podido actualizar la información',
@@ -101,14 +109,14 @@ export class ConfigInfoPageComponent implements OnInit {
         }
 
       });
-      this.updateBranches().subscribe((response) => {
-        if(response){
+      this.accountService.updateBranches(this.branches, this.companyId).subscribe((response) => {
+        if (response) {
           Swal.fire(
             'Información actualizada',
             'La información de las sucursales se ha actualizado correctamente',
             'success'
           )
-        }else{
+        } else {
           Swal.fire(
             'Error',
             'No se ha podido actualizar la información',
@@ -116,9 +124,87 @@ export class ConfigInfoPageComponent implements OnInit {
           )
         }
       });
+      this.accountService.getAllBranchesByCompany(this.companyId).subscribe((branches) => {
+        this.branches = branches;
+      });
 
+      Swal.fire(
+        'Información actualizada',
+        'La información se ha actualizado correctamente',
+        'success'
+      );
+      //move to general info page
+      this.router.navigate(['home/admin/myaccount']);
     }
-*/
+
+  }
+
+  validateForm() {
+    return this.validateCompany() && this.validateRootAccount() && this.validateBranches();
+  }
+
+  validateCompany() {
+    if (this.company.NIT.toString() === '' || this.company.name === '' || this.company.businessArea === '' || this.company.employeeNumber.toString() === '') {
+      Swal.fire(
+        'Error',
+        'Todos los campos de la empresa son requeridos',
+        'error'
+      );
+      return false;
+    }
+    this.accountService.companyNitExists(this.company.NIT, this.companyId).subscribe((exists) => {
+      if (exists) {
+        Swal.fire(
+          'Error',
+          'El NIT ya está registrado',
+          'error'
+        );
+        return false;
+      }
+      return true;
+    });
+    return true;
+  }
+
+  validateRootAccount() {
+    if (this.rootProfile.name === '' || this.rootProfile.lastname === '' || this.rootProfile.typeCardId === '' || this.rootProfile.cardId === '' || this.rootProfile.phone === '' || this.rootProfile.email === '') {
+      Swal.fire(
+        'Error',
+        'Todos los campos del administrador son requeridos',
+        'error'
+      );
+      return false;
+    }
+    if (!this.validateEmail(this.rootProfile.email)) {
+      Swal.fire(
+        'Error',
+        'El correo electrónico no es válido',
+        'error'
+      );
+      return false;
+    }
+    return true;
+  }
+
+  validateBranches() {
+
+    for (let i = 0; i < this.branches.length; i++) {
+      console.log(this.branches[i]);
+      if (this.branches[i].name === '' || this.branches[i].address === '') {
+        Swal.fire(
+          'Error',
+          'Todos los campos de las sucursales son requeridos',
+          'error'
+        );
+        return false;
+      }
+    }
+    return true;
+  }
+
+  validateEmail(email: string) {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
   }
 
   changePassword() {
@@ -188,4 +274,44 @@ export class ConfigInfoPageComponent implements OnInit {
   }
 
 
+  deleteBranch(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.accountService.deleteBranch(id, this.companyId).subscribe((response) => {
+          if (response) {
+            Swal.fire(
+              'Eliminado',
+              'La sucursal ha sido eliminada',
+              'success'
+            );
+            //update branches
+            this.accountService.getAllBranchesByCompany(this.companyId).subscribe((branches) => {
+              this.branches = branches;
+            });
+          } else {
+            Swal.fire(
+              'Error',
+              'No se ha podido eliminar la sucursal',
+              'error'
+            );
+          }
+        });
+      }
+    });
+  }
+
+  addNewBranch() {
+    let newSucursalId = this.accountService.generatebranchId(this.companyId);
+    let newBranch = {id: newSucursalId, address: '', name: ''}; // Inicializa la nueva sucursal
+    this.branches.push(newBranch); // Agrega la nueva sucursal al arreglo de sucursales
+  }
 }

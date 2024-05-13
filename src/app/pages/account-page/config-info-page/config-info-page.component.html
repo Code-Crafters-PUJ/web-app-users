@@ -26,6 +26,18 @@
 
       <div class="row mb-3">
         <div class="col-md-4">
+          <label for="newEmployeeTypeCardId" class="form-label">Tipo de documento</label>
+          <input type="text" id="newEmployeeTypeCardId" [(ngModel)]="rootProfile.typeCardId" name="newEmployeeTypeCardId" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="newEmployeeCardId" class="form-label">Número de documento</label>
+          <input type="text" id="newEmployeeCardId" [(ngModel)]="rootProfile.cardId" name="newEmployeeCardId" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
           <label for="newEmployeeEmail" class="form-label">Correo electrónico</label>
           <input type="text" id="newEmployeeEmail" [(ngModel)]="rootProfile.email" name="newEmployeeEmail" class="form-control" required>
         </div>
@@ -54,7 +66,7 @@
       <div class="row mb-5">
         <div class="col-md-4">
           <label for="companyNIT" class="form-label">NIT</label>
-          <input type="text" id="companyNIT" [(ngModel)]="company.NIT" name="companyNIT" class="form-control" required>
+          <input type="text" id="companyNIT" [(ngModel)]="company.NIT" name="companyNIT" class="form-control" disabled>
         </div>
 
         <div class="col-md-4">
@@ -66,27 +78,33 @@
       <hr>
 
       <h5 class="col-12 col-md-12 text-md-start text-center">Sucursales / Almacenes</h5>
-      <div class="row mb-3">
+      <div *ngFor="let branch of branches; let i = index" class="row mb-3 align-items-end">
         <div class="col-md-2">
-          <label for="branchId" class="form-label">Id</label>
-          <input type="text" id="branchId" name="branchId" class="form-control" required>
+          <label for="branchId-{{i}}" class="form-label">Id</label>
+          <input type="text" id="branchId-{{i}}" name="branchId-{{i}}" class="form-control" [(ngModel)]="branch.id" disabled>
         </div>
         <div class="col-md-4">
-          <label for="branchAddress" class="form-label">Dirección</label>
-          <input type="text" id="branchAddress" name="branchAddress" class="form-control" required>
+          <label for="branchAddress-{{i}}" class="form-label">Dirección</label>
+          <input type="text" id="branchAddress-{{i}}" name="branchAddress-{{i}}" class="form-control"  [(ngModel)]="branch.address">
         </div>
+        <div class="col-md-4">
+          <label for="branchName-{{i}}" class="form-label">Nombre</label>
+          <input type="text" id="branchName-{{i}}" name="branchName-{{i}}" class="form-control" [(ngModel)]="branch.name" >
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger py-2" (click)="deleteBranch(branch.id)">Eliminar sucursal</button>
+        </div>
+      </div>
 
-        <div class="col-md-4">
-          <label for="branchName" class="form-label">Nombre</label>
-          <input type="text" id="branchName" name="branchName" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-          <button class="btn btn-secondary py-2">Eliminar sucursal</button>
-        </div>
-      </div>
       <div class="col-md-2">
-        <button class="btn btn-secondary py-2">Nueva sucursal</button>
+        <button class="btn btn-secondary py-2" (click)="addNewBranch()">Nueva sucursal</button>
       </div>
+
+      <hr>
+      <div class="col-md-12 align-items-center">
+        <button class="btn btn-primary py-3 mx-auto" type="submit" (click)="updateConfigInfo()">Guardar cambios</button>
+      </div>
+
       <hr>
 
       <h5 class="col-12 col-md-12 text-md-start text-center">Cambio de contraseña</h5>
@@ -120,11 +138,6 @@
           </div>
         </div>
 
-      </div>
-
-      <hr>
-      <div class="col-md-12 align-items-center">
-        <button class="btn btn-primary py-3 mx-auto" type="submit" (click)="updateConfigInfo()">Guardar cambios</button>
       </div>
     </form>
 
