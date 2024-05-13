@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Plan} from "../../../../Models/user-models/plan";
+import {Plan} from "../../../../models/user-models/plan";
 import {AccountService} from "../../../../services/account-services/account.service";
 import {NgForOf, NgIf} from "@angular/common";
 
@@ -19,7 +19,9 @@ export class InfoPlanComponent implements OnInit {
   actualPlan : Plan = {
     id: 0,
     type: '',
-    price: 0,
+    mensual_price: 0,
+    semestral_price: 0,
+    anual_price: 0,
     plan_description: '',
     maxUsers: 0
   }
