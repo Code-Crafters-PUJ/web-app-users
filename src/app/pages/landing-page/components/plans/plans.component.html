@@ -1,33 +1,28 @@
-<p-carousel 
-    [numVisible]="3" 
-    [numScroll]="3" 
-    [circular]="false" 
-    [responsiveOptions]="responsiveOptions">
-        <ng-template let-product pTemplate="item">
-            <div class="border-1 surface-border border-round m-2 p-3">
-                <div class="mb-3">
-                    <div class="relative mx-auto">
-                        <img 
-                            src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" 
-                            [alt]="product.name" 
-                            class="w-full border-round" />
-                        <p-tag 
-                            class="absolute" 
-                            [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
-                    </div>
-                </div>
+<div class="card ">
+    <p-carousel
+        [value]="plans"
+        [numVisible]="4" 
+        [numScroll]="1" 
+        [circular]="true" 
+        [responsiveOptions]="responsiveOptions">
+        <ng-template let-plan pTemplate="plans">
+            <div class="c border border-grey rounded m-5 p-5 shadow">
+                
                 <div class="mb-3 font-medium">
-                    {{ product.name }}
+                    <h4>{{ plan.type }}</h4>
+                    <p>{{ plan.plan_description }}</p>
                 </div>
                 <div class="flex justify-content-between align-items-center">
-                <div class="mt-0 font-semibold text-xl">
-                    {{ '$' + product.price }}
-                </div>
-                    <span>
-                        <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
-                        <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
-                    </span>
+                    <div class="mt-0 font-semibold text-xl">
+                        <div class="header-container">
+                            <h1>{{ '$' + plan.mensual_price }}</h1>
+                            <h5>/mes</h5>
+                          </div>
+                    </div>
+                    <p-button label="¡Comprar ahora!" (click)="handleTrial(plan)"></p-button>
                 </div>
             </div>
         </ng-template>
-</p-carousel>
+        
+    </p-carousel>
+</div>
