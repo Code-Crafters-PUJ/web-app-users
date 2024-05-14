@@ -11,3 +11,10 @@ p, label{
     width: 100%;
 }
 
+::ng-deep pButton 
+{
+  .ui-button.orange-button
+  {
+    background-color: orange
+  }
+}

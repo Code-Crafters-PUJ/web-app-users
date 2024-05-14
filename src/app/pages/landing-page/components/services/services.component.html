@@ -1,1 +1,31 @@
-<p>services works!</p>
+<h1 class="text-center d-flex align-items-center justify-content-center" style="color: #21325B; font-weight:600;">Descubre la diferencia con StockWage en la gestión comercial</h1>
+
+<p-carousel
+    [value]="data"
+    [numVisible]="1" 
+    [numScroll]="1"
+    [circular]="true" 
+    orientation="vertical"
+    [responsiveOptions]="responsiveOptions"
+    verticalViewPortHeight="600px"
+    autoplayInterval="6000">
+    <ng-template let-data pTemplate="data">
+        <div class="container border border-grey rounded m-3 p-5 shadow mx-auto d-flex w-100">
+            <!-- Contenido a la izquierda -->
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <h1 class="mt-5">{{ data.title }}</h1>
+                <p>{{ data.description }}</p>
+                <ul>
+                  <li *ngFor="let benefit of data.benefits">{{ benefit }}</li>
+                </ul>
+              </div>
+              <!-- Imagen a la derecha -->
+              <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                
+              </div>
+            </div>
+          </div>
+    </ng-template>
+
+</p-carousel>
