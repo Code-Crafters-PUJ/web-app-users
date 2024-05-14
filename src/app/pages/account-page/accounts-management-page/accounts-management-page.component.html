@@ -1,8 +1,12 @@
-<div class="container">
+<div class="d-flex">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="container">
     <div class="header-container">
       <h1>Gestión de cuentas</h1>
     </div>
-  
+
     <div class="row mb-3">
       <div class="col-md-4 mb-3">
         <div class="input-group">
@@ -13,29 +17,35 @@
           </span>
         </div>
       </div>
-  
+
       <div class="col-md-8 d-flex justify-content-end mb-3">
-        <button class="btn btn-primary-border">Crear Nueva Cuenta</button>
+        <button class="btn btn-primary-border" (click)="showCreateAccount()">Crear Nueva Cuenta</button>
       </div>
     </div>
-  
+
     <div class="table-responsive">
       <table class="table table-custom-primary">
         <thead>
         <tr>
           <th scope="col">Nombre</th>
+          <th scope="col">Tipo Identificación</th>
           <th scope="col">No. Identificación</th>
           <th scope="col">Tipo Cuenta</th>
-          <th scope="col">Fecha Creación</th>
           <th scope="col">Correo Electrónico</th>
-          <th scope="col">Contraseña</th>
         </tr>
         </thead>
         <tbody>
-  
+        <tr *ngFor="let account of displayedAccounts">
+          <td (click)="showEditAccount(account.id_card)">{{ account.name }} {{ account.lastname }}</td>
+          <td>{{ account.type_id_card }}</td>
+          <td>{{ account.id_card }}</td>
+          <td>{{ account.role }}</td>
+          <td>{{ account.email }}</td>
+        </tr>
+
         </tbody>
       </table>
-  
+
       <div class="d-flex justify-content-start align-items-center mt-3">
         <button class="btn mx-1" (click)="previousPage()">
           <i class="fas fa-chevron-left icon-color"></i>
@@ -45,110 +55,172 @@
           <i class="fas fa-chevron-right icon-color"></i>
         </button>
       </div>
-  
+
     </div>
 
-    <form class="mt-3" action="tu_accion" method="POST">
-        <h5 class="col-12 col-md-12 text-md-start text-center">Crear Nueva Cuenta</h5>
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Nombre</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Contraseña</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+    <form class="mt-3" *ngIf="createAccountVisibility">
+      <h5 class="col-12 col-md-12 text-md-start text-center">Crear Nueva Cuenta</h5>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newAccountName" class="form-label">Nombre</label>
+          <input type="text" id="newAccountName" [(ngModel)]="account.name" name="newAccountName" class="form-control" required>
         </div>
-  
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Tipo identificación</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Número identificación</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+        <div class="col-md-4">
+          <label for="newAccountLastName" class="form-label">Apelido</label>
+          <input type="text" id="newAccountLastName" [(ngModel)]="account.lastname" name="newAccountLastName" class="form-control" required>
         </div>
-  
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Tipo de cuenta</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Correo electrónico</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col-md-3">
-              <button type="submit" class="btn btn-primary">Guardar Cuenta</button>
-            </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-primary-border">Cancelar</button>
-            </div>
-          </div>
-      </form>
+      </div>
 
-      <form class="mt-3" action="tu_accion" method="POST">
-        <h5 class="col-12 col-md-12 text-md-start text-center">Editar usuario</h5>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newAccountTypeCardId" class="form-label">Tipo identificación</label>
+          <input type="text" id="newAccountTypeCardId" [(ngModel)]="account.type_id_card" name="newAccountTypeCardId" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="newAccountCardId" class="form-label">Número identificación</label>
+          <input type="text" id="newAccountCardId" [(ngModel)]="account.id_card" name="newAccountCardId" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newAccountType" class="form-label">Tipo de cuenta</label>
+          <input type="text" id="newAccountType" [(ngModel)]="account.role" name="newAccountType" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label for="newAccountPhone" class="form-label">Teléfono</label>
+          <input type="text" id="newAccountPhone" [(ngModel)]="account.phone" name="newAccountPhone" class="form-control" required>
+        </div>
+
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newAccountEmail" class="form-label">Correo electrónico</label>
+          <input type="text" id="newAccountEmail" [(ngModel)]="account.email" name="newAccountEmail" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label for="newAccountPassword" class="form-label">Contraseña</label>
+          <input type="text" id="newAccountPassword" [(ngModel)]="account.password" name="newAccountPassword" class="form-control" required disabled>
+        </div>
+      </div>
+      <div class="col-md-6">
         <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Nombre</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Contraseña</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
+          <div class="col-md-12">
+            <p>Permisos</p>
+            <table class="table">
+              <thead>
+              <tr>
+                <th style="text-align: center;"></th>
+                <th style="text-align: center;">Visualizar</th>
+                <th style="text-align: center;">Modificar</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let permission of modules; let i = index">
+                <td>{{ permission.name }}</td>
+                <td><input type="checkbox" [(ngModel)]="permission.view" (change)="togglePermission(permission, 'view')" [ngModelOptions]="{standalone: true}"></td>
+                <td><input type="checkbox" [(ngModel)]="permission.modify" (change)="togglePermission(permission, 'modify')" [ngModelOptions]="{standalone: true}"></td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-  
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Tipo identificación</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Número identificación</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary" (click)="createAccount()">Guardar Cuenta</button>
         </div>
-  
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Tipo de cuenta</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Correo electrónico</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger-border" (click)="cancelCreateAccount()">Cancelar</button>
         </div>
-        <div class="row mb-4">
-            <div class="col-md-3">
-              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-primary-border">Cancelar</button>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-3">
-              <button class="btn btn-danger">Eliminar Cuenta</button>
-            </div>
-      
-          </div>
-      </form>
+      </div>
+    </form>
 
 
-      
+    <form class="mt-3" *ngIf="editAccountVisibility">
+      <h5 class="col-12 col-md-12 text-md-start text-center">Editar usuario</h5>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="updateAccountName" class="form-label">Nombre</label>
+          <input type="text" id="updateAccountName" [(ngModel)]="account.name" name="updateAccountName" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label for="updateAccountLastName" class="form-label">Nombre</label>
+          <input type="text" id="updateAccountLastName" [(ngModel)]="account.lastname" name="updateAccountLastName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="updateAccountTypeCardId" class="form-label">Tipo identificación</label>
+          <input type="text" id="updateAccountTypeCardId" [(ngModel)]="account.type_id_card" name="updateAccountTypeCardId" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="updateAccountCardId" class="form-label">Número identificación</label>
+          <input type="text" id="updateAccountCardId" [(ngModel)]="account.id_card" name="updateAccountCardId" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="updateAccountType" class="form-label">Tipo de cuenta</label>
+          <input type="text" id="updateAccountType" [(ngModel)]="account.role" name="updateAccountType" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="updateAccountPhone" class="form-label">Correo electrónico</label>
+          <input type="text" id="updateAccountPhone" [(ngModel)]="account.email" name="updateAccountPhone" class="form-control" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="updateAccountEmail" class="form-label">Correo electrónico</label>
+          <input type="text" id="updateAccountEmail" [(ngModel)]="account.email" name="updateAccountEmail" class="form-control" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <p>Permisos</p>
+            <table class="table">
+              <thead>
+              <tr>
+                <th style="text-align: center;"></th>
+                <th style="text-align: center;">Visualizar</th>
+                <th style="text-align: center;">Modificar</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let permission of modules; let i = index">
+                <td>{{ permission.name }}</td>
+                <td><input type="checkbox" [(ngModel)]="permission.view" (change)="togglePermission(permission, 'view')" [ngModelOptions]="{standalone: true}"></td>
+                <td><input type="checkbox" [(ngModel)]="permission.modify" (change)="togglePermission(permission, 'modify')" [ngModelOptions]="{standalone: true}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary" (click)="updateAccount()">Guardar Cambios</button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary-border" (click)="cancelUpdateAccount()">Cancelar</button>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <button class="btn btn-danger" (click)="deleteAccount()">Eliminar Cuenta</button>
+        </div>
+
+      </div>
+    </form>
+
   </div>
-  
+</div>

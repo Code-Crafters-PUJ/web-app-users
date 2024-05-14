@@ -4,13 +4,15 @@ import {PayrollsService} from "../../../services/payroll-services/payrolls.servi
 import {Employee} from "../../../models/payroll-models/employee";
 import {FormsModule, NgForm} from "@angular/forms";
 import {CurrencyPipe} from "@angular/common";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-show-details-employee-page',
   standalone: true,
   imports: [
     FormsModule,
-    CurrencyPipe
+    CurrencyPipe,
+    SidebarComponent
   ],
   templateUrl: './show-details-employee-page.component.html',
   styleUrl: './show-details-employee-page.component.css'
@@ -122,8 +124,6 @@ export class ShowDetailsEmployeePageComponent implements OnInit {
     }
     return total;
   }
-
-
   deleteEmployee(): void {
     if (!this.employeeId) {
       alert("No se ha especificado un ID de empleado válido.");
@@ -142,6 +142,4 @@ export class ShowDetailsEmployeePageComponent implements OnInit {
       });
     }
   }
-
-
 }

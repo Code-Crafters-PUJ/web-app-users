@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
 import {timestamp} from "rxjs";
 import { v4 as uuidv4 } from 'uuid';
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 
 @Component({
@@ -14,12 +15,13 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './new-payroll-page.component.html',
   styleUrls: ['./new-payroll-page.component.css'],
   standalone: true,
-  imports: [
-    FormsModule,
-    NgForOf,
-    CurrencyPipe,
-    DatePipe
-  ]
+    imports: [
+        FormsModule,
+        NgForOf,
+        CurrencyPipe,
+        DatePipe,
+        SidebarComponent
+    ]
 })
 export class NewPayrollPageComponent implements OnInit {
   @ViewChild('payrollForm') payrollForm!: NgForm;

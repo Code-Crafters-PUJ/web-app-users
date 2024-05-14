@@ -7,12 +7,30 @@
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color: #EBF6FF">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Stockwage</h5>
+    <h5 class="offcanvas-title title" id="offcanvasExampleLabel">Stockwage</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <div>
-      Menu
+      <p>Menú</p>
+      <div class="d-flex flex-column">
+        <a href="/home/admin/myaccount" class="btn btn-custom-icon">Mi cuenta</a>
+        <a href="/home/admin/accmanagement" class="btn btn-custom-icon">Gestión de cuentas</a>
+      </div>
+    </div>
+    <div>
+      <p>Nómina</p>
+      <div class="d-flex flex-column">
+        <a href="/home/payroll/show/all/employees" class="btn btn-custom-icon">Empleados</a>
+        <a href="/home/payroll/show/all/payrolls" class="btn btn-custom-icon">Nóminas</a>
+      </div>
+    </div>
+    <div>
+      <p>Inventario</p>
+      <div class="d-flex flex-column">
+        <a href="/home/inventory/show/product/all" class="btn btn-custom-icon">Productos</a>
+        <a href="/home/inventory/show/supplier/all" class="btn btn-custom-icon">Proveedores</a>
+      </div>
     </div>
   </div>
 </div>

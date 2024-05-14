@@ -1,1 +1,133 @@
-<p>show-all-products works!</p>
+<div class="d-flex ">
+  <app-sidebar></app-sidebar>
+  <div class="container mt-3 mb-3  cont-style">
+    <h1>Registro de Inventarios</h1>
+
+    <div class="navegation">
+      <div class="InputContainer">
+        <input type="text" name="text" class="input" id="input" placeholder="Busca por nombre del producto" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()">
+        <label for="input" class="labelforsearch">
+          <svg viewBox="0 0 512 512" class="searchIcon">
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
+          </svg>
+        </label>
+      </div>
+      <div class="buttonContainer">
+        <button class="btn btn-primary" (click)="enableProductRegistrer()">Registrar artículo</button>
+        <button class="btn btn-primary-border" (click)="enablebuy()">Comprar artículo</button>
+      </div>
+    </div>
+    <div *ngFor="let branch of branches">
+      <h5>{{ branch.name }}</h5>
+      <div class="d-flex justify-content-start align-items-center mt-3">
+        <button
+          class="btn btn-light mx-1"
+          (click)="changePage(branch.name, -1)"
+          [disabled]="pagination[branch.name].currentPage === 1"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div>Página {{ pagination[branch.name].currentPage }} de {{ pagination[branch.name].totalPages }}</div>
+        <button
+          class="btn btn-light mx-1"
+          (click)="changePage(branch.name, 1)"
+          [disabled]="pagination[branch.name].currentPage >= Math.ceil(pagination[branch.name].totalItems / pagination[branch.name].pageSize)"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <table class="table table-custom-primary">
+        <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre Artículo</th>
+          <th scope="col">Categoría</th>
+          <th scope="col">Precio de venta</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of branch.products ">
+          <td>{{ product.product.id }}</td>
+          <td class="clickable" (click)="productDetails(product.product.id)">{{ product.product.name }}</td>
+          <td>{{ product.product.category }}</td>
+          <td>{{ product.product.sellPrice }} COP</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="showProductbuy">
+      <h5>Registrar nuevo artículo</h5>
+      <h6>Información General</h6>
+      <div class="container edit-info">
+        <div class="row">
+          <div class="form-group col-md-3 mb-3">
+            <label for="productName">Nombre</label>
+
+            <select class="form-control" id="productName" [(ngModel)]="productOrder.productName" required>
+              <option *ngFor="let option of productOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3 mb-3">
+            <label for="supplier">Proveedor</label>
+            <select class="form-control" id="supplier" [(ngModel)]="productOrder.supplierName" required>
+              <option *ngFor="let option of supplierOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3 mb-3">
+            <label for="costPrice">Precio de costo</label>
+            <input type="text" class="form-control" id="costPrice" placeholder="Precio de costo"  [(ngModel)]="productOrder.costPrice" (change)="updateTotalProducts()">
+          </div>
+          <div class="form-group col-md-3 mb-3">
+            <label for="purchaseDate">Fecha de adquisición</label>
+            <input type="date" class="form-control" id="purchaseDate" placeholder="Fecha de adquisición" [(ngModel)]="productOrder.purchaseDate">
+          </div>
+        </div>
+        <div *ngFor="let sucursalOr of sucursalOrder; let i = index" class="row mb-3">
+          <div class="form-group col-md-1">
+            <label for="enable-{{i}}">Activar</label>
+            <div class="form-control form-check form-switch d-flex justify-content-center align-items-center border-0">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="enable-{{i}}"
+                [(ngModel)]="sucursalOr.enabled"
+                (change)="handleBranchToggle(sucursalOr, i)"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="branch-{{i}}">Sucursal</label>
+            <input type="text" class="form-control" id="branch-{{i}}" [(ngModel)]="sucursalOr.branchName" disabled>
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="quantity-{{i}}">Cantidad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantity-{{i}}"
+              [(ngModel)]="sucursalOr.quantity"
+              placeholder="Cantidad"
+              [disabled]="!sucursalOr.enabled"
+              (change)="updateTotalProducts()"/>
+          </div>
+        </div>
+      </div>
+      <h6>Total compra</h6>
+      <p>{{ total }} COP</p>
+
+      <button class="btn btn-primary" (click)="sendOrder()">Finalizar pedido</button>
+      <button class="btn btn-danger-border mx-3" (click)="cancelOrder()">Cancelar pedido</button>
+    </div>
+
+    <div *ngIf="showProductRegister">
+      <app-create-product (productDisabled)="haandleProductDisabled($event)"></app-create-product>
+    </div>
+  </div>
+
+</div>

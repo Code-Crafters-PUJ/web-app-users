@@ -1,65 +1,40 @@
-<div class="container border border-grey rounded p-3 min-vh-50">
+<div *ngIf="actualPlan">
+  <div class="container border border-grey rounded p-3 min-vh-50">
     <p>PLANES Y FACTURACIÓN</p>
     <h5>Plan Actual</h5>
-    <p>Puedes editar tu suscripción actual y acceder a los productos de StockWage.</p>
-
+    <div class="row">
+      <div class="col-md-2">
+        <p>{{ actualPlan.type }}</p>
+      </div>
+      <div class="col-md-3">
+        <p>{{ actualPlan.mensual_price }} dólares/mes</p>
+      </div>
+      <div class="col-md-4">
+        <p>Máximo {{ actualPlan.maxUsers }} usuarios</p>
+      </div>
+      <div class="col-md-3">
+        <a href="/home/admin/configpayment">CAMBIAR PLAN</a>
+      </div>
+    </div>
     <hr>
 
-    <div class="row">
-        
+    <div *ngFor="let plan of plansAvailable">
+      <div class="row">
         <div class="col-md-2">
-            <p>FREE TRIAL</p>
+          <p>{{ plan.type }}</p>
         </div>
         <div class="col-md-3">
-            <p>Gratis</p>
+          <p>{{ plan.mensual_price }} dólares/mes</p>
         </div>
         <div class="col-md-4">
-            <p>Máximo 5 usuarios</p>
+          <p>Máximo {{ plan.maxUsers }} usuarios</p>
         </div>
         <div class="col-md-3">
-            <a>CAMBIAR PLAN</a>
+          <a href="/home/admin/configpayment">PROBAR AHORA</a>
         </div>
-        
+      </div>
+      <hr>
     </div>
-
-    <hr>
-
-    <div class="row">
-        
-        <div class="col-md-2">
-            <p>SILVER</p>
-        </div>
-        <div class="col-md-3">
-            <p>25 dólares</p>
-        </div>
-        <div class="col-md-4">
-            <p>Máximo 20 usuarios</p>
-        </div>
-        <div class="col-md-3">
-            <a>PROBAR AHORA</a>
-        </div>
-        
-    </div>
-
-    <hr>
-
-    <div class="row">
-        
-        <div class="col-md-2">
-            <p>GOLDEN</p>
-        </div>
-        <div class="col-md-3">
-            <p>50 dólares</p>
-        </div>
-        <div class="col-md-4">
-            <p>Usuarios ilimitados</p>
-        </div>
-        <div class="col-md-3">
-            <a>PROBAR AHORA</a>
-        </div>
-        
-    </div>
-
-    <hr>
     <p>Comunícate con los administradores de tu cuenta si tienes preguntas sobre el estado o resultado de tu solicitud de licencia</p>
+  </div>
 </div>
