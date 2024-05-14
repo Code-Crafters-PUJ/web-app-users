@@ -87,7 +87,7 @@ export class NewEmployeePageComponent implements OnInit {
         this.router.navigate(['/home/payroll/show/all/employees']);
       },
       error: (error) => {
-        console.error('Error al guardar la nómina:', error);
+        console.error('Error al guardar el empleado:', error);
       }
     });
   }
@@ -99,16 +99,16 @@ export class NewEmployeePageComponent implements OnInit {
   calculateTotalSalary(): number {
     let total = this.employee.contract[0].baseSalary;
     if (this.employee.contract[0].transportAllowance) {
-      total += 162000; // Suma 162,000 si el auxilio de transporte está seleccionado
+      total += 162000;
     }
     if (this.employee.contract[0].healthAndPensions) {
-      total += this.employee.contract[0].baseSalary * 0.12; // Suma el 12% del salario base para salud y pensiones
+      total += this.employee.contract[0].baseSalary * 0.12;
     }
     if (this.employee.contract[0].severancePay) {
-      total += this.employee.contract[0].baseSalary * 0.10; // Suma el 10% del salario base para cesantías
+      total += this.employee.contract[0].baseSalary * 0.10;
     }
     if (this.employee.contract[0].serviceBonus) {
-      total += this.employee.contract[0].baseSalary * 0.08; // Suma el 8% del salario base para prima de servicios
+      total += this.employee.contract[0].baseSalary * 0.08;
     }
     return total;
   }

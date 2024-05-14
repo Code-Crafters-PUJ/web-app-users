@@ -96,7 +96,7 @@ export class ShowDetailsPayrollPageComponent implements OnInit {
   }
 
   consolidatePayroll() {
-    this.payrollsService.updatePayrollStatus(this.payroll.id, 'Consolidada').subscribe({
+    this.payrollsService.updatePayrollStatus(this.payroll.id,).subscribe({
       next: (response) => {
         alert('Nómina consolidada con éxito');
         this.router.navigate(['/home/payroll/show/all/payrolls']);
