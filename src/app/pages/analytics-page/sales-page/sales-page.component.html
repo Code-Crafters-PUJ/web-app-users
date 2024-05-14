@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="header-container">
+    <h1>Ventas</h1>
+    <h5>/Datos Generales</h5>
+  </div>
+
+  <div class="row">
+
+    <div class="row">
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body card-custom  text-center">
+            <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+            <canvas id="topSaledProductsVsSales" style="max-width: 100%; max-height: 100%;">{{ topSaledChart }}</canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body card-custom  text-center">
+            <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+            <canvas id="monthVsIncome" style="max-width: 100%; max-height: 100%;">{{ incomeChart }}
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body card-custom  text-center">
+            <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+            <canvas id="branchVsSales" style="max-width: 100%; max-height: 100%;">{{ branchChart }}
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

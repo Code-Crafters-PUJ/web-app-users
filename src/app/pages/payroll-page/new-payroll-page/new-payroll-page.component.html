@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="header-container">
+    <h1>Nominas </h1>
+    <h5>/Crear nomina</h5>
+  </div>
+
+  <div class="row mb-3 py-0">
+    <div class="col-md-8 order-2 order-md-1">
+      <h5>Nueva Nomina</h5>
+    </div>
+    <div class="col-md-4 order-1 order-md-2 d-flex justify-content-start justify-content-md-end mb-2">
+      <button class="btn btn-primary" (click)="cancelPayroll()">Cancelar Nomina</button>
+    </div>
+  </div>
+
+  <h6>Información General</h6>
+
+  <form class="mt-3 needs-validation" novalidate (ngSubmit)="onSubmit()" #payrollForm="ngForm">
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="liquidationType" class="form-label">Tipo de Liquidacion</label>
+          <select id="liquidationType" class="form-control" [(ngModel)]="payroll.liquidationType" name="liquidationType" required #liquidationType="ngModel">
+            <option value="">Seleccione...</option>
+            <option value="Mensual">Mensual</option>
+            <option value="Quincenal">Quincenal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="payrollName" class="form-label">Nombre de Nomina</label>
+          <input type="text" id="payrollName" class="form-control" [(ngModel)]="payroll.payrollName" name="payrollName" required #payrollName="ngModel">
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="month" class="form-label">Mes</label>
+          <select id="month" class="form-control" [(ngModel)]="payroll.month" name="month" required #month="ngModel">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="year" class="form-label">Año</label>
+          <input type="number" id="year" class="form-control" [(ngModel)]="payroll.year" name="year" required min="1900" max="2100" #year="ngModel">
+
+        </div>
+      </div>
+    </div>
+
+    <h6>Payroll Employees</h6>
+
+    <div class="table-responsive">
+      <table class="table table-custom-primary">
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Nombre</th>
+          <th scope="col">No. Cedula</th>
+          <th scope="col">No. Contrato</th>
+          <th scope="col">Fecha Inicio</th>
+          <th scope="col">Fecha Fin</th>
+          <th scope="col">Salario</th>
+          <th scope="col">Tipo Contrato</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of displayedEmployees">
+          <td>
+            <input type="checkbox" [checked]="selectedEmployees[employee.id]" (change)="updateSelection(employee)">
+          </td>
+          <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+          <td>{{ employee.idCard }}</td>
+          <td>{{ employee.contract.length > 0 ? employee.contract[0].id : '' }}</td>
+          <td>{{ employee.contract.length > 0 ? (employee.contract[0].startDate | date:'yyyy-MM-dd') : '' }}</td>
+          <td>{{ employee.contract.length > 0 ? (employee.contract[0].endDate | date:'yyyy-MM-dd') : '' }}</td>
+          <td>{{ employee.contract.length > 0 ? (employee.contract[0].baseSalary | currency:'USD':true:'1.2-2') : '' }}</td>
+          <td>{{ employee.contract.length > 0 ? employee.contract[0].totalSalary : '' }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-start align-items-center mt-3">
+      <button type="button" class="btn mx-1" (click)="previousPage()">
+        <i class="fas fa-chevron-left icon-color"></i>
+      </button>
+      <div>Página {{ currentPage }} de {{ totalPages }}</div>
+      <button type="button" class="btn mx-1" (click)="nextPage()">
+        <i class="fas fa-chevron-right icon-color"></i>
+      </button>
+    </div>
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h6>Total Ingresos</h6>
+          <h4>{{ totalIncome | currency }}</h4>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h6>Total Deducciones</h6>
+          <h4>{{ totalDeductions | currency }}</h4>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h6>Total Neto</h6>
+          <h4>{{ totalNet | currency }}</h4>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-5" [disabled]="!payrollForm.valid || !isEmployeeSelected()">Guardar Nomina</button>
+  </form>
+</div>

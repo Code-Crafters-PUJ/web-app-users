@@ -1,0 +1,35 @@
+.container{
+    margin: 10%;
+}
+
+.small-img {
+    width: 8vh;
+    border-radius: 50%;
+    background-color: #EBF6FF; /* Color azul claro */ /* Espacio entre el borde y la imagen */
+}
+
+@media (max-width: 700px) {
+    
+    .container {
+        margin: 0% !important;
+        padding-left: 5%;
+        padding-right: 5%;
+        display: flex !important;
+        flex-wrap:wrap! important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        font-size: medium;
+        
+    }
+    .images{
+        display: flex !important;
+        flex-wrap:wrap !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .big-img{
+        width:100% !important;
+        height: 50% !important;
+    }
+}

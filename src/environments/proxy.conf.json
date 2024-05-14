@@ -1,0 +1,8 @@
+{
+  "/Commertial/*": {
+    "target": "http://10.101.137.93:8000",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

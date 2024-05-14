@@ -1,0 +1,297 @@
+
+<div class="container">
+  <div class="header-container">
+    <h1>Empleados</h1>
+    <h5>/Info. Empleado</h5>
+  </div>
+
+  <h5>Perfil del Empleao</h5>
+  <h6>Datos Demograficos</h6>
+
+
+  <form class="mt-3" (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+
+    <div class="row mb-3 ">
+      <div class="col-md-3">
+        <label for="nombreEmpleadoNuevo" class="form-label">Nombre</label>
+        <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo"  [(ngModel)]="employee.firstName" class="form-control" required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="apellidoEmpleadoNuevo" class="form-label">Apellidos</label>
+        <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" [(ngModel)]="employee.lastName" class="form-control" required>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="nacimientoEmpleadoNuevo" class="form-label">Fecha De Nacimiento</label>
+        <input type="text" id="nacimientoEmpleadoNuevo" name="nacimientoEmpleadoNuevo" [(ngModel)]="employee.dateOfBirth" class="form-control" required>
+      </div>
+
+      <div class="col-md-3">
+        <div>
+          <label class="form-label">Sexo</label>
+        </div>
+        <div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio"  [(ngModel)]="employee.gender" name="sexo" id="masculinoEmpleadoNuevo" value="masculino" required>
+            <label class="form-check-label mx-1" for="masculinoEmpleadoNuevo">Masculino</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input mx-1" type="radio" [(ngModel)]="employee.gender" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+            <label class="form-check-label" for="femeninoEmpleadoNuevo">Femenino</label>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="tipoIdEmpleadoNuevo" class="form-label">Tipo de Identificacion</label>
+        <select id="tipoIdEmpleadoNuevo" [(ngModel)]="employee.typeCard" name="tipoIdEmpleadoNuevo" class="form-control" required>
+          <option value="ccEmpleadoNuevo">Cédula de ciudadanía</option>
+          <option value="ceEmpleadoNuevo">Cédula de extranjería</option>
+          <option value="pEmpleadoNuevo">Pasaporte</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="idEmpleadoNuevo" class="form-label">No. Identificación</label>
+        <input type="text" id="idEmpleadoNuevo" [(ngModel)]="employee.idCard" name="idEmpleadoNuevo" class="form-control" required>
+      </div>
+    </div>
+
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="ciudadEmpleadoNuevo" class="form-label">Ciudad</label>
+        <input type="text" id="ciudadEmpleadoNuevo" [(ngModel)]="employee.city" name="ciudadEmpleadoNuevo" class="form-control" required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="direccionEmpleadoNuevo" class="form-label">Direccion</label>
+        <input type="text" id="direccionEmpleadoNuevo" [(ngModel)]="employee.address" name="direccionEmpleadoNuevo" class="form-control" required>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="estadoCivilEmpleadoNuevo" class="form-label">Estado Civil</label>
+        <select id="estadoCivilEmpleadoNuevo" [(ngModel)]="employee.maritalStatus" name="estadoCivilEmpleadoNuevo" class="form-control" required>
+          <option value="solteroEmpleadoNuevo">Soltero</option>
+          <option value="casadoEmpleadoNuevo">Casado</option>
+          <option value="viudoEmpleadoNuevo">Viudo</option>
+          <option value="divorciadoEmpleadoNuevo">Divorciado</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="celularEmpleadoNuevo" class="form-label">Numero Celular</label>
+        <input type="text" id="celularEmpleadoNuevo" [(ngModel)]="employee.phoneNumber" name="celularEmpleadoNuevo" class="form-control" required>
+      </div>
+    </div>
+
+    <h6 class="mt-5">Datos Educacionales</h6>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="educacionNuevoEmpleado" class="form-label">Máximo Nivel de Educación</label>
+        <select id="educacionNuevoEmpleado" [(ngModel)]="employee.education.level" name="educacionNuevoEmpleado" class="form-control" required>
+          <option value="Bachillerato">Bachillerato</option>
+          <option value="Tecnico">Tecnico</option>
+          <option value="Tecnologo">Tecnologo</option>
+          <option value="Profesional">Profesional</option>
+
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="tituloNuevoEmpleado" class="form-label">Titulo Educacion</label>
+        <input type="text" id="tituloNuevoEmpleado" [(ngModel)]="employee.education.title" name="tituloNuevoEmpleado" class="form-control" required>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="fechaTituloNuevoEmpleado" class="form-label">Fecha de Finalizacion</label>
+        <input type="text" id="fechaTituloNuevoEmpleado" [(ngModel)]="employee.education.endDate" name="fechaTituloNuevoEmpleado" class="form-control" required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="institucionNuevoEmpleado" class="form-label">Nombre de Institución</label>
+        <input type="text" id="institucionNuevoEmpleado" [(ngModel)]="employee.education.nameInstitution" name="institucionNuevoEmpleado" class="form-control" required>
+      </div>
+    </div>
+
+
+    <h6 class="mt-5">Datos Auxiliares</h6>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="nombreContactoNuevoEmpleado" class="form-label">Nombre Completo del contacto</label>
+        <input type="text" id="nombreContactoNuevoEmpleado" [(ngModel)]="employee.contact.name" name="nombreContactoNuevoEmpleado" class="form-control" required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="relacionNuevoEmpleado" class="form-label">Relacion</label>
+        <input type="text" id="relacionNuevoEmpleado" [(ngModel)]="employee.contact.relationship" name="relacionNuevoEmpleado" class="form-control" required>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="telefonoNuevoEmpleado" class="form-label">Telefono</label>
+        <input type="text" id="telefonoNuevoEmpleado" [(ngModel)]="employee.contact.phone" name="telefonoNuevoEmpleado" class="form-control " required>
+      </div>
+    </div>
+
+
+    <h5 class="mt-5">Contrato del empleado</h5>
+    <h6>Informacion General</h6>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="tipoContratoNuevoEmpleado" class="form-label">Tipo de contrato</label>
+        <select id="tipoContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].contractType.type" name="tipoContratoNuevoEmpleado" class="form-control" required>
+          <option value="indefinido">Termino Indefinido</option>
+          <option value="definido">Termino Definido</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="fechaIContratoNuevoEmpleado" class="form-label">Fecha de Inicio</label>
+        <input type="text" id="fechaIContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].startDate" name="fechaIContratoNuevoEmpleado" class="form-control " required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+
+      <div class="col-md-3">
+        <label for="duracionContratoNuevoEmpleado" class="form-label">Duracion</label>
+        <input type="text" id="duracionContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].duration" name="duracionContratoNuevoEmpleado" class="form-control " required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="fechaFContratoNuevoEmpleado" class="form-label">Fecha De finalizacion</label>
+        <input type="text" id="fechaFContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].endDate" name="fechaFContratoNuevoEmpleado" class="form-control " required>
+      </div>
+
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="cargoNuevoEmpleado" class="form-label">Cargo</label>
+        <input type="text" id="cargoNuevoEmpleado" [(ngModel)]="employee.contract[0].position" name="cargoNuevoEmpleado" class="form-control " required>
+      </div>
+    </div>
+
+    <h6 class="mt-5">Salario General</h6>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="salarioNuevoEmpleado" class="form-label">Salario Base</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="number" id="salarioNuevoEmpleado" [(ngModel)]="employee.contract[0].baseSalary" name="salarioNuevoEmpleado" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="auxilioNuevoEmpleado" class="form-label d-flex align-items-center">
+          <input type="checkbox" id="auxilioNuevoEmpleado" [(ngModel)]="employee.contract[0].transportAllowance" name="auxilioNuevoEmpleado" class="me-2">
+          Auxilio de Transporte
+        </label>
+        <span >$ 162,000 COP</span>
+      </div>
+
+      <div class="col-md-3">
+        <label for="saludNuevoEmpleado" class="form-label d-flex align-items-center">
+          <input type="checkbox" id="saludNuevoEmpleado" [(ngModel)]="employee.contract[0].healthAndPensions" name="saludNuevoEmpleado" class="me-2">
+          Salud y pensiones
+        </label>
+        <span>{{ employee.contract[0].baseSalary * 0.12 | currency:'USD' }}</span>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="cesantiasNuevoEmpleado" class="form-label d-flex align-items-center">
+          <input type="checkbox" id="cesantiasNuevoEmpleado" [(ngModel)]="employee.contract[0].severancePay" name="cesantiasNuevoEmpleado" class="me-2">
+          Cesantías
+        </label>
+        <span> {{ employee.contract[0].baseSalary * 0.10 | currency: 'USD' }}</span>
+      </div>
+
+      <div class="col-md-3">
+        <label for="primaNuevoEmpleado" class="form-label d-flex align-items-center">
+          <input type="checkbox" id="primaNuevoEmpleado" [(ngModel)]="employee.contract[0].serviceBonus" name="primaNuevoEmpleado" class="me-2">
+          Prima de servicios
+        </label>
+        <span>{{ employee.contract[0].baseSalary * 0.08 | currency:'USD' }}</span>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label class="form-label d-flex align-items-center">
+          Salario Total
+        </label>
+        <span>{{ calculateTotalSalary() | currency }}</span>
+      </div>
+    </div>
+
+    <h6 class="mt-5">Contratación</h6>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label class="form-label d-flex align-items-center">
+          Id. Contrato
+        </label>
+        <span>{{ employee.contract[0].id }}</span>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <button type="button" class="btn btn-secondary-border">Generar Nuevo Contrato</button>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <button type="button" class="btn btn-secondary">Descargar Contrato</button>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-secondary">Subir Contrato</button>
+      </div>
+    </div>
+
+
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary"  (click)="onSubmit()"  [disabled]="!employeeForm.valid"  >Guardar Cambios Empleado</button>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-danger-border" (click)="deleteEmployee()" >Eliminar Empleado</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+

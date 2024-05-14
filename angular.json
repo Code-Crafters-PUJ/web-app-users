@@ -28,7 +28,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -57,12 +58,17 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/environments/proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "web-app-users:build:production"
+              "buildTarget": "web-app-users:build:production",
+              "proxyConfig": "src/environments/proxy.conf.json"
             },
             "development": {
-              "buildTarget": "web-app-users:build:development"
+              "buildTarget": "web-app-users:build:development",
+              "proxyConfig": "src/environments/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -70,7 +76,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "web-app-users:build"
+            "buildTarget": "web-app-users:build",
+            "proxyConfig": "src/environments/proxy.conf.json"
           }
         },
         "test": {
@@ -89,7 +96,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           }
         }
       }

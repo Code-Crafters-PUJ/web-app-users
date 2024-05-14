@@ -1,0 +1,29 @@
+<!-- Main container for the login form -->
+<div id="main-container">
+    <!-- Logo -->
+    <img src="assets/images/logo.svg" alt="logo-company">
+  
+    <!-- Login form -->
+    <div class="form-container">
+      <!-- Username input -->
+      <label for="username" class="main-label">Usuario</label>
+      <input type="text" id="username" class="main-input" name="username" #email>
+  
+      <!-- Password input -->
+      <label for="password" class="main-label">Contraseña</label>
+      <div id="password-container">
+        <input type="password" id="password" class="main-input" name="password" #password [type]="changetype?'password':'text'">
+        <span class="eyeicon" (click)="viewpass()"><i [ngClass]="visible?'fa fa-eye':'fa fa-eye-slash'"></i>
+        </span>
+      </div>
+  
+      <!-- Login button -->
+      <button type="submit" id="btn-login" (click)="signInUser(email.value,password.value)">INICIAR SESIÓN</button>
+  
+    </div>
+    <div id="description">
+      <a>¿Olvidó la contraseña?</a>
+      <a>Obtener prueba gratis</a>
+    </div>
+    
+  </div>
