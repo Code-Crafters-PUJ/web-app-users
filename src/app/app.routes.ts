@@ -63,7 +63,7 @@ export const routes: Routes = [
     {
         path: "home/payroll",
         children: [
-            { path: 'general', component:PayrollComponent },
+            { path: 'general', component: PayrollPageComponent },
             { path: 'show/all/payrolls', component:ShowPayrollsPageComponent },
           { path: 'show/detail/payroll/:id', component: ShowDetailsPayrollPageComponent },
             { path: 'register/payroll', component: NewPayrollPageComponent },
