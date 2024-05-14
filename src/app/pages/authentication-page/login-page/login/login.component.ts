@@ -27,7 +27,7 @@ export class LoginComponent {
   }
 
   signInUser(email: string, password: string) {
-    /*
+   
     if (email === "" || password === "") {
       Swal.fire({
         title: 'Uppss algo pasó',
@@ -45,7 +45,7 @@ export class LoginComponent {
       this.authService.login(email, password).then((value) => {
         if (value) {
           var jwt = JSON.parse(value).jwt;
-          if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas" || jwt === "Campos faltantes" || jwt === "Error en el formato de datos" || jwt === "Usuario no encontrado") {
+          if (jwt === "No Account matches the given query." || jwt === "ups! credenciales incorrectas" || jwt === "Campos faltantes" || jwt === "Error en el formato de datos" || jwt === "Usuario no encontrado") {
             this.handleFailedAuthentication();
             this.storageService.getSavedAccount();
           }
@@ -64,8 +64,7 @@ export class LoginComponent {
         }
       });
     }
-    */
-    this.router.navigate(['/home/admin/myaccount']);
+
   }
   private handleSuccessfulAuthentication(role: string) {
     

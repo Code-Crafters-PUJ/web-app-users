@@ -40,7 +40,7 @@ export class NewEmployeePageComponent implements OnInit {
       endDate: new Date(),
       nameInstitution: ''
     },
-    companyId: 0,
+    companyId: 5,
     contact: {
       id: 0,
       name: '',
@@ -80,19 +80,24 @@ export class NewEmployeePageComponent implements OnInit {
   saveEmployee(): void {
     if (!this.employeeForm.valid) {
       this.employeeForm.form.markAllAsTouched();
-      alert('Por favor complete todos los campos requeridos y seleccione al menos un empleado.');
+      alert('Por favor complete todos los campos requeridos.');
       return;
     }
-      this.payrollsService.addEmployee(this.employee).subscribe({
+
+    // Imprimir los datos para verificar
+    console.log('Sending data:', this.employee);
+
+    this.payrollsService.addEmployee(this.employee).subscribe({
       next: () => {
-        console.log('employee saved successfully!' , this.employee);
+        console.log('Employee saved successfully!', this.employee);
         this.router.navigate(['/home/payroll/show/all/employees']);
       },
       error: (error) => {
-        console.error('Error al guardar la nómina:', error);
+        console.error('Error al guardar el empleado:', error);
       }
     });
   }
+
 
   cancel() {
     this.router.navigate(['/home/payroll/show/all/employees']);
