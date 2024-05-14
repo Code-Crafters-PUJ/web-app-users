@@ -1,0 +1,95 @@
+
+<div class="d-flex justify-content-center p-5">
+<div class="container">
+
+    <!-- Logo -->
+    <img class="col-sm-12 col-md-3" src="assets/images/logo.svg" alt="logo-company">
+  
+    <p class="col-12 col-md-12 text-md-start text-center">Desde el primer contacto con un cliente potencial hasta la gestión de cuentas existentes, las negocios pueden lograr interacciones exitosas con los clientes mediante un enfoque estratégico en la relación cliente-empresa.</p>
+    <h5 class="col-12 col-md-12 text-md-start text-center">Explora nuevas formas de conectar con tus clientes comerciales</h5>
+  
+  
+    <form class="mt-3" action="tu_accion" method="POST">
+  
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="RootAccountName" class="form-label">Nombre</label>
+          <input type="text" id="RootAccountName" name="RootAccountName" class="form-control" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="RootAccountLastName" class="form-label">Apellidos</label>
+          <input type="text" id="RootAccountLastName" name="RootAccountLastName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="RootAccountRole" class="form-label">Cargo</label>
+          <input type="text" id="RootAccountRole" name="RootAccountRole" class="form-control" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="RootAccountEmail" class="form-label">Correo electrónico</label>
+          <input type="text" id="RootAccountEmail" name="RootAccountEmail" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="RootAccountPhone" class="form-label">Teléfono celular</label>
+          <input type="text" id="RootAccountPhone" name="RootAccountPhone" class="form-control" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="RootAccountCelphone" class="form-label">Contraseña</label>
+          <input type="text" id="RootAccountCelphone" name="RootAccountCelphone" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="RootAccountBusinessArea" class="form-label">Industria</label>
+          <input type="text" id="RootAccountBusinessArea" name="RootAccountBusinessArea" class="form-control" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="apellidoEmpleadoNuevo" class="form-label">Negocio</label>
+          <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-6">
+          <label for="RootAccountNIT" class="form-label">NIT</label>
+          <input type="text" id="RootAccountNIT" name="RootAccountNIT" class="form-control" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="RootAccountEmployeeNumber" class="form-label">Número de empleados</label>
+          <input type="text" id="RootAccountEmployeeNumber" name="RootAccountEmployeeNumber" class="form-control" required>
+        </div>
+      </div>
+      <div class="row mb-4">
+
+        <div class="col-md-12">
+            <label for="firstCheck" class="form-label d-flex align-items-center">
+            <input type="checkbox" id="firstCheck" name="firstCheck" class="me-2">
+            Si acepto recibir comunicaciones de marketing relacionadas con la gama de productos, servicios y eventos ofrecidos por la empresa StockWage, tengo la opción de cancelar la suscripción en cualquier momento.
+            </label>
+        </div>
+
+        <div class="col-md-12">
+            <label for="secondCheck" class="form-label d-flex align-items-center">
+            <input type="checkbox" id="secondCheck" name="secondCheck" class="me-2">
+            Acepto que estoy de acuerdo co que StockWage  trate sus datos personales tal como se desccribe en la declaración de privacidad 
+            </label>
+        </div>
+        </div>
+
+        <div class="col-md-12">
+          <button class="btn btn-primary py-3" (click)="signUpUser()">Comenzar</button>
+        </div>
+    </form>
+  </div>
+</div>

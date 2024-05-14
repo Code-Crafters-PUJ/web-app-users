@@ -1,0 +1,59 @@
+<div class="d-flex ">
+  <app-sidebar></app-sidebar>
+<div class="container">
+  <div class="header-container">
+    <h1>Nominas</h1>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4 mb-3">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar: Estado, Nombre, Periodo de Pago"
+               aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="a">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-end mb-3">
+      <button class="btn btn-primary-border" (click)="newPayroll()">Crear Nomina</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-custom-primary">
+      <thead>
+      <tr>
+        <th scope="col">Estado</th>
+        <th scope="col">Nombre de Nomina</th>
+        <th scope="col">Tipo Liquidacion</th>
+        <th scope="col">Periodo de Pago</th>
+        <th scope="col">Total Nomina</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let payroll of displayedPayrolls" (click)="viewPayrollDetail(payroll)" style="cursor: pointer">
+        <td>{{ payroll.state }}</td>
+        <td>{{ payroll.payrollName }}</td>
+        <td>{{ payroll.liquidationType }}</td>
+        <td>{{ payroll.month }} de {{payroll.year}}</td>
+        <td>{{ payroll.totalNet }}</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-start align-items-center mt-3">
+      <button class="btn mx-1" (click)="previousPage()">
+        <i class="fas fa-chevron-left icon-color"></i>
+      </button>
+      <div>Página {{ currentPage }} de {{ totalPages }}</div>
+      <button class="btn mx-1" (click)="nextPage()">
+        <i class="fas fa-chevron-right icon-color"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+</div>

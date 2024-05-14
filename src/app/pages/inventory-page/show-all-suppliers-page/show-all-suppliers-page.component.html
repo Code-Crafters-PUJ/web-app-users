@@ -1,0 +1,57 @@
+<div class="d-flex">
+  <app-sidebar></app-sidebar>
+
+  <div class="container mt-3 mb-3">
+    <h1>Registro de Proveedores</h1>
+
+    <div class="navegation">
+      <div class="InputContainer">
+        <input type="text" name="text" class="input" id="input" placeholder="Busca por el nombre del proveedor" [(ngModel)]="searchText"
+               (ngModelChange)="handleSearchChange()">
+        <label for="input" class="labelforsearch">
+          <svg viewBox="0 0 512 512" class="searchIcon">
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
+          </svg>
+        </label>
+      </div>
+      <button class="btn btn-primary btn-format" (click)="enableSupplierComponent()" >Crear proveedor</button>
+
+    </div>
+    <div class="table-responsive">
+      <div class="d-flex justify-content-start align-items-center mt-3">
+        <button class="btn btn-light mx-1" (click)="previousPage()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div>Pagina {{ currentPage }} de {{totalPages}}</div>
+        <button class="btn btn-light mx-1" (click)="nextPage()">
+          <i class="fas fa-chevron-right "></i>
+        </button>
+      </div>
+      <table class="table table-custom-primary">
+        <thead>
+        <tr>
+          <th scope="col">Id proveedor</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Tipo de proveedor</th>
+          <th scope="col">Correo electrónico</th>
+          <th scope="col">Telefono</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let supplier of paginatedSuppliers">
+          <td>{{ supplier.id }}</td>
+          <td class="clickable" (click)="supplierDetails(supplier.id)">{{ supplier.name }}</td>
+          <td>{{ getSupplierTypeName(supplier.supplierType)}}</td>
+          <td>{{ supplier.email }}</td>
+          <td>{{ supplier.phone }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="showSupplierComponent">
+      <app-create-supplier (supplierDisabled)="handleSupplierDisabled($event)"></app-create-supplier>
+    </div>
+  </div>
+
+</div>
