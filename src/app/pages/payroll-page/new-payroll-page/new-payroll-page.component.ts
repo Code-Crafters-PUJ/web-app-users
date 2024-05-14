@@ -5,7 +5,6 @@ import { Payroll } from '../../../models/payroll-models/payroll';
 import { PayrollsService } from '../../../services/payroll-services/payrolls.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
-import {timestamp} from "rxjs";
 import { v4 as uuidv4 } from 'uuid';
 import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 

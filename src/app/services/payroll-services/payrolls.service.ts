@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable, of, throwError} from "rxjs";
+import {Observable, of, throwError} from 'rxjs';
+import {catchError } from "rxjs/operators";
 import {Payroll} from "../../models/payroll-models/payroll";
 import {Employee} from "../../models/payroll-models/employee";
 
