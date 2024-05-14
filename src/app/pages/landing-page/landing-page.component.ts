@@ -4,11 +4,12 @@ import { GeneralInfoComponent } from './components/general-info/general-info.com
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ServicesComponent } from './components/services/services.component';
 import { PlansComponent } from './components/plans/plans.component';
+import { AskAnythingComponent } from './components/ask-anything/ask-anything.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [MenuComponent, GeneralInfoComponent, AboutUsComponent, ServicesComponent, PlansComponent],
+  imports: [MenuComponent, GeneralInfoComponent, AboutUsComponent, ServicesComponent, PlansComponent, AskAnythingComponent],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css'
 })
