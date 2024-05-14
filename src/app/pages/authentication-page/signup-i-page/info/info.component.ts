@@ -40,8 +40,6 @@ export class InfoComponent {
 
     this.data = this.obtainData();
 
-    this.handleSuccessfulAuthentication();
-
     if (!this.isValidEmail(this.data.RootAccountEmail)) {
       // Invalid email
       this.showValidationError('Correo electrónico inválido');
