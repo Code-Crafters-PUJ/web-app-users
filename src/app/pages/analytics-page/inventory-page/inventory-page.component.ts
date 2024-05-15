@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {AccountingAnalyticService} from "../../../services/analytics-services/accounting-analytic.service";
 import {InventoryAnalyticService} from "../../../services/analytics-services/inventory-analytic.service";
 import Chart from "chart.js";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-inventory-page',
   standalone: true,
-  imports: [],
+  imports: [
+    SidebarComponent
+  ],
   templateUrl: './inventory-page.component.html',
   styleUrl: './inventory-page.component.css'
 })

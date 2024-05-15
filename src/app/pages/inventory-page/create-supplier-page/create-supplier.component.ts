@@ -5,6 +5,7 @@ import {supplierType} from "../../../Models/Inventory/supplierType";
 import {NgForOf} from "@angular/common";
 import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
 import Swal from "sweetalert2";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 
 @Component({
@@ -13,7 +14,8 @@ import Swal from "sweetalert2";
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    NgForOf
+    NgForOf,
+    SidebarComponent
   ],
   templateUrl: './create-supplier.component.html',
   styleUrl: './create-supplier.component.css'

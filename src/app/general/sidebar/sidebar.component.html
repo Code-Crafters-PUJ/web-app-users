@@ -1,36 +1,183 @@
-<div class="container container-menu-custom mt-3 ">
-  <button class="btn btn-custom-icon " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+<div class="container-fluid container-menu-custom mt-3">
+  <button class="btn btn-custom-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     <i class="fas fa-bars"></i>
   </button>
-
 </div>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color: #EBF6FF">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title title" id="offcanvasExampleLabel">Stockwage</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
-    <div>
-      <p>Menú</p>
-      <div class="d-flex flex-column">
-        <a href="/home/admin/myaccount" class="btn btn-custom-icon">Mi cuenta</a>
-        <a href="/home/admin/accmanagement" class="btn btn-custom-icon">Gestión de cuentas</a>
+  <div class="offcanvas-body d-flex flex-column align-items-center justify-content-between">
+    <div class="top-section w-100">
+      <div class="logo-container mb-4">
+        <img src="assets/images/logo_sidebar.png" alt="Logo" id="offcanvasExampleLabel" style="width: 200px; height: auto;">
+      </div>
+      <div class="user-container text-center mb-4">
+        <img src="assets/images/user.svg" alt="User" style="width: 150px; height: auto;">
+        <h6 class="mt-2">Felipe Garcia Castiblanco</h6>
+        <p class="">Gerente General</p>
+      </div>
+
+      <div class="text-start w-100">
+        <p class="fw-bold">General</p>
+        <div class="d-flex flex-column mb-3">
+          <a routerLink="/home/admin/general" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> General
+          </a>
+          <a routerLink="/home/admin/myaccount" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mi Cuenta
+          </a>
+          <a routerLink="/home/admin/configinfo" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Configuración de Información
+          </a>
+          <a routerLink="/home/admin/configpayment" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Configuración de Pago
+          </a>
+          <a routerLink="/home/admin/accmanagement" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Gestión de Cuentas
+          </a>
+        </div>
+      </div>
+
+      <div class="text-start w-100">
+        <p class="fw-bold">Nómina</p>
+        <div class="d-flex flex-column mb-3">
+          <a routerLink="/home/payroll/general" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> General
+          </a>
+          <a routerLink="/home/payroll/show/all/payrolls" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mostrar Nóminas
+          </a>
+          <a routerLink="/home/payroll/show/detail/payroll/:id" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Detalles de Nómina
+          </a>
+          <a routerLink="/home/payroll/register/payroll" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Nueva Nómina
+          </a>
+          <a routerLink="/home/payroll/show/all/employees" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mostrar Empleados
+          </a>
+          <a routerLink="/home/payroll/show/detail/employee/:id" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Detalles del Empleado
+          </a>
+          <a routerLink="/home/payroll/register/employee" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Nuevo Empleado
+          </a>
+        </div>
+      </div>
+
+      <div class="text-start w-100">
+        <p class="fw-bold">Ventas</p>
+        <div class="d-flex flex-column mb-3">
+          <a routerLink="/home/sales/general" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> General
+          </a>
+          <a routerLink="/home/sales/show/all" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mostrar Todas las Facturas
+          </a>
+          <a routerLink="/home/sales/register/bill" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Crear Factura
+          </a>
+        </div>
+      </div>
+
+      <div class="text-start w-100">
+        <p class="fw-bold">Inventario</p>
+        <div class="d-flex flex-column mb-3">
+          <a routerLink="/home/inventory/general" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> General
+          </a>
+          <a routerLink="/home/inventory/show/product/all" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mostrar Todos los Productos
+          </a>
+          <a routerLink="/home/inventory/show/supplier/all" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mostrar Todos los Proveedores
+          </a>
+          <a routerLink="/home/inventory/show/product/detail" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Detalles del Producto
+          </a>
+          <a routerLink="/home/inventory/show/supplier/detail" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Detalles del Proveedor
+          </a>
+          <a routerLink="/home/inventory/register/product" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Crear Producto
+          </a>
+          <a routerLink="/home/inventory/register/supplier" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Crear Proveedor
+          </a>
+        </div>
+      </div>
+
+      <div class="text-start w-100">
+        <p class="fw-bold">Contabilidad</p>
+        <div class="d-flex flex-column mb-3">
+          <a routerLink="/home/accounting/general" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> General
+          </a>
+          <a routerLink="/home/accounting/records" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Registros
+          </a>
+          <a routerLink="/home/accounting/electronic/payroll" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Nómina Electrónica
+          </a>
+          <a routerLink="/home/accounting/electronic/bill" routerLinkActive="active" class="mb-2">
+            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Factura Electrónica
+          </a>
+        </div>
       </div>
     </div>
-    <div>
-      <p>Nómina</p>
-      <div class="d-flex flex-column">
-        <a href="/home/payroll/show/all/employees" class="btn btn-custom-icon">Empleados</a>
-        <a href="/home/payroll/show/all/payrolls" class="btn btn-custom-icon">Nóminas</a>
-      </div>
+
+    <div class="bottom-section mt-auto w-100 d-flex justify-content-center">
+      <button class="btn btn-primary me-2" (click)="logout()">Cerrar Sesión</button>
+      <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#configModal">
+        <i class="fas fa-cog"></i> Configuración
+      </button>
     </div>
-    <div>
-      <p>Inventario</p>
-      <div class="d-flex flex-column">
-        <a href="/home/inventory/show/product/all" class="btn btn-custom-icon">Productos</a>
-        <a href="/home/inventory/show/supplier/all" class="btn btn-custom-icon">Proveedores</a>
+  </div>
+</div>
+
+<!-- Modal de Configuración
+<div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="configModalLabel">Configuración Cuenta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" value="Felipe" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="surname" value="Garcia Castiblanco" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" value="felipe@example.com" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Celular</label>
+            <input type="text" class="form-control" id="phone" value="1234567890" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="company" class="form-label">Empresa</label>
+            <input type="text" class="form-control" id="company" value="MiEmpresa" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" value="123456789">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>
 </div>
+-->

@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import Chart from "chart.js";
 import {AccountingAnalyticService} from "../../../services/analytics-services/accounting-analytic.service";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-accounting-page',
   standalone: true,
-  imports: [],
+  imports: [
+    SidebarComponent
+  ],
   templateUrl: './accounting-page.component.html',
   styleUrl: './accounting-page.component.css'
 })

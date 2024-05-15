@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import Chart from "chart.js";
 import {PayrollAnalyticService} from "../../../services/analytics-services/payroll-analytic.service";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-payroll-page',
   standalone: true,
-  imports: [],
+  imports: [
+    SidebarComponent
+  ],
   templateUrl: './payroll-page.component.html',
   styleUrl: './payroll-page.component.css'
 })
