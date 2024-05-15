@@ -1,6 +1,6 @@
 
-<div class="d-flex justify-content-center p-5">
-<div class="container">
+<div class="f d-flex justify-content-center p-5">
+<div class="container max-vh-100">
 
     <!-- Logo -->
     <img class="col-sm-12 col-md-3" src="assets/images/logo.svg" alt="logo-company">
@@ -9,7 +9,9 @@
     <h5 class="col-12 col-md-12 text-md-start text-center">Explora nuevas formas de conectar con tus clientes comerciales</h5>
   
   
-    <form class="mt-3" action="tu_accion" method="POST">
+    <form class="mt-3" (ngSubmit)="signUpUser()" #userForm="ngForm">
+
+      <h5 class="col-12 col-md-12 text-md-start text-center">Tus datos</h5>
   
       <div class="row mb-3">
         <div class="col-md-6">
@@ -24,18 +26,31 @@
       </div>
 
       <div class="row mb-3">
-        <div class="col-md-6">
+  
+        <div class="col-md-2">
+          <label for="RootAccountType" class="form-label">Tipo</label>
+          <select id="RootAccountType" name="RootAccountType" class="form-select" required >
+              <option value="CC" data-descripcion="Cédula">C.C.</option>
+              <option value="DNI" data-descripcion="Documento Nacional de Identidad">D.N.I.</option>
+              <option value="PP" data-descripcion="Pasaporte">P.P.</option>
+          </select>
+          <p id="descripcion" class="text-muted"></p>
+      </div>
+
+        <div class="col-md-4">
           <label for="RootAccountIdCard" class="form-label">Documento Identidad</label>
           <input type="text" id="RootAccountIdCard" name="RootAccountIdCard" class="form-control" required>
         </div>
-  
+
         <div class="col-md-6">
           <label for="RootAccountEmail" class="form-label">Correo electrónico</label>
           <input type="text" id="RootAccountEmail" name="RootAccountEmail" class="form-control" required>
         </div>
+
       </div>
 
       <div class="row mb-3">
+
         <div class="col-md-6">
           <label for="RootAccountPhone" class="form-label">Teléfono celular</label>
           <input type="text" id="RootAccountPhone" name="RootAccountPhone" class="form-control" required>
@@ -43,9 +58,12 @@
   
         <div class="col-md-6">
           <label for="RootAccountPassword" class="form-label">Contraseña</label>
-          <input type="text" id="RootAccountPassword" name="RootAccountPassword" class="form-control" required>
+          <input type="password" id="RootAccountPassword" name="RootAccountPassword" class="form-control" required>
         </div>
+
       </div>
+
+      <h5 class="col-12 col-md-12 text-md-start text-center">Datos de compañía</h5>
 
       <div class="row mb-3">
         <div class="col-md-6">
@@ -88,7 +106,7 @@
         </div>
 
         <div class="col-md-12">
-          <button class="btn btn-primary py-3" (click)="signUpUser()">Comenzar</button>
+          <button type="submit" class="btn btn-primary py-3">Comenzar</button>
         </div>
     </form>
   </div>
