@@ -4,11 +4,14 @@ import Chart from "chart.js";
 import {SalesAnalyticService} from "../../../services/analytics-services/sales-analytic.service";
 import {InventoryAnalyticService} from "../../../services/analytics-services/inventory-analytic.service";
 import {AccountingAnalyticService} from "../../../services/analytics-services/accounting-analytic.service";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [],
+  imports: [
+    SidebarComponent
+  ],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css'
 })

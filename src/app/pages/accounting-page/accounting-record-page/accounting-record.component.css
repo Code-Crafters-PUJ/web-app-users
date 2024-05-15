@@ -1,56 +1,55 @@
 .header-container {
-    text-align: left; 
-    margin-top: 1em;
+    text-align: left;
+    margin-top: 2em;
     margin-bottom: 1em;
-    padding-left: 65px;
+    padding-left: 8px;
   }
-  
+
 .table-custom-primary {
     width: 100%;
     border: none;
     margin-bottom: 1em;
   }
-  
+
   .table-custom-primary thead {
     background-color: #2b2e4a;
     color: white;
   }
-  
+
   .table-custom-primary th,
   .table-custom-primary td {
     padding: 1px;
     border: none;
-    text-align: center; 
+    text-align: center;
   }
-  
+
   .table-custom-primary th {
-    min-width: 100px; 
+    min-width: 100px;
   }
-  
+
   .table-custom-primary tr:nth-child(even) {
     background-color: #f2f2f2;
   }
-  
+
   .table-custom-primary tr:hover {
     background-color: #ddd;
   }
 
   .accordion-item {
-    width: auto;
-    max-width: 90%;
-    margin-left: auto; 
-    margin-right: auto;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
     margin-bottom: 30px;
     text-align: center;
   }
-  
+
   .pagination-controls {
     display: flex;
     justify-content: start;
     align-items: center;
     margin: 5px;
   }
-  
+
   .pagination-controls .btn {
     border-radius: none;
     margin: 0 5px;
@@ -59,12 +58,11 @@
     border: none;
     cursor: pointer;
   }
-  
+
   .pagination-controls .btn:hover {
     background-color: #d3d4d9;
   }
-  
+
   .pagination-controls .btn i {
     margin: 0 5px;
   }
-  

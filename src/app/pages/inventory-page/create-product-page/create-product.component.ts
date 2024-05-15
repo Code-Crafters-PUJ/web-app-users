@@ -7,6 +7,8 @@ import {ProductService} from "../../../services/inventory-services/product/produ
 import Swal from "sweetalert2";
 import {branchProductInventory} from "../../../models/Inventory/branchProductInventory";
 import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
+
 
 @Component({
   selector: 'app-create-product',
@@ -14,7 +16,8 @@ import {branchesProductTemplate} from "../../../models/Inventory/branchesProduct
   imports: [
     NgForOf,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SidebarComponent
   ],
   templateUrl: './create-product.component.html',
   styleUrl: './create-product.component.css'

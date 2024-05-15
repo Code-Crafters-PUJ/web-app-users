@@ -1,14 +1,17 @@
+
 import { Component, OnInit } from '@angular/core';
 import { BillService } from '../../../services/sales-services/bill.service';
 import { SucursalService } from '../../../services/sales-services/sucursal.service';
 import { branch } from '../../../models/Inventory/branch';
 import { bill } from '../../../models/sales-models/bill';
 import { CommonModule } from '@angular/common';
+import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
+
 
 @Component({
   selector: 'app-show-all-bills',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,SidebarComponent],
   templateUrl: './show-all-bills.component.html',
   styleUrl: './show-all-bills.component.css'
 })

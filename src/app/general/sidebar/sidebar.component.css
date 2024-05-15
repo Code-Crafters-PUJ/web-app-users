@@ -1,19 +1,30 @@
-a{
-  border: none;
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-}
-a:hover{
-  color: #FFC107;
+.offcanvas-body {
+  text-align: center;
 }
 
-p{
-  margin-left: 6%;
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  font-size: x-large;
+.logo-container {
+  text-align: center;
 }
 
-.title{
-  font-size: xx-large;
+.user-container {
+  text-align: center;
 }
+
+a {
+  text-decoration: none;
+  color: var(--bs-secondary);
+}
+
+.active {
+  font-weight: bold;
+}
+
+.bottom-section {
+  margin-top: auto;
+  padding-bottom: 1rem;
+}
+
+
+
+
+
