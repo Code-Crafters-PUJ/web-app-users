@@ -87,6 +87,9 @@ export class AccountingRecordComponent implements OnInit {
     this.recordsService.getPasivos().subscribe(pasivos => {
       this.data.pasivos = pasivos;
     });
+    this.recordsService.getCapitalContable().subscribe(capital =>{
+      this.data.capital = capital;
+    });
     this.recordsService.getTransaccionesBancarias().subscribe(transacciones => {
       this.data.transacciones = transacciones;
     });
