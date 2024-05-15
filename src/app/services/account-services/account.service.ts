@@ -395,8 +395,8 @@ export class AccountService {
       {
         email: 'kadjf@kjsdn',
         password: 'jsnkdjnewrk4j',
-        name: 'Fabio',
-        lastname: 'cuellar',
+        name: 'Laura',
+        lastname: 'Martinez',
         phone: '284',
         type_id_card: 'C.C',
         id_card: '29384932',
@@ -406,8 +406,8 @@ export class AccountService {
       {
         email: 'kadjf@kjsdn',
         password: 'jsnkdjnewrk4j',
-        name: 'Fabio',
-        lastname: 'cuellar',
+        name: 'Kevin',
+        lastname: 'Gonzalez',
         phone: '284',
         type_id_card: 'C.C',
         id_card: '29384932',
@@ -417,8 +417,8 @@ export class AccountService {
       {
         email: 'kadjf@kjsdn',
         password: 'jsnkdjnewrk4j',
-        name: 'Fabio',
-        lastname: 'cuellar',
+        name: 'Maria',
+        lastname: 'Morales',
         phone: '284',
         type_id_card: 'C.C',
         id_card: '29384932',
@@ -439,7 +439,7 @@ export class AccountService {
       {
         email: 'kadjf@kjsdn',
         password: 'jsnkdjnewrk4j',
-        name: 'Fabio',
+        name: 'Pablo',
         lastname: 'cuellar',
         phone: '284',
         type_id_card: 'C.C',
@@ -450,8 +450,8 @@ export class AccountService {
       {
         email: 'kadjf@kjsdn',
         password: 'jsnkdjnewrk4j',
-        name: 'Fabio',
-        lastname: 'cuellar',
+        name: 'Lina',
+        lastname: 'Rojas',
         phone: '284',
         type_id_card: 'C.C',
         id_card: '29384932',
@@ -461,8 +461,8 @@ export class AccountService {
       {
         email: 'kadjf@kjsdn',
         password: 'jsnkdjnewrk4j',
-        name: 'Fabio',
-        lastname: 'cuellar',
+        name: 'Santiago',
+        lastname: 'Salazar',
         phone: '284',
         type_id_card: 'C.C',
         id_card: '29384932',
@@ -517,7 +517,6 @@ export class AccountService {
     ];
     return of(accounts);
     //return this.http.get(environment.baseURL + "/accounts/" + companyId);
-
   }
 
   getAllModulesByCompany(companyId: number) {
