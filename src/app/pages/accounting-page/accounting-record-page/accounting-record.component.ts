@@ -1,14 +1,9 @@
-<<<<<<< Updated upstream
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
-import { SidebarComponent } from '../../../general/sidebar/sidebar.component';
-=======
 import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { SidebarComponent } from '../../../general/sidebar/sidebar.component';
 import { RecordsService  } from '../../../services/accounting-services/records/records.service';
 import { Ventas, Compras, Gastos, CuentasPorCobrar, CuentasPorPagar, Activos, Pasivos, CapitalContable, TransaccionBancaria, Impuestos, AsuntosContables, EstadosFinancieros } from '../../../Models/accounting/records';
->>>>>>> Stashed changes
+
 
 @Component({
   selector: 'app-accounting-record',
@@ -17,10 +12,7 @@ import { Ventas, Compras, Gastos, CuentasPorCobrar, CuentasPorPagar, Activos, Pa
   templateUrl: './accounting-record.component.html',
   styleUrl: './accounting-record.component.css'
 })
-<<<<<<< Updated upstream
-export class AccountingRecordComponent {
 
-=======
 export class AccountingRecordComponent implements OnInit {
   data: {
     compras: Compras[];
