@@ -1,17 +1,20 @@
 <div class="container-fluid container-menu-custom mt-3">
-  <button class="btn btn-custom-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  <button class="btn btn-custom-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample">
     <i class="fas fa-bars"></i>
   </button>
 </div>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color: #EBF6FF">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel"
+     style="background-color: #EBF6FF">
   <div class="offcanvas-header">
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body d-flex flex-column align-items-center justify-content-between">
     <div class="top-section w-100">
       <div class="logo-container mb-4">
-        <img src="assets/images/logo_sidebar.png" alt="Logo" id="offcanvasExampleLabel" style="width: 200px; height: auto;">
+        <img src="assets/images/logo_sidebar.png" alt="Logo" id="offcanvasExampleLabel"
+             style="width: 200px; height: auto;">
       </div>
       <div class="user-container text-center mb-4">
         <img src="assets/images/user.svg" alt="User" style="width: 150px; height: auto;">
@@ -23,19 +26,24 @@
         <p class="fw-bold">General</p>
         <div class="d-flex flex-column mb-3">
           <a routerLink="/home/admin/general" routerLinkActive="active" class="mb-2">
-            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> General
+            <img src="assets/icons/general_information_icon.png" alt="Icon"
+                 style="width: 30px; height: auto; margin-right: 10px;"> General
           </a>
           <a routerLink="/home/admin/myaccount" routerLinkActive="active" class="mb-2">
-            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Mi Cuenta
+            <img src="assets/icons/general_information_icon.png" alt="Icon"
+                 style="width: 30px; height: auto; margin-right: 10px;"> Mi Cuenta
           </a>
           <a routerLink="/home/admin/configinfo" routerLinkActive="active" class="mb-2">
-            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Configuración de Información
+            <img src="assets/icons/general_information_icon.png" alt="Icon"
+                 style="width: 30px; height: auto; margin-right: 10px;"> Configuración de Información
           </a>
           <a routerLink="/home/admin/configpayment" routerLinkActive="active" class="mb-2">
-            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Configuración de Pago
+            <img src="assets/icons/general_information_icon.png" alt="Icon"
+                 style="width: 30px; height: auto; margin-right: 10px;"> Configuración de Pago
           </a>
           <a routerLink="/home/admin/accmanagement" routerLinkActive="active" class="mb-2">
-            <img src="assets/icons/general_information_icon.png" alt="Icon" style="width: 30px; height: auto; margin-right: 10px;"> Gestión de Cuentas
+            <img src="assets/icons/general_information_icon.png" alt="Icon"
+                 style="width: 30px; height: auto; margin-right: 10px;"> Gestión de Cuentas
           </a>
         </div>
       </div>
@@ -66,6 +74,7 @@
           </a>
         </div>
       </div>
+
 
       <div class="text-start w-100">
         <p class="fw-bold">Ventas</p>
@@ -139,45 +148,44 @@
 
 <!-- Modal de Configuración
 <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="configModalLabel">Configuración Cuenta</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" value="Felipe" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="surname" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="surname" value="Garcia Castiblanco" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="email" value="felipe@example.com" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">Celular</label>
-            <input type="text" class="form-control" id="phone" value="1234567890" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="company" class="form-label">Empresa</label>
-            <input type="text" class="form-control" id="company" value="MiEmpresa" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" value="123456789">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-      </div>
-    </div>
-  </div>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="configModalLabel">Configuración Cuenta</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
--->
+<div class="modal-body">
+  <form>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="name" value="Felipe" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="surname" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="surname" value="Garcia Castiblanco" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo</label>
+      <input type="email" class="form-control" id="email" value="felipe@example.com" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Celular</label>
+      <input type="text" class="form-control" id="phone" value="1234567890" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="company" class="form-label">Empresa</label>
+      <input type="text" class="form-control" id="company" value="MiEmpresa" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="password" value="123456789">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+</div>
+</div>
+</div>
+</div>-->
