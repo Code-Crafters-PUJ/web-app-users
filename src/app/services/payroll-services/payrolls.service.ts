@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable, of, throwError} from "rxjs";
+import {Observable, of, throwError} from 'rxjs';
+import {catchError } from "rxjs/operators";
 import {Payroll} from "../../models/payroll-models/payroll";
 import {Employee} from "../../models/payroll-models/employee";
 
@@ -8,7 +9,7 @@ import {Employee} from "../../models/payroll-models/employee";
   providedIn: 'root',
 })
 export class PayrollsService {
-  private apiUrl = 'https://localhost:3000/';
+  private apiUrl = 'http://localhost:3000/';
   private payrolls: Payroll[] = [];
   private employees: Employee[] = [
     {
@@ -183,20 +184,29 @@ export class PayrollsService {
   }
 
   addPayroll(payroll: Payroll): Observable<Payroll> {
-    this.payrolls.push(payroll);
-    return of(payroll);
+    /*this.payrolls.push(payroll);
+    return of(payroll);*/
+
+    return this.http.post<Payroll>(`${this.apiUrl}payroll/create`, payroll).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
-    this.employees.push(employee);
-    return of(employee);
+   /* this.employees.push(employee);
+    return of(employee);*/
+
+    return this.http.post<Employee>(`${this.apiUrl}employee/create`, employee).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
+
   }
 
   //servicios para empleados
 
   // Método para obtener empleados
   getEmployees(): Observable<Employee[]> {
-    const simulatedEmployees: Employee[] = [
+    /*const simulatedEmployees: Employee[] = [
       {
         id: 1,
         idCard: '123456789',
@@ -290,13 +300,19 @@ export class PayrollsService {
       }
     ];
 
-    return of(this.employees);
+
+    return of(simulatedEmployees);*/
+
+    console.log(this.http.get<Employee[]>(this.apiUrl + 'employee/all'));
+    return this.http.get<Employee[]>(this.apiUrl + 'employee/all').pipe(
+      catchError(this.handleError)
+    );
   }
 
 
   getPayrollDetails(id: string | null): Observable<any> {
     //return this.http.get(`/api/payroll/${id}`);
-
+/*
     if (id) {
       const payroll = this.payrolls.find(p => p.id === id);
       if (payroll) {
@@ -307,32 +323,69 @@ export class PayrollsService {
     } else {
       return throwError('Invalid ID');
     }
+    */
+
+    if (id) {
+      return this.http.get<Payroll>(`${this.apiUrl}payroll/${id}`).pipe(
+        catchError(this.handleError)  // Manejo de errores
+      );
+    } else {
+      return throwError('Invalid ID');  // Lanzar error si el ID es nulo o inválido
+    }
+
   }
 
   deletePayroll(id: string): Observable<any> {
-    // Simulamos la eliminación filtrando las nóminas que no coincidan con el ID
+    /*// Simulamos la eliminación filtrando las nóminas que no coincidan con el ID
     this.payrolls = this.payrolls.filter(payroll => payroll.id !== id);
-    return of({status: 'success'});
+    return of({status: 'success'});*/
+
+    // La URL incluye el ID de la nómina a eliminar
+    const url = `${this.apiUrl}payroll/delete/${id}`;
+
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
+
+
+
   deleteEmployee(id: string): Observable<any> {
-    this.employees = this.employees.filter(payroll => payroll.id.toString() !== id);
-    return of(null);
+
+
+    // La URL incluye el ID del empleado  a eliminar
+    const url = `${this.apiUrl}employee/delete/${id}`;
+
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
   updatePayrollStatus(id: string, newState: string): Observable<any> {
-    const payroll = this.payrolls.find(p => p.id === id);
+    /*const payroll = this.payrolls.find(p => p.id === id);
     if (payroll) {
       payroll.state = newState;
       return of({status: 'success'});
     } else {
       return throwError('Payroll not found');
-    }
+    }*/
+
+    // La URL incluye el ID de la nómina a actualizar
+    const url = `${this.apiUrl}payroll/update/${id}`;
+    // Crea un objeto que solo contiene el nuevo estado
+    const body = { newState };
+
+    return this.http.put(url, body).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
+
+
   }
 
 
   getEmployeeDetails(id: string | null): Observable<any> {
-    //return this.http.get(`/api/payroll/${id}`);
+    /*//return this.http.get(`/api/payroll/${id}`);
     if (id) {
       const employee = this.employees.find(p => p.id.toString() === id);
       if (employee) {
@@ -342,18 +395,36 @@ export class PayrollsService {
       }
     } else {
       return throwError('Invalid ID');
+    }*/
+
+    if (id) {
+      // Construye la URL incluyendo el ID del empleado
+      const url = `${this.apiUrl}employee/${id}`;
+      return this.http.get<Employee>(url).pipe(
+        catchError(this.handleError)  // Manejo de errores
+      );
+    } else {
+      return throwError('Invalid ID');  // Lanzar un error si el ID es nulo o inválido
     }
+
+
   }
 
 
-  updateEmployee(employeeId: string, updatedEmployee: Employee): Observable<Employee> {
-    const index = this.employees.findIndex(e => e.id.toString() === employeeId);
+  updateEmployee(id: string, updatedEmployee: Employee): Observable<Employee> {
+    /*const index = this.employees.findIndex(e => e.id.toString() === employeeId);
     if (index !== -1) {
       this.employees[index] = updatedEmployee;
       return of(this.employees[index]);
     } else {
       return throwError(`Employee with ID ${employeeId} not found`);
-    }
+    }*/
+
+    // Construye la URL incluyendo el ID del empleado
+    const url = `${this.apiUrl}employee/update/${id}`;
+    return this.http.put<Employee>(url, updatedEmployee).pipe(
+      catchError(this.handleError)  // Manejo de errores
+    );
   }
 
   // Método para manejar errores de la solicitud HTTP

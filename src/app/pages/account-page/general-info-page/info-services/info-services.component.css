@@ -1,0 +1,15 @@
+p{
+    font-weight: 300;
+    font-size: small;
+    margin-bottom: 0;
+}
+
+a{
+    font-weight: 500;
+    font-size: small;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-secondary);
+    border-color: var(--bs-secondary);
+  }

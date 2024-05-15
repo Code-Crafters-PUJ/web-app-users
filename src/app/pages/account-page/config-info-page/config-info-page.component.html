@@ -1,8 +1,8 @@
 <div class="d-flex">
 
   <app-sidebar></app-sidebar>
-  
-<div class="container">
+
+  <div class="container">
     <div class="header-container">
       <h1>Info. general</h1>
       <h5>/Config. usuario</h5>
@@ -10,114 +10,136 @@
     <p>Cualquier cambio que hagas se aplicará a tus cuentas de StockWage.</p>
 
 
-    <form class="mt-3" action="tu_accion" method="POST">
-        <h5 class="col-12 col-md-12 text-md-start text-center">Configuración de perfil</h5>
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Nombre</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Apellidos</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
-        </div>
-  
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Cargo</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Correo electrónico</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
-        </div>
-  
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Teléfono</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Celular</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+    <form class="mt-3">
+      <h5 class="col-12 col-md-12 text-md-start text-center">Configuración de perfil</h5>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newEmployeeName" class="form-label">Nombre</label>
+          <input type="text" id="newEmployeeName" [(ngModel)]="rootProfile.name" name="newEmployeeName" class="form-control" required>
         </div>
 
-        <hr>
-
-        <h5 class="col-12 col-md-12 text-md-start text-center">Configuración de empresa</h5>
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">Industria</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Negocio</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+        <div class="col-md-4">
+          <label for="newEmployeeLastName" class="form-label">Apellidos</label>
+          <input type="text" id="newEmployeeLastName" [(ngModel)]="rootProfile.lastname" name="newEmployeeLastName" class="form-control" required>
         </div>
-  
-        <div class="row mb-5">
-          <div class="col-md-4">
-            <label for="nombreEmpleadoNuevo" class="form-label">NIT</label>
-            <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-          </div>
-    
-          <div class="col-md-4">
-            <label for="apellidoEmpleadoNuevo" class="form-label">Número de empleados</label>
-            <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-          </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newEmployeeTypeCardId" class="form-label">Tipo de documento</label>
+          <input type="text" id="newEmployeeTypeCardId" [(ngModel)]="rootProfile.typeCardId" name="newEmployeeTypeCardId" class="form-control" required>
         </div>
 
-        <hr>
+        <div class="col-md-4">
+          <label for="newEmployeeCardId" class="form-label">Número de documento</label>
+          <input type="text" id="newEmployeeCardId" [(ngModel)]="rootProfile.cardId" name="newEmployeeCardId" class="form-control" required>
+        </div>
+      </div>
 
-        <h5 class="col-12 col-md-12 text-md-start text-center">Sucursales / Almacenes</h5>
-        <div class="row mb-3">
-            <div class="col-md-4">
-              <label for="nombreEmpleadoNuevo" class="form-label">Dirección</label>
-              <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-            </div>
-      
-            <div class="col-md-4">
-              <label for="apellidoEmpleadoNuevo" class="form-label">Nombre</label>
-              <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
-            </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="newEmployeeEmail" class="form-label">Correo electrónico</label>
+          <input type="text" id="newEmployeeEmail" [(ngModel)]="rootProfile.email" name="newEmployeeEmail" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="newEmployeePhone" class="form-label">Teléfono</label>
+          <input type="text" id="newEmployeePhone" [(ngModel)]="rootProfile.phone" name="newEmployeePhone" class="form-control" required>
+        </div>
+      </div>
+
+      <hr>
+
+      <h5 class="col-12 col-md-12 text-md-start text-center">Configuración de empresa</h5>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="companyIndustry" class="form-label">Industria</label>
+          <input type="text" id="companyIndustry" [(ngModel)]="company.businessArea" name="companyIndustry" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="companyName" class="form-label">Negocio</label>
+          <input type="text" id="companyName" [(ngModel)]="company.name" name="companyName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <label for="companyNIT" class="form-label">NIT</label>
+          <input type="text" id="companyNIT" [(ngModel)]="company.NIT" name="companyNIT" class="form-control" disabled>
+        </div>
+
+        <div class="col-md-4">
+          <label for="companyEmployeesNumber" class="form-label">Número de empleados</label>
+          <input type="text" id="companyEmployeesNumber" [(ngModel)]="company.employeeNumber" name="companyEmployeesNumber" class="form-control" required>
+        </div>
+      </div>
+
+      <hr>
+
+      <h5 class="col-12 col-md-12 text-md-start text-center">Sucursales / Almacenes</h5>
+      <div *ngFor="let branch of branches; let i = index" class="row mb-3 align-items-end">
+        <div class="col-md-2">
+          <label for="branchId-{{i}}" class="form-label">Id</label>
+          <input type="text" id="branchId-{{i}}" name="branchId-{{i}}" class="form-control" [(ngModel)]="branch.id" disabled>
+        </div>
+        <div class="col-md-4">
+          <label for="branchAddress-{{i}}" class="form-label">Dirección</label>
+          <input type="text" id="branchAddress-{{i}}" name="branchAddress-{{i}}" class="form-control"  [(ngModel)]="branch.address">
+        </div>
+        <div class="col-md-4">
+          <label for="branchName-{{i}}" class="form-label">Nombre</label>
+          <input type="text" id="branchName-{{i}}" name="branchName-{{i}}" class="form-control" [(ngModel)]="branch.name" >
         </div>
         <div class="col-md-2">
-            <button class="btn btn-secondary py-2">Nueva sucursal</button>
-          </div>
-        <hr>
+          <button class="btn btn-danger py-2" (click)="deleteBranch(branch.id)">Eliminar sucursal</button>
+        </div>
+      </div>
 
-        <h5 class="col-12 col-md-12 text-md-start text-center">Cambio de contraseña</h5>
+      <div class="col-md-2">
+        <button class="btn btn-secondary py-2" (click)="addNewBranch()">Nueva sucursal</button>
+      </div>
+
+      <hr>
+      <div class="col-md-12 align-items-center">
+        <button class="btn btn-primary py-3 mx-auto" type="submit" (click)="updateConfigInfo()">Guardar cambios</button>
+      </div>
+
+      <hr>
+
+      <h5 class="col-12 col-md-12 text-md-start text-center">Cambio de contraseña</h5>
+      <!-- checkbox for update password-->
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [(ngModel)]="enablePasswordChange" (click)="showPasswordChange()" name="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Habilitar cambio de contraseña</label>
+      </div>
+      <div *ngIf="enablePasswordChange" >
         <div class="row mb-5">
-            <div class="col-md-4">
-              <label for="nombreEmpleadoNuevo" class="form-label">Nueva Contraseña</label>
-              <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col-md-4">
-              <label for="nombreEmpleadoNuevo" class="form-label">Repetir Contraseña</label>
-              <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col-md-4">
-              <label for="nombreEmpleadoNuevo" class="form-label">Contraseña Actual</label>
-              <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
-            </div>
-        </div>
-        <hr>
-          <div class="col-md-12 align-items-center">
-            <button class="btn btn-primary py-3 mx-auto">Guardar cambios</button>
+          <div class="col-md-4">
+            <label for="newPassword" class="form-label">Nueva Contraseña</label>
+            <input type="password" id="newPassword" [(ngModel)]="pass.newPassword" name="newPassword" class="form-control" required>
           </div>
-      </form>
-    
-</div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <label for="newPasswordConfirmation" class="form-label">Repetir Contraseña</label>
+            <input type="password" id="newPasswordConfirmation" [(ngModel)]="pass.confirmPassword" name="newPasswordConfirmation" class="form-control" required>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <label for="actualPassword" class="form-label">Contraseña Actual</label>
+            <input type="password" id="actualPassword" [(ngModel)]="pass.actualPassword" name="actualPassword" class="form-control" required>
+          </div>
+        </div>
+        <div class="row mb-5 align-items-center">
+          <div class="col-md-2">
+            <button class="btn btn-primary" (click)="changePassword()">Cambiar contraseña</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
 </div>
