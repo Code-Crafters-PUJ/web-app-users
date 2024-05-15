@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AccountingAnalyticService {
 
-  private apiUrl = 'http://localhost:3000/accounting';
+  private apiUrl = 'http://10.43.101.58:8081/accounting';
 
   constructor(private http: HttpClient ) { }
 

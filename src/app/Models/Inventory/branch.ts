@@ -1,4 +1,5 @@
-import {branchProductInventory} from "./branchProductInventory";
+import { branchProductInventory } from "../../models/Inventory/branchProductInventory";
+
 
 export interface branch{
   id: number;

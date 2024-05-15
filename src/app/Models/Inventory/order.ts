@@ -1,4 +1,5 @@
-import {branchOrder} from "./branchOrder";
+import { branchOrder } from "../../models/Inventory/branchOrder";
+
 
 export interface order{
   productName: string;

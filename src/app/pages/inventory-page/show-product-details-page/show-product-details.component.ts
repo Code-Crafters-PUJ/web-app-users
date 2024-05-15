@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CreateProductComponent} from "../create-product-page/create-product.component";
-import {product} from "../../../Models/Inventory/product";
+import {product} from "../../../models/Inventory/product";
 import {FormsModule} from "@angular/forms";
-import {branch} from "../../../Models/Inventory/branch";
+import {branch} from "../../../models/Inventory/branch";
 import {NgForOf} from "@angular/common";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
-import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
+import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {SidebarComponent} from "../../../general/sidebar/sidebar.component";

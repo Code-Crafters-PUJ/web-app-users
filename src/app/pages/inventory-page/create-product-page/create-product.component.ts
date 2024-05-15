@@ -1,12 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {product} from "../../../Models/Inventory/product";
-import {branch} from "../../../Models/Inventory/branch";
+import {product} from "../../../models/Inventory/product";
+import {branch} from "../../../models/Inventory/branch";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
 import Swal from "sweetalert2";
-import {branchProductInventory} from "../../../Models/Inventory/branchProductInventory";
-import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
+import {branchProductInventory} from "../../../models/Inventory/branchProductInventory";
+import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
 
 @Component({
   selector: 'app-create-product',

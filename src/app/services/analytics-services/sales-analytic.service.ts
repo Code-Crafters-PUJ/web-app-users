@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class SalesAnalyticService {
 
-  private apiUrl = 'http://localhost:3000/sales';
+  private apiUrl = 'http://10.43.101.58:8081/sales';
 
   constructor(private http: HttpClient) { }
 

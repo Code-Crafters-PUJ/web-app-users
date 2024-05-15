@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {branch} from "../../../Models/Inventory/branch";
+import {branch} from "../../../models/Inventory/branch";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {product} from "../../../Models/Inventory/product";
-import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
-import {order} from "../../../Models/Inventory/order";
+import {product} from "../../../models/Inventory/product";
+import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
+import {order} from "../../../models/Inventory/order";
 
 @Injectable({
   providedIn: 'root'

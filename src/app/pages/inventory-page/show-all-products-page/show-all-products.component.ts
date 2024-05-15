@@ -5,12 +5,12 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {branch} from "../../../Models/Inventory/branch";
+import {branch} from "../../../models/Inventory/branch";
 import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
-import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
-import {order} from "../../../Models/Inventory/order";
+import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
+import {order} from "../../../models/Inventory/order";
 import Swal from "sweetalert2";
-import {branchOrder} from "../../../Models/Inventory/branchOrder";
+import {branchOrder} from "../../../models/Inventory/branchOrder";
 
 @Component({
   selector: 'app-show-all-products',

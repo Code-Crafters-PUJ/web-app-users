@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class PayrollAnalyticService {
 
-  private apiUrl = 'http://localhost:3000/payroll';
+  private apiUrl = 'http://10.43.101.58:8081/payroll';
 
   constructor(private http: HttpClient) { }
 

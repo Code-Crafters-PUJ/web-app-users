@@ -9,7 +9,7 @@ import {Employee} from "../../models/payroll-models/employee";
   providedIn: 'root',
 })
 export class PayrollsService {
-  private apiUrl = 'http://localhost:3000/';
+  private apiUrl = 'http://10.43.101.58:8081/';
   private payrolls: Payroll[] = [];
   private employees: Employee[] = [
     {
