@@ -238,11 +238,8 @@ export class ConfigInfoPageComponent implements OnInit {
 
     this.accountService.changePassword(this.companyId, this.pass.newPassword, this.pass.actualPassword).subscribe((response) => {
       if (response) {
-        console.log('Password changed1', this.enablePasswordChange);
         this.showPasswordChange();
-        console.log('Password changed2', this.enablePasswordChange);
         this.enablePasswordChange = false;
-        console.log('Password changed3', this.enablePasswordChange);
         Swal.fire(
           'Contraseña actualizada',
           'La contraseña se ha actualizado correctamente',
@@ -258,7 +255,7 @@ export class ConfigInfoPageComponent implements OnInit {
       } else {
         Swal.fire(
           'Error',
-          'La contraseña actual es incorrecta',
+          'Ops! Algo salió mal, verifica que la contraseña actual sea correcta',
           'error'
         );
       }

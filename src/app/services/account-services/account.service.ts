@@ -283,8 +283,18 @@ export class AccountService {
   }
 
   changePassword(companyId: number, newPassword: string, actualPassword: string): Observable<any> {
+    let root :any;
+    this.getRootAccount(companyId).subscribe(profile => {
+      if (profile.password === actualPassword) {
+        root = profile;
+        profile.password = newPassword;
+         return this.updateRootAccount(profile);
 
-    let okActualPassword = false;
+      }
+      else{
+        return of(false);
+      }
+    });
     //answer = this.http.post(environment.baseURL + "/changePassword", {companyId, newPassword, actualPassword});
     return of(true);
   }
