@@ -1,4 +1,4 @@
-import {product} from "../../models/Inventory/product";
+import {product} from "./product";
 
 export interface branchProductInventory {
   product: product;

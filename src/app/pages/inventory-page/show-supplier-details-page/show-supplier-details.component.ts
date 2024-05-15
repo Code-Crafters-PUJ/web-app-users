@@ -40,6 +40,7 @@ export class ShowSupplierDetailsComponent implements OnInit{
     {value: supplierType.ORGANIZACION, text: 'Organización'},
     {value: supplierType.FUNDACION, text: 'Fundación'}
   ];
+  orders: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -57,7 +58,13 @@ export class ShowSupplierDetailsComponent implements OnInit{
         this.supplier = supplier;
       });
     }
+    this.supplierService.getOrdersBySupplierId(this.supplierId, this.companyId).subscribe(orders => {
+      this.orders = orders;
+      console.log(this.orders);
+
+    });
     sessionStorage.removeItem('supplierId');
+
   }
 
   saveSupplierChanges() {
@@ -129,5 +136,14 @@ export class ShowSupplierDetailsComponent implements OnInit{
         default:
           return 'Desconocido';
       }
+  }
+
+  calcularTotal(order: any) {
+    let total = 0;
+    let cost = order.costPrice;
+    order.branchOrders.forEach((branchOrder: { quantity: number; costPrice: number; }) => {
+      total += branchOrder.quantity * cost;
+    });
+    return total;
   }
 }

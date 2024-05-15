@@ -35,3 +35,10 @@ input{
   margin-left: 5%;
 }
 
+
+table td:first-child, table th:first-child {
+  display: none;
+}
+
+
+

@@ -6,8 +6,9 @@ import {branch} from "../../../models/Inventory/branch";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
 import Swal from "sweetalert2";
 import {branchProductInventory} from "../../../models/Inventory/branchProductInventory";
-import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
+import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
 import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
+import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
 
 
 @Component({
@@ -37,16 +38,17 @@ export class CreateProductComponent implements OnInit{
   }
   productBranches: branchProductInventory[] = [];
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private supplierService: SupplierService
   ) {
 
   }
 
   ngOnInit(): void {
-    this.productService.generateproductId().subscribe(id => {
+    this.supplierService.generateproductId().subscribe(id => {
       this.newProduct.id = id;
     });
-    this.productService.getAllBranchesNames().subscribe(branches => {
+    this.supplierService.getAllBranchesNames().subscribe(branches => {
       this.branchesNames = branches;
       this.branchesNames.forEach(branchName => {
         this.branchesProducts.push({
@@ -76,7 +78,7 @@ export class CreateProductComponent implements OnInit{
         });
         return;
       }
-      this.productService.createProduct(this.newProduct, branchesProducts).subscribe(result => {
+      this.supplierService.createProduct(this.newProduct, branchesProducts).subscribe(result => {
         if (result) {
           Swal.fire({
             title: '¡Producto creado!',

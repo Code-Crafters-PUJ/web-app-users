@@ -5,10 +5,11 @@ import {FormsModule} from "@angular/forms";
 import {branch} from "../../../models/Inventory/branch";
 import {NgForOf} from "@angular/common";
 import {ProductService} from "../../../services/inventory-services/product/product.service";
-import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
+import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {SidebarComponent} from "../../../general/sidebar/sidebar.component";
+import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
 
 @Component({
   selector: 'app-show-product-details',
@@ -38,6 +39,7 @@ export class ShowProductDetailsComponent implements OnInit {
   total=0;
   constructor(
     private productService: ProductService,
+    private supplierService: SupplierService,
     private router: Router
   ) {
 
@@ -48,13 +50,13 @@ export class ShowProductDetailsComponent implements OnInit {
     const productIdString = sessionStorage.getItem('productId');
     if (productIdString !== null) {
       this.productId = parseInt(productIdString);
-      this.productService.getProductById(this.productId).subscribe((product) => {
+      this.supplierService.getProductById(this.productId).subscribe((product) => {
         this.product = product;
       });
 
       //Get all branches and set them enabled or disabled depending if they have the product
-      this.productService.getAllBranchesByCompany(1).subscribe((allBranches) => {
-        this.productService.getAllBranchesByProduct(this.productId).subscribe((productBranches) => {
+      this.supplierService.getAllBranchesByCompany(1).subscribe((allBranches) => {
+        this.supplierService.getAllBranchesByProduct(this.productId).subscribe((productBranches) => {
           //Create a map of branches with products
           const productBranchNames = productBranches.map((b) => b.branchName);
           // Start all branches, but only enable those that have the product
@@ -98,7 +100,7 @@ export class ShowProductDetailsComponent implements OnInit {
         });
         return;
       }
-      this.productService.updateProduct(product, enabledBranches).subscribe(result => {
+      this.supplierService.updateProduct(product, enabledBranches).subscribe(result => {
         if (result) {
           Swal.fire({
             title: 'Producto actualizado',
@@ -125,7 +127,7 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
   deleteProduct(productId: number) {
-    this.productService.deleteProduct(productId).subscribe(() => {
+    this.supplierService.deleteProduct(productId).subscribe(() => {
       this.router.navigate(['home/inventory/show/product/all']);
     });
 

@@ -7,8 +7,8 @@ import {ProductService} from "../../../services/inventory-services/product/produ
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {branch} from "../../../models/Inventory/branch";
 import {SupplierService} from "../../../services/inventory-services/supplier/supplier.service";
-import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
-import {order} from "../../../models/Inventory/order";
+import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
+import {order} from "../../../Models/Inventory/order";
 import Swal from "sweetalert2";
 import {branchOrder} from "../../../models/Inventory/branchOrder";
 
@@ -58,7 +58,7 @@ export class ShowAllProductsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productService.getAllBranchesByCompany(1).subscribe(branches => {
+    this.supplierService.getAllBranchesByCompany(1).subscribe(branches => {
       this.branches = branches;
       this.initializePagination();
     });
@@ -125,7 +125,7 @@ export class ShowAllProductsComponent implements OnInit{
     // If the component is disabled, reload or update information
     if (disabled) {
       // Reload branches or product information
-      this.productService.getAllBranchesByCompany(1).subscribe((branches) => {
+      this.supplierService.getAllBranchesByCompany(1).subscribe((branches) => {
         this.branches = branches;
         this.initializePagination();
       });
@@ -140,10 +140,10 @@ export class ShowAllProductsComponent implements OnInit{
     this.supplierService.getAllSuppliersByCompany(1).subscribe((suppliers) => {
       this.supplierOptions = suppliers.map(supplier => supplier.name);
     });
-    this.productService.getAllProductsByCompany(1).subscribe((products) => {
+    this.supplierService.getAllProductsByCompany(1).subscribe((products) => {
       this.productOptions = products.map(product => product.name);
     });
-    this.productService.getAllBranchesNames().subscribe(branches => {
+    this.supplierService.getAllBranchesNames().subscribe(branches => {
       this.branchesNames = branches;
       this.branchesNames.forEach(branchName => {
         this.sucursalOrder.push({
@@ -186,7 +186,7 @@ export class ShowAllProductsComponent implements OnInit{
   sendOrder(){
     if(this.validateOrder()){
       this.productOrder.branchOrders = this.sucursalOrder.filter(branchOrder => branchOrder.enabled);
-      this.productService.sendOrder(this.productOrder).subscribe((result) => {
+      this.supplierService.sendOrder(this.productOrder).subscribe((result) => {
         if (result){
           Swal.fire({
             title: '¡Éxito!',

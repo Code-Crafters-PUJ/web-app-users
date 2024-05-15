@@ -5,8 +5,10 @@ import {branch} from "../../../models/Inventory/branch";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {product} from "../../../models/Inventory/product";
-import {branchesProductTemplate} from "../../../models/Inventory/branchesProductTemplate";
-import {order} from "../../../models/Inventory/order";
+import {branchesProductTemplate} from "../../../Models/Inventory/branchesProductTemplate";
+import {order} from "../../../Models/Inventory/order";
+import {branchOrder} from "../../../models/Inventory/branchOrder";
+import {SupplierService} from "../supplier/supplier.service";
 
 @Injectable({
   providedIn: 'root'
@@ -126,9 +128,30 @@ export class ProductService {
       ]
     },
   ];
+  orders:order[]=[];
+  order ={
+  productName: 'Producto 1',
+  supplierName: 'Ana Perez',
+  costPrice: 25,
+  purchaseDate: 2024-15-12,
+  branchOrders: [
+    {
+      branchName: 'Sucursal 1',
+      quantity: 10
+    },
+    {
+      branchName: 'Sucursal 2',
+      quantity: 5
+    },
+    {
+      branchName: 'Sucursal 3',
+      quantity: 20
+    }
 
+  ],
+}
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getAllBranchesByCompany(id: number): Observable<branch[]> {
@@ -311,10 +334,23 @@ export class ProductService {
             answer = false;
           }
         });
+        console.log("En este momento en product service las ordenes son: ", this.orders);
+        this.orders.push(orderProducts);
+        console.log("Ahora en este momento en product service las ordenes son: ", this.orders);
       }else {
         console.error('Product not found');
         answer = false;
       }
     return of(answer);
+  }
+
+  getOrdersBySupplierId(supplierId:any, companyId: number): Observable<order[]> {
+    //return this.http.get<order[]>(`${environment.baseURL}/get/orders/${companyId}`);
+    //return this.http.get<order[]>(`https://localhost:7071/api/orders/${companyId}`);
+    //Get supplier name
+
+
+    let ord = this.orders.filter(order => order.supplierName === supplierId);
+    return of(ord);
   }
 }
