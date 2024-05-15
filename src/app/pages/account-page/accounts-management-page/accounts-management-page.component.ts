@@ -51,11 +51,11 @@ export class AccountsManagementPageComponent {
   }
 
   ngOnInit(): void {
-    let companyString = sessionStorage.getItem('companyId');
+    let companyString = sessionStorage.getItem('id_company');
     if (companyString) {
       this.companyId = parseInt(companyString);
     }
-    let userString = sessionStorage.getItem('userId');
+    let userString = sessionStorage.getItem('id_account');
     if (userString) {
       this.userId = parseInt(userString);
     }

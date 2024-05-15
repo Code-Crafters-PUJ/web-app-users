@@ -35,7 +35,7 @@ export class InfoProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let companyIdString = sessionStorage.getItem('companyId');
+    let companyIdString = sessionStorage.getItem('id_company');
     if (companyIdString != null) {
       this.companyId = parseInt(companyIdString);
     }
@@ -46,6 +46,7 @@ export class InfoProfileComponent implements OnInit {
     });
     this.accountService.getRootAccount(this.companyId).subscribe(account => {
       this.rootAccount = account;
+      this.rootAccount.role = 'Administrador';
     });
 
 

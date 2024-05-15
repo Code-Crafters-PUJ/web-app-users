@@ -34,7 +34,7 @@ export class InfoPlanComponent implements OnInit {
 
 
   ngOnInit(): void {
-    let companyIdString = sessionStorage.getItem('companyId');
+    let companyIdString = sessionStorage.getItem('id_company');
     if(companyIdString != null){
       this.companyId = parseInt(companyIdString);
     }

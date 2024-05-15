@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../../../../services/account-services/account.service";
-import {SubscriptionBilling} from "../../../../Models/user-models/subscriptionBilling";
 import {NgForOf} from "@angular/common";
+import { SubscriptionBilling } from '../../../../models/user-models/subscriptionBilling';
 
 @Component({
   selector: 'app-historic',
@@ -22,7 +22,7 @@ export class HistoricComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    let companyIdString = sessionStorage.getItem('companyId');
+    let companyIdString = sessionStorage.getItem('id_company');
     if(companyIdString != null){
       this.companyId = parseInt(companyIdString);
     }

@@ -1,5 +1,5 @@
 
-<div class="d-flex justify-content-center p-5">
+<div class="f d-flex justify-content-center p-5">
     <div class="container">
     
         <!-- Logo -->
@@ -9,13 +9,13 @@
         <h5 class="col-12 col-md-12 text-md-start text-center">Explora nuevas formas de conectar con tus clientes comerciales</h5>
       
       
-        <form class="mt-3" action="tu_accion" method="POST">
+        <form class="mt-3" (ngSubmit)="continue()" #userForm="ngForm">
       
             <div class="row mb-3">
                 <h5 class="col-12 col-md-12 text-md-start text-center">Descuentos</h5>
                 <div class="col-md-6">
-                    <label for="nombreEmpleadoNuevo" class="form-label">Cupón</label>
-                    <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
+                    <label for="coupon" class="form-label">Cupón</label>
+                    <input type="text" id="coupon" name="coupon" class="form-control" required>
                 </div>
         
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
@@ -29,31 +29,31 @@
             <div class="m-5">
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="masculinoEmpleadoNuevo">VISA</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="masculinoEmpleadoNuevo" value="masculino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="VISA" value="VISA" required>
                 </div>
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="femeninoEmpleadoNuevo">MasterCard</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="MasterCard" value="MasterCard" required>
                 </div>
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="femeninoEmpleadoNuevo">American Express</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="American" value="American" required>
                 </div>
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="femeninoEmpleadoNuevo">PSE</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="PSE" value="PSE" required>
                 </div>
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="femeninoEmpleadoNuevo">Dinners Club</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="Dinners" value="Dinners" required>
                 </div>
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="femeninoEmpleadoNuevo">Paypal</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="Paypal" value="Paypal" required>
                 </div>
                 <div class="form-check-inline text-center">
                     <label class="form-check-label" for="femeninoEmpleadoNuevo">Efecty</label><br>
-                    <input class="form-check-input" type="radio" name="sexo" id="femeninoEmpleadoNuevo" value="femenino" required>
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="Efecty" value="Efecty" required>
                 </div>
             </div>
     
@@ -61,27 +61,40 @@
           <div class="row mb-5">
             <h5 class="col-12 col-md-12 text-md-start text-center">Datos del titular</h5>
             <div class="col-md-6">
-              <label for="nombreEmpleadoNuevo" class="form-label">Nombre del titular</label>
-              <input type="text" id="nombreEmpleadoNuevo" name="nombreEmpleadoNuevo" class="form-control" required>
+              <label for="nameMain" class="form-label">Nombre del titular</label>
+              <input type="text" id="nameMain" name="nameMain" class="form-control" required>
             </div>
       
             <div class="col-md-6">
-              <label for="apellidoEmpleadoNuevo" class="form-label">Fecha de expiración</label>
-              <input type="text" id="apellidoEmpleadoNuevo" name="apellidoEmpleadoNuevo" class="form-control" required>
+              <label for="dateEXP" class="form-label">Fecha de expiración</label>
+              <input type="date" id="dateEXP" name="dateEXP" class="form-control" required>
             </div>
           </div>
           <div class="row mb-4">
+
+            <h5 class="col-12 col-md-12 text-md-start text-center">Datos del plan</h5>
+            
+            <div class="col-md-6">
+                  <label for="SubPlanType" class="form-label">Tipo de plan</label>
+                  <select id="SubPlanType" name="SubPlanType" class="form-select" required>
+                      <option value="Anual" data-descripcion="Anual">Anual</option>
+                      <option value="Semestral" data-descripcion="Semestral">Semestral</option>
+                      <option value="Mensual" data-descripcion="Mensual">Mensual</option>
+                  </select>
+                  <p id="descripcion" class="text-muted"></p>
+            </div>
+
     
             <div class="col-md-12">
-                <label for="auxilioNuevoEmpleado" class="form-label d-flex align-items-center">
-                <input type="checkbox" id="auxilioNuevoEmpleado" name="auxilioNuevoEmpleado" class="me-2">
+                <label for="acceptTerms" class="form-label d-flex align-items-center">
+                <input type="checkbox" id="acceptTerms" name="acceptTerms" class="me-2">
                 Al utilizar nuestra pasarela de pagos, usted declara haber leído, comprendido y aceptado los términos y condiciones establecidos en este documento. Además, usted reconoce que el uso continuado de nuestros servicios constituye su aceptación de estos términos y condiciones. Si no está de acuerdo con alguno de estos términos, le rogamos que no utilice nuestros servicios.
                 </label>
             </div>
             </div>
     
             <div class="col-md-12">
-              <button class="btn btn-primary py-3" (click)="continue()">Pagar</button>
+              <button class="btn btn-primary py-3" type="submit">Pagar</button>
             </div>
         </form>
       </div>

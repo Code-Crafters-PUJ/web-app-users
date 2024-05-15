@@ -1,14 +1,12 @@
 <h4>Datos de facturación</h4>
 <h6>Historial de facturación</h6>
-<p>No hay facturas por mostrar</p>
 <div *ngFor="let bill of historic">
   <div class="row">
     <div class="col-md-12">
       <!--TODO: Model correctly the historic and redirect to a pdf bill-->
       <h5>{{ bill.plan }}</h5>
-      <p>FACTURA #</p>
+      <p>FACTURA # {{bill.id }}</p>
       <!--TODO: Redirect to a generate pdf with that specific bill-->
-      <a href="">{{bill.id }}</a>
       <p>FECHA DE INICIO</p>
       <p>{{ bill.initial_date }}</p>
       <p>FECHA DE FINALIZACIÓN</p>
