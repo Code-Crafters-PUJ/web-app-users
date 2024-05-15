@@ -64,6 +64,7 @@ export class ConfigInfoPageComponent implements OnInit {
     this.companyId = 1;
     this.accountService.getRootAccount(this.companyId).subscribe(profile => {
       this.rootProfile = profile;
+      this.rootProfile.role = 'Administrador';
     });
     this.accountService.getCompanyById(this.companyId).subscribe((company) => {
       this.company = company;

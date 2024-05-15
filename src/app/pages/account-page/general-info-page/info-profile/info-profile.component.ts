@@ -46,6 +46,7 @@ export class InfoProfileComponent implements OnInit {
     });
     this.accountService.getRootAccount(this.companyId).subscribe(account => {
       this.rootAccount = account;
+      this.rootAccount.role = 'Administrador';
     });
 
 
