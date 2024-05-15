@@ -1,8 +1,8 @@
 .header-container {
     text-align: left;
-    margin-top: 1em;
+    margin-top: 2em;
     margin-bottom: 1em;
-    padding-left: 65px;
+    padding-left: 8px;
   }
 
 .table-custom-primary {
@@ -36,10 +36,9 @@
   }
 
   .accordion-item {
-    width: auto;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
     margin-bottom: 30px;
     text-align: center;
   }
