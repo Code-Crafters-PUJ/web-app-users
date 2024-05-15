@@ -129,12 +129,10 @@ export class AccountService {
   ];
 
   company: any = {
-    id: 0,
     NIT: '',
     name: '',
     businessArea: '',
     employeeNumber: 0,
-    planId: 0,
   }
   plan: Plan = {
     id: 0,
@@ -204,6 +202,12 @@ export class AccountService {
   ) {
   }
 
+  /**
+   * this method is used to get the actual plan of a company giving the company id
+   * Params sent: companyId
+   * Return a plan
+   * Check the plan model on Models/user-models/plan.ts
+   * */
   getPlanByCompanyId(companyId: number): Observable<Plan> {
     let comp = this.companies.find(company => company.id === companyId);
     if (comp) {
@@ -215,9 +219,16 @@ export class AccountService {
 
     }
     return of(this.plan);
-    //return this.http.get<Plan>(environment.baseURL + "/plan/" + companyId);
+    //return this.http.get<Plan>(environment.baseURL + "company/plan/" + companyId);
   }
 
+
+  /**
+   * this method is used to get all the plans available (get all the plans that stockwage offers)
+   * Params sent: companyId
+   * Return an array/list of plans
+   * Check the plan model on Models/user-models/plan.ts
+   * */
   getAllPlans(): Observable<Plan[]> {
     let plans: Plan[] = this.plans;
     //return this.http.get<Plan[]>(environment.baseURL + "/plans";
@@ -225,6 +236,12 @@ export class AccountService {
 
   }
 
+  /**
+   * this method is used to get the company by the company id
+   * Params sent: companyId
+   * Return a company
+   * Check the company model on Models/user-models/company.ts
+   * */
   getCompanyById(companyId: number): Observable<any> {
     let company = this.companies.find(company => company.id === companyId);
     if (company) {
@@ -234,6 +251,11 @@ export class AccountService {
     //return this.http.get<Company>(environment.baseURL + "/company/" + companyId);
   }
 
+  /**
+   * This method is used to get the root account of a company
+   * Params sent: companyId
+   * Return a profile (the return doesnt have role because the role is always the same)
+   * */
   getRootAccount(companyId: number): Observable<any> {
     let profile = {
       name: "Fabio",
@@ -244,18 +266,24 @@ export class AccountService {
       email: "fabio@kajfn.jslf",
       password: "jsjdf",
       businessNit: "800.328",
-      role: "Administrador"
     }
     return of(profile);
     //return this.http.get<Profile>(environment.baseURL + "/root/" + companyId);
   }
 
+  /**this method is used to get all the branches of a company
+   * Params sent: companyId
+   * Return an array/list of branches
+   * The object contains id, name and address
+   * */
   getAllBranchesByCompany(companyId: number): Observable<any> {
 
     return of(this.branches);
+    //return this.http.get<any[]>(environment.baseURL + "/branches/" + companyId);
   }
 
   changePassword(companyId: number, newPassword: string, actualPassword: string): Observable<any> {
+
     let okActualPassword = false;
     //answer = this.http.post(environment.baseURL + "/changePassword", {companyId, newPassword, actualPassword});
     return of(true);
@@ -264,10 +292,12 @@ export class AccountService {
   deleteBranch(id: number, companyId: number): Observable<any> {
     this.branches.splice(this.branches.findIndex(branch => branch.id === id), 1);
     return of(true);
+    //return this.http.delete(environment.baseURL + "/branch/" + companyId + "/" + id);
   }
 
   generatebranchId(companyId: number) {
     return this.branches.length + 1;
+    //return this.http.get(environment.baseURL + "/branchId/" + companyId);
   }
 
   companyNitExists(NIT: number, companyId: number) {
@@ -276,8 +306,14 @@ export class AccountService {
       return of(true);
     }
     return of(false);
+    //return this.http.get(environment.baseURL + "/company/existance/" + companyId + "/" + NIT);
   }
 
+  /**
+   * this method is used to update the company (All parameters can be changed except nit or id)
+   * Params sent: company
+   * Return a boolean
+   * */
   updateCompany(company: {
     businessArea: string;
     NIT: number;
@@ -293,6 +329,7 @@ export class AccountService {
     }
     this.companies[companyIndex] = company;
     return of(true);
+    //return this.http.put(environment.baseURL + "/company", company);
   }
 
   updateRootAccount(rootProfile: {
@@ -307,6 +344,7 @@ export class AccountService {
     lastname: string
   }) {
     return of(true);
+    //return this.http.put(environment.baseURL + "/root", rootProfile);
   }
 
   updateBranches(branches: { address: string; name: string; id: number }[], companyId: number) {
@@ -326,11 +364,30 @@ export class AccountService {
       }
     });
     return of(true);
+    /*
+    const dbBranches$ = this.getAllBranchesByCompany(companyId);
+    return dbBranches$.pipe(
+      map(dbBranches => {
+        const requests = branches.map(branch => {
+          const existingBranch = dbBranches.find(dbBranch => dbBranch.id === branch.id);
+          return existingBranch ?
+            this.http.put(`${environment.baseURL}/branch`, branch) :
+            this.http.post(`${environment.baseURL}/branch`, branch);
+        });
+        return forkJoin(requests).pipe(
+          map(() => true),
+
+          catchError(() => of(false))
+        );
+      })
+    );
+    * */
   }
 
   getHistoricByCompanyId(companyId: number) {
 
     return of(this.historic);
+    //return this.http.get(environment.baseURL + "/historic/" + companyId);
   }
 
   getAllAccounts(companyId: number) {
@@ -459,28 +516,8 @@ export class AccountService {
 
     ];
     return of(accounts);
+    //return this.http.get(environment.baseURL + "/accounts/" + companyId);
 
-  }
-
-  getPermissions() {
-    let permissions = [
-      {
-        id: 1,
-        name: 'vendedor',
-        description: 'vende'
-      },
-      {
-        id: 2,
-        name: 'contador',
-        description: 'cuenta'
-      },
-      {
-        id: 3,
-        name: 'logistico',
-        description: 'entrega'
-      }
-    ];
-    return of(permissions);
   }
 
   getAllModulesByCompany(companyId: number) {
@@ -496,38 +533,47 @@ export class AccountService {
       }
     ];
     return of(modules);
+    //return this.http.get(environment.baseURL + "/modules/" + companyId);
   }
 
   createAccount(account: Account, modules: any[]) {
     return of(true);
+    //return this.http.post(environment.baseURL + "/account", {account, modules});
   }
 
   verifyCardIdExists(id_card: string) {
     return of(false);
+    //return this.http.get(environment.baseURL + "/cardId/existance/" + id_card);
   }
 
   verifyEmailExists(email: string) {
     return of(false);
+    //return this.http.get(environment.baseURL + "/email/existance/" + email);
   }
 
   getTemporalPassword() {
     let regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     let password = 'Aa123456';
     return of(password);
+    //this.http.get(environment.baseURL + "/temporalPassword");
   }
 
   updateAccount(account: Account, modules: any[]) {
     return of(true);
-
+    //return this.http.put(environment.baseURL + "/account", {account, modules});
   }
 
+  //This method is to verify if the cardId exists on a different account when editing
   verifyCardIdExistsOnEdit(id_card: string, userId: number) {
     return of(false);
+    //return this.http.get(environment.baseURL + "/cardId/existance/" + id_card + "/" + userId);
 
   }
 
+  //This method is to verify if the email exists on a different account when editing
   verifyEmailExistsOnEdit(email: string, userId: number) {
     return of(false);
+    //return this.http.get(environment.baseURL + "/email/existance/" + email + "/" + userId);
   }
 
   getAccountById(id: number) {
@@ -542,9 +588,11 @@ export class AccountService {
       company_NIT: 1,
       role: 'vendedor',
     });
+    //return this.http.get(environment.baseURL + "/account/" + id);
   }
 
   deleteAccount(id_card: string) {
     return of(true);
+    //return this.http.delete(environment.baseURL + "/account/" + id_card);
   }
 }
