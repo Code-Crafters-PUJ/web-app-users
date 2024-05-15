@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Company } from '../../../../models/user-models/company';
 import { AccountService } from '../../../../services/account-services/account.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-info-support',
@@ -50,6 +51,21 @@ export class InfoSupportComponent {
     });
 
 
+  }
+
+  enviarFormulario() {
+
+    const asunto = (<HTMLInputElement>document.getElementById('asuntoInput')).value;
+    const descripcion = (<HTMLInputElement>document.getElementById('descripcionInput')).value;
+    console.log('Asunto:', asunto);
+    console.log('Descripción:', descripcion);
+
+    Swal.fire({
+        icon: 'success',
+        title: '¡Enviado!',
+        text: 'El formulario se ha enviado correctamente.',
+        confirmButtonText: 'Aceptar'
+    });
   }
   
 }
