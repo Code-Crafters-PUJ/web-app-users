@@ -111,6 +111,9 @@ export class ShowAllProductsComponent implements OnInit{
   }
 
   enableProductRegistrer() {
+    if(this.showProductbuy){
+      this.showProductbuy = false;
+    }
     this.showProductRegister = true;
 
   }
@@ -131,6 +134,9 @@ export class ShowAllProductsComponent implements OnInit{
 
 
   enablebuy() {
+    if(this.showProductRegister){
+      this.showProductRegister = false;
+    }
     this.supplierService.getAllSuppliersByCompany(1).subscribe((suppliers) => {
       this.supplierOptions = suppliers.map(supplier => supplier.name);
     });
