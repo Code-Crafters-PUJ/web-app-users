@@ -77,7 +77,7 @@
 
       <div class="col-md-3">
         <label for="direccionEmpleadoNuevo" class="form-label">Direccion</label>
-        <input type="text" id="direccionEmpleadoNuevo" [(ngModel)]="employee.idCard" name="direccionEmpleadoNuevo" class="form-control" required>
+        <input type="text" id="direccionEmpleadoNuevo" [(ngModel)]="employee.address" name="direccionEmpleadoNuevo" class="form-control" required>
       </div>
     </div>
 
@@ -105,10 +105,10 @@
       <div class="col-md-3">
         <label for="educacionNuevoEmpleado" class="form-label">Máximo Nivel de Educación</label>
         <select id="educacionNuevoEmpleado" [(ngModel)]="employee.education.level" name="educacionNuevoEmpleado" class="form-control" required>
-          <option value="mensual">Bachillerato</option>
-          <option value="quincenal">Tecnico</option>
-          <option value="quincenal">Tecnologo</option>
-          <option value="quincenal">Profesional</option>
+          <option value="Bachillerato">Bachillerato</option>
+          <option value="Tecnico">Tecnico</option>
+          <option value="Tecnologo">Tecnologo</option>
+          <option value="Profesional">Profesional</option>
 
         </select>
       </div>
@@ -123,7 +123,7 @@
     <div class="row mb-3">
       <div class="col-md-3">
         <label for="fechaTituloNuevoEmpleado" class="form-label">Fecha de Finalizacion</label>
-        <input type="date" id="fechaTituloNuevoEmpleado" [(ngModel)]="employee.education.endDate" name="fechaTituloNuevoEmpleado" class="form-control" required>
+        <input type="text" id="fechaTituloNuevoEmpleado" [(ngModel)]="employee.education.endDate" name="fechaTituloNuevoEmpleado" class="form-control" required>
       </div>
 
       <div class="col-md-3">
@@ -163,14 +163,14 @@
       <div class="col-md-3">
         <label for="tipoContratoNuevoEmpleado" class="form-label">Tipo de contrato</label>
         <select id="tipoContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].contractType.type" name="tipoContratoNuevoEmpleado" class="form-control" required>
-          <option value="mensual">Termino Indefinido</option>
-          <option value="quincenal">Termino Definido</option>
+          <option value="indefinido">Termino Indefinido</option>
+          <option value="definido">Termino Definido</option>
         </select>
       </div>
 
       <div class="col-md-3">
         <label for="fechaIContratoNuevoEmpleado" class="form-label">Fecha de Inicio</label>
-        <input type="date" id="fechaIContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].startDate" name="fechaIContratoNuevoEmpleado" class="form-control " required>
+        <input type="text" id="fechaIContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].startDate" name="fechaIContratoNuevoEmpleado" class="form-control " required>
       </div>
     </div>
 
@@ -183,7 +183,7 @@
 
       <div class="col-md-3">
         <label for="fechaFContratoNuevoEmpleado" class="form-label">Fecha De finalizacion</label>
-        <input type="date" id="fechaFContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].endDate" name="fechaFContratoNuevoEmpleado" class="form-control " required>
+        <input type="text" id="fechaFContratoNuevoEmpleado" [(ngModel)]="employee.contract[0].endDate" name="fechaFContratoNuevoEmpleado" class="form-control " required>
       </div>
 
     </div>
@@ -266,9 +266,6 @@
     </div>
 
 
-
-
-
     <div class="row mb-3">
       <div class="col-md-3">
         <button type="button" class="btn btn-secondary-border">Generar Nuevo Contrato</button>
@@ -292,12 +289,11 @@
         <button type="submit" class="btn btn-primary"  (click)="onSubmit()"  [disabled]="!employeeForm.valid"  >Guardar Cambios Empleado</button>
       </div>
       <div class="col-md-3">
+
         <button type="button" (click)="deleteEmployee()" class="btn btn-danger-border">Eliminar Empleado</button>
+
       </div>
     </div>
-
-
-
 
   </form>
 </div>

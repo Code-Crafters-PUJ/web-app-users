@@ -1,13 +1,14 @@
-import { Company } from "./company";
-import { Role } from "./role";
-
 export interface Account {
-    id:number;
+
     email:string;
     password:string;
+
+    name: string;
+    lastname: string;
+    phone: string;
+    type_id_card:string;
     id_card:string;
-    last_connection:Date;
-    connected:number;
-    company: Company;
-    roles: Role[]
+    company_NIT: number;
+    
+    role:string;
 }

@@ -124,23 +124,22 @@ export class ShowDetailsEmployeePageComponent implements OnInit {
     }
     return total;
   }
-
-
-  deleteEmployee() {
-    if (confirm('¿Estás seguro de querer eliminar esta nómina?')) {
-      this.payrollsService.deleteEmployee(this.employee.id.toString()).subscribe({
-        next: (response) => {
-          alert('Empleado eliminada con éxito');
+  deleteEmployee(): void {
+    if (!this.employeeId) {
+      alert("No se ha especificado un ID de empleado válido.");
+      return;
+    }
+    if (confirm("¿Estás seguro de que deseas eliminar este empleado?")) {
+      this.payrollsService.deleteEmployee(this.employeeId).subscribe({
+        next: () => {
+          alert("Empleado eliminado con éxito.");
           this.router.navigate(['/home/payroll/show/all/employees']);
         },
-        error: (err) => {
-          console.error('Error al eliminar el Empleado:', err);
+        error: (error) => {
+          console.error('Error deleting employee', error);
+          alert("Error al eliminar el empleado.");
         }
       });
     }
   }
-
-
-
-
 }

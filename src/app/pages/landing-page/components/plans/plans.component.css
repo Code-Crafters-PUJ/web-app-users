@@ -1,0 +1,20 @@
+p, label{
+    font-weight: 200;
+}
+
+.btn{
+    width: 100%;
+}
+
+
+.p-carousel-dot-icon {
+    width: 100%;
+}
+
+::ng-deep pButton 
+{
+  .ui-button.orange-button
+  {
+    background-color: orange
+  }
+}
