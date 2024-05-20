@@ -36,7 +36,6 @@ import { AccountingPageComponent } from './pages/analytics-page/accounting-page/
 import { AccountingRecordComponent } from './pages/accounting-page/accounting-record-page/accounting-record.component';
 import { ElectronicPayrollComponent } from './pages/accounting-page/electronic-payroll-page/electronic-payroll.component';
 import { ElectronicBillComponent } from './pages/accounting-page/electronic-bill-page/electronic-bill.component';
-import {PayrollComponent} from "./pages/payroll-page/payroll.component";
 
 
 export const routes: Routes = [
@@ -104,7 +103,7 @@ export const routes: Routes = [
             { path: 'general', component:AccountingPageComponent },
             { path: 'records', component:AccountingRecordComponent },
             { path: 'electronic/payroll', component:ElectronicPayrollComponent },
-            { path: 'electornic/bill', component:ElectronicBillComponent },
+            { path: 'electronic/bill', component: ElectronicBillComponent },
             { path: '', redirectTo: 'general', pathMatch: 'full' }
         ]
     }
