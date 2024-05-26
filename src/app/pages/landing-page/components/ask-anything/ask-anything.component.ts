@@ -13,38 +13,78 @@ import Swal from 'sweetalert2';
   styleUrl: './ask-anything.component.css'
 })
 export class AskAnythingComponent {
-  
 
-  sendPetition(){
-
-    let data = this.obtainData();
-    console.log(data);
-    if (this.verifyContent(data)){
-      this.handleSuccessfulAuthentication()
-    }else{
-      this.handleFailedAuthentication()
+  sendPetition() {
+    const formData = this.obtainData();
+    if (this.verifyContent(formData)) {
+      if (formData['acceptTerms']) {
+        this.handleSuccessfulAuthentication();
+      } else {
+        Swal.fire({
+          title: 'Aviso',
+          text: 'Debe aceptar la Política de Tratamiento de Datos.',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
+      }
+    } else {
+      this.handleFieldErrors(formData);
     }
   }
 
-  private handleFailedAuthentication() {
-    Swal.fire({
-      title: 'Uppss algo pasó',
-      text: "Error en los datos ingresados, por favor verifique los campos",
-      icon: 'warning',
-      confirmButtonText: 'OK'
-    })
+  private handleFieldErrors(data: { [x: string]: string }) {
+    if (!data['acceptTerms']) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Debe aceptar la Política de Tratamiento de Datos.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    if (!this.isValidEmail(data['email'])) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El correo electrónico ingresado no es válido.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    if (!this.isValidPhone(data['phone'])) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El número de teléfono ingresado no es válido.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    const requiredFields = ['city', 'comoSeEntero', 'email', 'enterprise', 'name', 'phone'];
+    const emptyFields = requiredFields.filter(field => !data[field]);
+
+    if (emptyFields.length > 0) {
+      Swal.fire({
+        title: 'Error',
+        text: `Los siguientes campos son obligatorios: ${emptyFields.join(', ')}`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   }
 
-  private handleSuccessfulAuthentication(){
+  private handleSuccessfulAuthentication() {
     Swal.fire({
       title: '¡Gracias por contactarte con nosotros!',
-      text: "Envío exitoso",
+      text: 'Envío exitoso',
       icon: 'success',
       confirmButtonText: 'OK'
     });
   }
 
-  // Get Data
   private obtainData() {
     const formData = new FormData(document.querySelector('form')!);
     const data: { [key: string]: any } = {};
@@ -58,8 +98,7 @@ export class AskAnythingComponent {
     return data;
   }
 
-  // Verification
-  private verifyContent(data: { [x: string]: string; }) {
+  private verifyContent(data: { [x: string]: string }) {
     const requiredFields = ['acceptTerms', 'city', 'comoSeEntero', 'email', 'enterprise', 'name', 'phone'];
     const isComplete = requiredFields.every(field => data[field]);
 
@@ -67,18 +106,15 @@ export class AskAnythingComponent {
     const isPhoneValid = this.isValidPhone(data['phone']);
 
     return isComplete && isEmailValid && isPhoneValid;
-}
+  }
 
   private isValidEmail(email: string): boolean {
-    
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
-
   }
 
   private isValidPhone(phone: string): boolean {
-      
-      const phoneRegex = /^\d{10}$/;
-      return phoneRegex.test(phone);
+    const phoneRegex = /^\d{7,15}$/;
+    return phoneRegex.test(phone);
   }
 }
