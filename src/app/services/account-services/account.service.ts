@@ -5,6 +5,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {Company} from "../../models/user-models/company";
 import {Account} from "../../models/user-models/account";
+import { PaymentMethod } from '../../models/user-models/paymentMethod';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,37 @@ export class AccountService {
       anual_price: 4000,
       plan_description: 'Descripción 4',
       maxUsers: 40
+    }
+  ];
+
+  paymentMethods: PaymentMethod[] = [
+    {
+      id:1,
+      name:'VISA'
+    },
+    {
+      id:2,
+      name:'MasterCard'
+    },
+    {
+      id:3,
+      name:'American Express'
+    },
+    {
+      id:4,
+      name:'PSE'
+    },
+    {
+      id:5,
+      name:'Dinners Club'
+    },
+    {
+      id:6,
+      name:'Paypal'
+    },
+    {
+      id:7,
+      name:'Efecty'
     }
   ];
 
@@ -234,6 +266,12 @@ export class AccountService {
     //return this.http.get<Plan[]>(environment.baseURL + "/plans";
     return of(plans);
 
+  }
+
+  getAllPMethods():Observable<PaymentMethod[]> {
+    let pm: PaymentMethod[] = this.paymentMethods;
+    //return this.http.get<PaymentMethod[]>(environment.baseURL + "/paymentmethods";
+    return of(pm);
   }
 
   /**

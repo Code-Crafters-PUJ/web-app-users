@@ -27,35 +27,12 @@
             <p class="col-12 col-md-12 text-md-start text-center">Selecciona un método de pago</p>
 
             <div class="m-5">
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="masculinoEmpleadoNuevo">VISA</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="VISA" value="VISA" required>
-                </div>
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="femeninoEmpleadoNuevo">MasterCard</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="MasterCard" value="MasterCard" required>
-                </div>
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="femeninoEmpleadoNuevo">American Express</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="American" value="American" required>
-                </div>
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="femeninoEmpleadoNuevo">PSE</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="PSE" value="PSE" required>
-                </div>
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="femeninoEmpleadoNuevo">Dinners Club</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="Dinners" value="Dinners" required>
-                </div>
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="femeninoEmpleadoNuevo">Paypal</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="Paypal" value="Paypal" required>
-                </div>
-                <div class="form-check-inline text-center">
-                    <label class="form-check-label" for="femeninoEmpleadoNuevo">Efecty</label><br>
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="Efecty" value="Efecty" required>
+                <div *ngFor="let method of paymentMethods" class="form-check-inline text-center">
+                  <label class="form-check-label" [for]="method.id">{{ method.name }}</label><br>
+                  <input class="form-check-input" type="radio" name="paymentMethod" [id]="method.id" [value]="method.id" required>
                 </div>
             </div>
+              
     
 
           <div class="row mb-5">
