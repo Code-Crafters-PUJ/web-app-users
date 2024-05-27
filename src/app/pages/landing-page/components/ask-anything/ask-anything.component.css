@@ -5,3 +5,10 @@ p, label{
 .btn{
     width: 100%;
 }
+
+@media (max-width: 576px) {
+    .container {
+      width: 100% !important;
+      margin: 0 auto; /* Para centrar el contenedor */
+    }
+  }
