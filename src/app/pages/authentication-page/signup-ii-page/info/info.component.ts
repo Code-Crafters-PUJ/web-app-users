@@ -7,6 +7,8 @@ import { CommonModule, CurrencyPipe, NgIf } from '@angular/common';
 import { Plan } from '../../../../models/user-models/plan';
 import Swal from 'sweetalert2';
 import { SubscriptionBilling } from '../../../../models/user-models/subscriptionBilling';
+import { PaymentMethod } from '../../../../models/user-models/paymentMethod';
+import { AccountService } from '../../../../services/account-services/account.service';
 
 @Component({
   selector: 'app-info',
@@ -25,14 +27,14 @@ export class InfoComponent {
   account!: any;
   plan!: any;
   bill!: any;
-
-  metodosPago: string[] = ['VISA', 'MasterCard', 'American Express', 'PSE', 'Dinners Club', 'Paypal', 'Efecty'];
+  paymentMethods: PaymentMethod[] = [];
   
-  constructor(private authService: AuthService, private router: Router, private dataService: DataService) { }
+  constructor(private authService: AuthService, private router: Router, private dataService: DataService, private accountService: AccountService) { }
 
   ngOnInit(): void {
 
     this.obtainService();
+    this.loadPaymentMethods();
 
   }
   obtainService() {
@@ -41,7 +43,12 @@ export class InfoComponent {
     this.account = this.dataService.getAccount();
     this.plan = this.dataService.getPlan();
     
+  }
 
+  loadPaymentMethods() {
+    this.accountService.getAllPMethods().subscribe((methods: PaymentMethod[]) => {
+      this.paymentMethods = methods;
+    });
   }
 
   continue(): void {
@@ -66,10 +73,13 @@ export class InfoComponent {
         confirmButtonText: 'OK'
       });
 
-      this.authService.signup(this.account);
-      this.authService.createCompany(this.company);
-      this.bill = this.buildBill();
-      this.authService.registerPayment(this.bill);
+      console.log(this.account);
+      console.log(this.company);
+      this.bill = this.buildBill()
+      
+      console.log(this.bill);
+  
+      this.authService.signup(this.account, this.company, this.bill);
       this.router.navigate(['/login']);
       
   }
@@ -79,28 +89,25 @@ export class InfoComponent {
     let amount: number = 0;
 
     if (this.data.SubPlanType === "Anual") {
-        finalDate = new Date(this.bill.final_date);
         finalDate.setFullYear(finalDate.getFullYear() + 1);
         amount = this.plan.anual_price;
     } else if (this.data.SubPlanType === "Semestral") {
-        finalDate = new Date(this.bill.final_date);
         finalDate.setMonth(finalDate.getMonth() + 6);
         amount = this.plan.semestral_price;
     } else if (this.data.SubPlanType === "Mensual") {
-        finalDate = new Date(this.bill.final_date);
         finalDate.setMonth(finalDate.getMonth() + 1);
         amount = this.plan.mensual_price;
     }
 
     const bill: SubscriptionBilling = {
-        id: 1,
-        initial_date: new Date(),
-        final_date: finalDate,
-        amount: amount,
-        active: true,
-        payment_date: new Date(),
-        payment_method: this.data.paymentMethod,
-        plan: this.plan.id
+      initial_date: new Date(),
+      final_date: finalDate,
+      amount: amount,
+      active: true,
+      payment_date: new Date(),
+      payment_method: this.data.paymentMethod,
+      plan: this.plan.id,
+      coupon: this.data.coupon || ""
     };
     return bill;
   }
@@ -131,7 +138,9 @@ export class InfoComponent {
 
     const acceptTerms = formData.get('acceptTerms');
     data['acceptTerms'] = acceptTerms === 'on';
-
+    
+    console.log(data);
+    
     return data;
   }
 
@@ -142,10 +151,6 @@ export class InfoComponent {
     }
 
     if(this.data['paymentMethod'] === ''){
-      return false
-    }
-
-    if(this.data['coupon'] === ''){
       return false
     }
 
@@ -162,16 +167,6 @@ export class InfoComponent {
     if (expirationDate < currentDate) {
       return false;
     }
-
-    this.authService.isValidCoupon(this.data['coupon']).then((value) => {
-      if (!value) {
-        return false;
-      } 
-      return true;
-    }).catch((error) => {
-      console.error('Error al validar el cupón:', error);
-      return false;
-    });
 
     return true
   }

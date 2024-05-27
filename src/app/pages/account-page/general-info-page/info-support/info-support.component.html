@@ -1,26 +1,57 @@
 <div class="container border border-grey rounded p-3 min-vh-50">
     <p>AYUDA ADICIONAL</p>
     <h5>Solicitudes de soporte técnico</h5>
-    <p>Consulta todas tus solicitudes de soporte técnico en el Centro de ayuda.</p>
-    <div class="col-auto ps-0 mb-2">
-        <h5 class="mb-3">Historial de soporte</h5>
-        <h5>Respuestas Solicitud</h5>
-      </div>
-      <div class="col">
-        <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-custom">Enviar</button>
+    
+      <div class="col-auto ps-0 mb-2">
+        <h5 class="mb-1">Historial de soporte</h5>
+        <p>Consulta todas tus solicitudes de soporte técnico en el Centro de ayuda.</p>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row  mb-3">
+              <div class="col-6">
+                <h5>{{rootAccount.name}} {{rootAccount.lastname}}</h5>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6">
+                <h6>{{rootAccount.email}}</h6>
+              </div>
+              <div class="col-6 text-end">
+                <span>Empresa 1</span>
+              </div>
+            </div>
+            <div class="row bg-light py-3 mb-3">
+              <div class="col">
+                <span>PROBLEMA AL AGREGAR NUEVA CUENTA EJECUTIVA</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col" style="text-align: justify;">
+                <p>Estimado soporte de StockWage, escribo este mensaje ya que tengo problemas para agregar una nueva cuenta ejecutiva dentro de la aplicación...</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="bg-light py-3 ">
-            <h6 class="mb-0">Asunto</h6>
-            <input type="text" class="form-control" id="asuntoInput" placeholder="Escriba el asunto">
-          </div>
-
-          <div class="mt-3">
-            <h6>Descripción</h6>
-            <textarea class="form-control" id="descripcionInput" rows="3" placeholder="Escriba la descripción"></textarea>
-          </div>
+        <h5 class="mb-1">Envía tu solicitud</h5>
+        <p>¿Tienes alguna duda? Envía una solicitud y te responderá el equipo de soporte de 7 días hábiles</p>
       </div>
-
-      
+      <div class="card mb-3">
+        <div class="col">
+        
+          <div class="bg-light py-3 mt-3 p-3">
+  
+              <h6 class="">Asunto</h6>
+              <input type="text" class="form-control" id="asuntoInput" placeholder="Escriba el asunto">
+            </div>
+  
+            <div class="mt-3 p-3">
+              <h6>Descripción</h6>
+              <textarea class="form-control" id="descripcionInput" rows="3" placeholder="Escriba la descripción"></textarea>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary mb-2">Enviar</button>
+            </div>
+        </div>
+      </div>
 
 </div>

@@ -90,6 +90,7 @@ export class LoginComponent {
 
   }
   private handleFailedAuthentication() {
+
     Swal.fire({
       title: 'Uppss algo pasó',
       text: "Error en los datos ingresados, por favor verifique los campos",
@@ -101,4 +102,5 @@ export class LoginComponent {
       }
     });
   }
+  
 }
