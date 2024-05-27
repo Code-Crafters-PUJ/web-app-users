@@ -10,6 +10,10 @@ import {Account} from "../../models/user-models/account";
   providedIn: 'root'
 })
 export class AccountService {
+
+  private apiUrl = 'http://10.147.17.183:8000'; 
+
+
   plans: Plan[] = [
     {
       id: 1,
@@ -229,10 +233,12 @@ export class AccountService {
    * Return an array/list of plans
    * Check the plan model on Models/user-models/plan.ts
    * */
-  getAllPlans(): Observable<Plan[]> {
-    let plans: Plan[] = this.plans;
+  getAllPlans(): Observable<any> {
+    //let plans: Plan[] = this.plans;
     //return this.http.get<Plan[]>(environment.baseURL + "/plans";
-    return of(plans);
+    return this.http.get<any>(`${this.apiUrl}/Commertial/user/actualPlans`);
+
+    //return of(plans);
 
   }
 

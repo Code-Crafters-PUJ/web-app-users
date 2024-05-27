@@ -8,9 +8,10 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class PlanService {
 
+  private apiUrl = 'http://10.147.17.183:8000'; // URL base del backend
   private planSubject: BehaviorSubject<Plan | null> = new BehaviorSubject<Plan | null>(null);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   setPlan(plan: Plan): void {
     this.planSubject.next(plan);
@@ -35,6 +36,26 @@ export class PlanService {
       maxUsers: 10
     };
     return of(freeTrialPlan);
+  }
+
+  getAllPlans(): Observable<Plan[]> {
+    return this.http.get<Plan[]>(`${this.apiUrl}/plans/all`);
+  }
+
+  getPlanByType(type: string): Observable<Plan[]> {
+    return this.http.get<Plan[]>(`${this.apiUrl}/plans/${type}`);
+  }
+
+  createPlan(plan: Plan): Observable<Plan> {
+    return this.http.post<Plan>(`${this.apiUrl}/plans`, plan);
+  }
+
+  updatePlan(type: string, plan: Plan): Observable<Plan> {
+    return this.http.put<Plan>(`${this.apiUrl}/plans/${type}`, plan);
+  }
+
+  deletePlan(type: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/plans/${type}`);
   }
 
 }
